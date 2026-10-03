@@ -1,0 +1,1207 @@
+/* FEMÓNOE · sistema visual. Fuente única.
+   ---------------------------------------------------------------------------
+   Esto NO es la hoja de estilos de una página: es el sistema que leen la
+   portada, la página de alerta y lo que venga después. Antes vivía incrustado
+   en tablero.py, que es como se degrada un diseño: cada función nueva agrega su
+   propio CSS al lado y en tres meses no hay sistema, hay sedimento.
+
+   Los colores entran por sustitución desde la paleta de la casa (@@color-x@@),
+   que sale del manual de identidad FUSK y no se redefine acá.
+
+   Las cuatro reglas que gobiernan todo lo de abajo:
+   1. Una sola cosa manda por pantalla. Si todo pesa igual, nada pesa.
+   2. El color tiene función, no decora. El violeta marca lo que está vivo.
+   3. El dato se lee como dato: cifra grande, rótulo chico arriba.
+   4. Fondo claro por defecto. El oscuro sólo si el lector lo elige.
+   =========================================================================== */
+
+:root {
+  /* Paleta de la casa */
+  --azul: #00121E;
+  --fondo: #F9F9F7;
+  --superficie: #FFFFFF;
+  --linea: #DDE2E5;
+  --violeta: #8C00E0;
+  --violeta-claro: #BA66EC;
+  --violeta-profundo: #460070;
+  --acero: #667B89;
+  --texto2: #5A6E7B;
+  --naranja: #FB6500;
+  /* Dirección del movimiento. Leídos el 2/10/2026 de la hoja de SIWA, para que
+     las dos plataformas de la casa digan lo mismo con el mismo color. No son
+     un invento de FEMÓNOE: SIWA ya los publica. */
+  --verde: #3FA796;
+  --rojo: #C23B22;
+
+  --texto: var(--azul);
+  --sombra: 0 1px 2px rgba(0, 18, 30, .06), 0 8px 24px -12px rgba(0, 18, 30, .14);
+  --sombra-alta: 0 2px 4px rgba(0, 18, 30, .08), 0 16px 32px -14px rgba(0, 18, 30, .22);
+  --tenue: color-mix(in srgb, var(--violeta) 5%, transparent);
+
+  /* Escala tipográfica. Los saltos son grandes a propósito: una escala blanda
+     es exactamente lo que hace que una página se vea plana. */
+  --t-display: clamp(1.9rem, 1.2rem + 2.6vw, 3rem);
+  --t-titulo: clamp(1.25rem, 1.05rem + .7vw, 1.6rem);
+  --t-seccion: .76rem;
+  --t-cuerpo: .97rem;
+  --t-chico: .84rem;
+  --t-micro: .73rem;
+
+  /* Ritmo vertical */
+  --aire-1: 8px;  --aire-2: 14px; --aire-3: 22px;
+  --aire-4: 36px; --aire-5: 56px; --aire-6: 80px;
+  --radio: 12px;
+  /* El ancho se adapta a la pantalla. Era 1180 px fijos y en una notebook
+     dejaba la página angosta en el medio —lo marcó la dirección el 2/10/2026—.
+     La prosa sigue acotada por su propio `max-width` en ch, que es lo que
+     manda para leer; lo que gana ancho son las listas, que son tabulares. */
+  --ancho: min(1320px, 92vw);
+}
+
+:root[data-tema="oscuro"] {
+  --fondo: #071620;
+  --superficie: #0D222E;
+  --linea: #1E3A48;
+  --texto: #EAF2F6;
+  --texto2: #9FB4C0;
+  --violeta: #C58BF0;
+  --violeta-claro: #8C00E0;
+  --acero: #8CA3B1;
+  --sombra: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .5);
+  --sombra-alta: 0 2px 4px rgba(0, 0, 0, .35), 0 16px 32px -14px rgba(0, 0, 0, .6);
+  --tenue: color-mix(in srgb, var(--violeta) 11%, transparent);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: Inter, -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-size: var(--t-cuerpo);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+main { max-width: var(--ancho); margin: 0 auto; padding: var(--aire-5) 24px var(--aire-6); }
+
+/* --- Franja institucional -------------------------------------------------- */
+
+.franja {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  padding: 12px 24px;
+  background: color-mix(in srgb, var(--superficie) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--linea);
+}
+.franja .marca { display: flex; align-items: center; gap: 16px; }
+.franja .logo { height: 30px; display: block; }
+.franja .logo.oscuro, :root[data-tema="oscuro"] .franja .logo.claro { display: none; }
+:root[data-tema="oscuro"] .franja .logo.oscuro { display: block; }
+.franja .sep { width: 1px; height: 30px; background: var(--linea); }
+/* El nombre de la casa es el camino de vuelta a la portada. Antes no era
+   enlace: se hacía clic y no pasaba nada, que es lo que todo el mundo espera de
+   un logotipo en la cabecera. No se subraya ni cambia de color —es cabecera, no
+   texto corrido—, pero el cursor y una pizca de opacidad avisan que responde. */
+.franja .nombre { display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: inherit; border-radius: 6px;
+  transition: opacity .14s ease; }   /* el resto de la casa usa literales, no token */
+.franja .nombre:hover { opacity: .78; }
+.franja .nombre:focus-visible { outline: 2px solid var(--violeta); outline-offset: 3px; }
+.franja .icono { height: 26px; }
+.franja h1 {
+  margin: 0; font-size: 1.08rem; letter-spacing: .14em; font-weight: 700;
+  color: var(--violeta); line-height: 1.1;
+}
+.franja small { color: var(--texto2); font-size: var(--t-micro); letter-spacing: .05em; }
+.franja-derecha {
+  display: flex; align-items: center; gap: 14px;
+  font-size: var(--t-chico); color: var(--texto2);
+}
+.franja-derecha b { color: var(--texto); }
+.tema {
+  border: 1px solid var(--linea); background: transparent; color: var(--texto2);
+  border-radius: 999px; padding: 5px 13px; font: inherit; font-size: var(--t-micro);
+  cursor: pointer;
+}
+.tema:hover { border-color: var(--violeta); color: var(--violeta); }
+
+/* --- La banda de diseminación -------------------------------------------
+   Todo producto de la casa declara hasta dónde llega. Hasta el 2/10/2026 eso
+   se decía con una píldora que ponía «USO INTERNO» en el rincón de arriba a la
+   derecha, entre los controles. La dirección preguntó DOS VECES para qué
+   servía ese botón que no hacía nada, y tenía razón las dos: un rótulo que
+   vive donde viven los botones se lee como un botón, y uno que necesita un
+   globo de ayuda para entenderse todavía no se entiende.
+
+   Ahora es lo que siempre fue en un producto de inteligencia: una banda que
+   cruza la página y dice la frase entera. No se puede confundir con un
+   control, porque no está donde están los controles, y no hace falta
+   explicarla porque se explica sola. */
+.banda-uso {
+  background: var(--tenue); color: var(--violeta);
+  border-bottom: 1px solid color-mix(in srgb, var(--violeta) 22%, transparent);
+  padding: 7px 24px; font-size: var(--t-micro); letter-spacing: .03em;
+  text-align: center;
+}
+.banda-uso b { letter-spacing: .1em; text-transform: uppercase; }
+
+@media (max-width: 560px) { .banda-uso { padding-inline: 16px; } }
+
+/* --- Entrada: lo primero que manda ---------------------------------------- */
+
+.hero { margin: 0 0 var(--aire-4); max-width: 62ch; }
+.hero h2 {
+  margin: 0 0 var(--aire-3);
+  font-size: var(--t-display); line-height: 1.12; font-weight: 700;
+  letter-spacing: -.022em;
+}
+.hero h2 em { font-style: normal; color: var(--violeta); }
+.hero p { margin: 0; color: var(--texto2); font-size: 1.02rem; max-width: 56ch; }
+
+/* El estado, leído como datos y no como una línea de texto corrido. */
+.estado {
+  display: grid; gap: 1px; background: var(--linea);
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  border: 1px solid var(--linea); border-radius: var(--radio);
+  overflow: hidden; margin: 0 0 var(--aire-5);
+}
+.estado > * {
+  background: var(--superficie); padding: 13px 16px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.estado .rotulo {
+  font-size: var(--t-micro); letter-spacing: .09em; text-transform: uppercase;
+  color: var(--texto2);
+}
+.estado .cifra {
+  font-size: 1.16rem; font-weight: 700; line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+.estado .cifra small { font-size: var(--t-chico); font-weight: 400; color: var(--texto2); }
+.estado .alerta .cifra { color: var(--naranja); }
+
+/* El recorrido: enseña a leer el producto antes de mostrarlo. */
+.recorrido {
+  display: grid; gap: var(--aire-3); margin: 0 0 var(--aire-5);
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.recorrido li {
+  list-style: none; position: relative; padding-left: 40px;
+  font-size: var(--t-chico); color: var(--texto2);
+}
+.recorrido li b { display: block; color: var(--texto); font-size: var(--t-cuerpo); }
+.recorrido li::before {
+  counter-increment: paso; content: counter(paso);
+  position: absolute; left: 0; top: 1px;
+  width: 27px; height: 27px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--tenue); color: var(--violeta);
+  font-size: var(--t-chico); font-weight: 700;
+}
+.recorrido { counter-reset: paso; padding: 0; }
+
+/* --- Secciones ------------------------------------------------------------- */
+
+main h2:not(.apertura h2):not(.dictamen h2) {
+  display: flex; align-items: center; gap: 14px;
+  margin: var(--aire-6) 0 var(--aire-3);
+  font-size: var(--t-seccion); font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--texto2);
+}
+main h2:not(.apertura h2):not(.dictamen h2)::after {
+  content: ""; flex: 1; height: 1px; background: var(--linea);
+}
+.referencia {
+  margin: 0 0 var(--aire-3); font-size: var(--t-chico); color: var(--texto2);
+  max-width: 78ch;
+}
+
+/* --- Los 33 Estados -------------------------------------------------------- */
+
+/* 250 y no 215: medido el 2/10/2026, con las siglas de tres letras al nombre
+   del país le quedaban 40 px para 65 que necesita, y «Argentina» se cortaba. */
+.mosaico { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+
+.celda {
+  display: flex; align-items: center; gap: 11px;
+  padding: 12px 14px; border: 1px solid var(--linea); border-radius: var(--radio);
+  background: var(--superficie); box-shadow: var(--sombra);
+  cursor: pointer; text-align: left; font: inherit; color: inherit;
+  transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+}
+.celda:hover, .celda:focus-visible {
+  transform: translateY(-2px); box-shadow: var(--sombra-alta);
+  border-color: var(--violeta-claro); outline: none;
+}
+.celda.viva { border-color: var(--violeta); }
+.celda > img {
+  width: 30px; height: 21px; border-radius: 3px; object-fit: cover;
+  border: 1px solid var(--linea); flex: none;
+}
+.celda .quien { min-width: 0; flex: 1; }
+.celda .quien b {
+  display: block; font-weight: 600; font-size: var(--t-chico); line-height: 1.25;
+  /* Si aun así no entra, se parte en dos líneas antes que cortarse: el nombre
+     de un Estado no se abrevia. */
+  overflow-wrap: anywhere;
+}
+.celda .quien small {
+  display: block; font-size: var(--t-micro); color: var(--texto2);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* 6 px y no 4: con la sigla de una letra alcanzaba, con «Gob Seg Info» las tres
+   se leían como una sola palabra. Lo marcó la dirección el 2/10/2026. */
+.celda .luces { display: flex; align-items: center; gap: 6px; flex: none; }
+
+/* Las tres letras son el corazón de la lectura: tienen que leerse. */
+.eje {
+  /* `inline-flex` y no `inline-grid`: el grid se encogía hasta el `min-width` en
+     pantallas angostas y cortaba «Gob». Medido a 390 px el 2/10/2026: la caja
+     quedaba en 21 px para un texto que necesita 28. */
+  min-width: 21px; height: 21px; border-radius: 5px; padding: 0 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  white-space: nowrap; flex: none; vertical-align: middle;
+  font-size: var(--t-micro); font-weight: 700; line-height: 1;
+  background: color-mix(in srgb, var(--acero) 13%, transparent);
+  color: var(--texto2); border: 1px solid transparent;
+}
+.eje.viva {
+  background: var(--violeta); color: #fff; border-color: var(--violeta);
+  box-shadow: 0 0 0 3px var(--tenue);
+}
+.naranja {
+  display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--naranja); vertical-align: middle;
+}
+
+.caja-mapa { margin: 0; }
+.caja-mapa svg { width: 100%; height: auto; display: block; }
+.caja-mapa figcaption {
+  font-size: var(--t-micro); color: var(--texto2); margin-top: var(--aire-2);
+  line-height: 1.55;
+}
+
+/* --- Alertas en portada ---------------------------------------------------- */
+
+/* `min(330px, 100%)`: con `minmax(330px, …)` a secas, en una pantalla de 390 px
+   la columna seguía midiendo 330 contra un contenedor de 327 y se desbordaba
+   tres píxeles. El `min()` deja que la columna ceda cuando no hay lugar. */
+.alertas { display: grid; gap: var(--aire-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); }
+
+/* La cabecera de la tarjeta de alerta NO TENÍA NINGUNA REGLA, y por eso el país
+   y el eje salían pegados: «Haitíseguridad». Lo marcó la dirección el 2/10/2026.
+   El país manda y el eje lo acompaña, separados y con jerarquía distinta. */
+.alerta > header {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  margin: 0 0 var(--aire-2);
+}
+.alerta > header b { font-size: 1.05rem; letter-spacing: .01em; }
+.alerta > header span {
+  font-size: var(--t-micro); color: var(--texto2);
+  text-transform: uppercase; letter-spacing: .08em;
+}
+.tarjeta {
+  border: 1px solid var(--linea); border-left: 4px solid var(--violeta);
+  border-radius: var(--radio); background: var(--superficie);
+  padding: 20px 22px; box-shadow: var(--sombra);
+}
+.tarjeta .sello {
+  font-size: var(--t-micro); letter-spacing: .09em; text-transform: uppercase;
+  color: var(--texto2); margin-bottom: var(--aire-1);
+}
+.tarjeta h3 { margin: 0 0 var(--aire-2); font-size: 1.02rem; line-height: 1.4; font-weight: 600; }
+.tarjeta .resumen { font-size: var(--t-chico); color: var(--texto2); margin: 0; }
+.leer {
+  display: inline-block; margin-top: var(--aire-2); color: var(--violeta);
+  font-size: var(--t-chico); font-weight: 700; text-decoration: none;
+}
+.leer:hover { text-decoration: underline; }
+
+/* --- La alerta, como documento --------------------------------------------- */
+
+.dictamen { max-width: 820px; margin: 0 auto; padding: var(--aire-5) 24px var(--aire-6); }
+/* 820 px es el ancho de una COLUMNA DE PROSA, y para un dictamen está bien: lo
+   que manda al leer es el largo de la línea. Pero el horizonte no es prosa, es
+   una tabla, y heredar ese ancho lo dejaba en una franja angosta en el medio de
+   cualquier monitor —lo marcó la dirección el 2/10/2026, y el cambio de
+   `--ancho` no lo alcanzaba porque esta página nunca usó `--ancho`—. Con esta
+   variante la página usa el ancho de la pantalla y la prosa de adentro sigue
+   acotada por su propio límite en `ch`, que es el que de verdad importa. */
+.dictamen.ancho { max-width: var(--ancho); }
+.dictamen .volver {
+  display: inline-block; margin-bottom: var(--aire-3); color: var(--violeta);
+  font-size: var(--t-chico); text-decoration: none;
+}
+.dictamen .sello {
+  font-size: var(--t-micro); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--texto2); margin-bottom: var(--aire-2);
+}
+.dictamen h2 {
+  margin: 0 0 var(--aire-3); font-size: var(--t-titulo); line-height: 1.35;
+  font-weight: 700; letter-spacing: -.012em;
+}
+.dictamen .resumen { color: var(--texto2); font-size: var(--t-chico); margin: var(--aire-2) 0 var(--aire-4); }
+.dictamen .cuerpo {
+  display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--aire-4);
+  align-items: start; border-top: 1px solid var(--linea); padding-top: var(--aire-3);
+}
+.dictamen .cuerpo p { margin: 0 0 var(--aire-2); }
+.dictamen .criterio {
+  border-left: 3px solid var(--violeta-claro); padding-left: 14px;
+  margin: var(--aire-3) 0 0; font-size: var(--t-chico); color: var(--texto2);
+}
+
+.salvedades {
+  margin: var(--aire-3) 0 var(--aire-4); padding: 20px 22px;
+  border-radius: var(--radio); background: var(--tenue);
+  border-left: 4px solid var(--violeta);
+}
+.salvedades h3 {
+  margin: 0 0 var(--aire-1); font-size: var(--t-micro); letter-spacing: .1em;
+  text-transform: uppercase; color: var(--violeta);
+}
+.salvedades .porque { margin: 0 0 var(--aire-2); font-size: var(--t-chico); color: var(--texto2); }
+.salvedades ul { margin: 0; padding-left: 18px; }
+.salvedades li { font-size: var(--t-chico); margin-bottom: var(--aire-1); line-height: 1.55; }
+.salvedades .corregida {
+  margin: var(--aire-2) 0 0; font-size: var(--t-micro); color: var(--texto2);
+  border-top: 1px dashed var(--linea); padding-top: 10px;
+}
+
+.dos-voces { display: grid; grid-template-columns: 1fr 1fr; gap: var(--aire-3); margin-top: var(--aire-3); }
+.dos-voces > div {
+  border: 1px solid var(--linea); border-radius: var(--radio);
+  padding: 16px 18px; background: var(--superficie);
+}
+.dos-voces h3 {
+  margin: 0 0 var(--aire-1); font-size: var(--t-micro); letter-spacing: .09em;
+  text-transform: uppercase; color: var(--texto2);
+}
+.dos-voces p { margin: 0 0 var(--aire-1); font-size: var(--t-chico); }
+.disenso.falta, .reserva { font-size: var(--t-chico); color: var(--texto2); }
+
+.disarm { margin: var(--aire-4) 0 0; border-top: 1px solid var(--linea); padding-top: var(--aire-3); }
+.disarm h3 {
+  margin: 0 0 var(--aire-2); font-size: var(--t-micro); letter-spacing: .09em;
+  text-transform: uppercase; color: var(--texto2);
+}
+.disarm .observable { margin: 0 0 var(--aire-1); font-size: var(--t-chico); }
+.disarm .tecnicas { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--aire-1); }
+.disarm .tecnica {
+  font-size: var(--t-micro); padding: 4px 9px; border-radius: 5px;
+  border: 1px solid var(--violeta-claro); color: var(--violeta);
+}
+.disarm .salvedad {
+  margin: 0 0 var(--aire-3); font-size: var(--t-micro); color: var(--texto2);
+  border-left: 3px solid var(--linea); padding-left: 12px;
+}
+.disarm .credito { font-size: var(--t-micro); color: var(--texto2); margin: 0; }
+
+.tira { display: flex; flex-wrap: wrap; gap: 5px; margin-top: var(--aire-4);
+  border-top: 1px solid var(--linea); padding-top: var(--aire-3); }
+.tira img { width: 22px; border: 1px solid var(--linea); border-radius: 2px; opacity: .35; }
+.tira img.viva { opacity: 1; outline: 2px solid var(--violeta); }
+
+/* --- Marcador, calendario, pie --------------------------------------------- */
+
+.calendario { list-style: none; padding: 0; margin: 0; }
+.calendario li {
+  display: flex; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--linea);
+  font-size: var(--t-chico);
+}
+.calendario li time { color: var(--violeta); font-weight: 700; flex: none; width: 92px;
+  font-variant-numeric: tabular-nums; }
+
+footer {
+  border-top: 1px solid var(--linea); margin-top: var(--aire-6);
+  padding: var(--aire-4) 24px; font-size: var(--t-micro); color: var(--texto2);
+}
+footer a { color: var(--violeta); }
+
+#ficha {
+  position: fixed; inset: auto 0 0 0; z-index: 50;
+  background: var(--superficie); border-top: 1px solid var(--linea);
+  box-shadow: var(--sombra-alta); padding: var(--aire-3) 24px;
+  max-height: 72vh; overflow: auto;
+}
+
+/* --- Pantallas chicas ------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .region { grid-template-columns: 1fr; }
+  .dictamen .cuerpo, .dos-voces { grid-template-columns: 1fr; }
+  main { padding-top: var(--aire-4); }
+}
+@media (max-width: 560px) {
+  .franja { padding: 10px 16px; }
+  .franja-derecha { width: 100%; justify-content: space-between; gap: 8px; }
+  main, footer, .dictamen { padding-left: 16px; padding-right: 16px; }
+  .mosaico { grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pais { transition: none; }
+  .franja .nombre { transition: none; }
+}
+
+
+/* --- Componentes que vienen del sistema anterior ---------------------------
+   Rescatados al cambiar de hoja. Lo que funcionaba se conserva: la banda de
+   Kent, la barra de plazo, la chispa, el mapa y la ficha de país ya estaban
+   resueltos y no había motivo para rehacerlos. Usan los mismos tokens. */
+
+:root[data-tema="oscuro"] svg.mapa .pais path,
+  :root[data-tema="oscuro"] svg.mapa .pais .marca { fill: #13242F; }
+svg.mapa { width: 100%; height: auto; display: block; }
+svg.mapa .pais path { fill: #E6EBEE; stroke: var(--acero); stroke-width: .5;
+    vector-effect: non-scaling-stroke; }
+svg.mapa .pais .marca { fill: #E6EBEE; stroke: var(--acero); stroke-width: .8; }
+svg.mapa .pais:hover path, svg.mapa .pais:hover .marca { fill: var(--violeta-claro); }
+svg.mapa .pais.viva path, svg.mapa .pais.viva .marca { fill: var(--violeta); }
+.hecho { margin: 10px 0 8px; font-size: 1.02rem; line-height: 1.45; }
+/* La escala de Kent, dibujada. Siete pasos; el juicio ocupa el suyo y se lee. */
+  .kent {
+    display: flex; align-items: center; gap: 4px; margin: 0 0 10px;
+    font-size: .64rem; color: var(--texto2); }
+.kent small { white-space: nowrap; letter-spacing: .04em; }
+.kent .paso {
+    flex: 1; height: 12px; background: var(--linea); display: grid; place-items: center; }
+.kent .paso.aqui {
+    flex: 3.2; height: 20px; background: var(--violeta); color: #fff; font-weight: 700;
+    font-size: .68rem; letter-spacing: .02em; white-space: nowrap; padding: 0 6px; }
+:root[data-tema="oscuro"] .kent .paso.aqui { color: #00121E; }
+.meta { color: var(--texto2); font-size: .82rem; margin: 0 0 10px; }
+.grafico { margin: 0 0 10px; }
+svg.chispa { width: 100%; height: auto; display: block; }
+.grafico figcaption { color: var(--texto2); font-size: .72rem; margin-top: 4px; }
+.plazo { margin: 0 0 10px; }
+.riel { display: block; height: 6px; background: var(--linea); overflow: hidden; }
+.riel .lleno { display: block; height: 100%; background: var(--violeta); }
+.lleno.ocurrio { background: var(--violeta); }
+.lleno.no-ocurrio { background: var(--acero); }
+.lleno.sin-evidencia { background: var(--naranja); }
+.plazo small { display: block; color: var(--texto2); font-size: .74rem; margin-top: 4px; }
+.panel { font-size: .78rem; color: var(--texto2); margin: 0 0 8px; }
+ul.calendario .que { color: var(--texto2); }
+.sello { margin-left: auto; font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; }
+.sello.ok { color: var(--violeta); }
+.sello.porconf { color: var(--texto2); }
+.vacio { color: var(--texto2); }
+#ficha .bloque { color: var(--texto2); font-size: .78rem; text-transform: uppercase;
+    letter-spacing: .06em; }
+#ficha .item { border-left: 3px solid var(--linea); padding-left: 10px; margin-bottom: 10px;
+    font-size: .86rem; }
+#ficha .item.viva { border-left-color: var(--violeta); }
+#ficha .item small { display: block; color: var(--texto2); font-size: .76rem; }
+#ficha .cerrar {
+    position: absolute; top: 12px; right: 14px; background: transparent; border: 0;
+    font-size: 24px; line-height: 1; color: var(--texto2); cursor: pointer; font-family: inherit; }
+#ficha .aSiwa { display: inline-block; margin-top: 16px; color: var(--violeta);
+    font-size: .84rem; }
+svg.mapa { max-height: 420px; }
+.dictamen .sello {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: .68rem;
+    text-transform: uppercase; letter-spacing: .14em; color: var(--texto2); }
+.dictamen .sello b { color: var(--violeta); }
+.dictamen .kent { max-width: 580px; }
+
+/* --- El marcador ------------------------------------------------------------
+   Vacío se muestra igual, con las siete bandas dibujadas. El lector ve la vara
+   antes de que haya nada que medir: es la única forma de que la vara no se
+   acomode después a los resultados. */
+
+.marcador { border: 1px solid var(--linea); border-radius: var(--radio);
+  background: var(--superficie); padding: 22px 24px; box-shadow: var(--sombra); }
+.marcador .arranca { margin: 0 0 var(--aire-2); font-size: var(--t-cuerpo); }
+.marcador .como, .marcador .aparte {
+  margin: var(--aire-2) 0 0; font-size: var(--t-chico); color: var(--texto2);
+}
+.marcador .aparte { border-left: 3px solid var(--naranja); padding-left: 12px; }
+
+.brier {
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  padding-bottom: var(--aire-3); margin-bottom: var(--aire-3);
+  border-bottom: 1px solid var(--linea);
+}
+.brier .rotulo {
+  font-size: var(--t-micro); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--texto2);
+}
+.brier .cifra {
+  font-size: 2rem; font-weight: 700; line-height: 1; color: var(--violeta);
+  font-variant-numeric: tabular-nums;
+}
+.brier .nota { font-size: var(--t-chico); color: var(--texto2); }
+
+.bandas { list-style: none; padding: 0; margin: 0; }
+/* --- El horizonte: tendencia con dirección, figura y bandera -------------
+   Pedido de la dirección el 2/10/2026, mirando la página en una notebook.
+   Cuatro defectos y su arreglo:
+
+   1. LA NOTA SE CAÍA A UNA COLUMNA DE 170 px. La fila es una grilla de tres
+      columnas y el aviso era el cuarto hijo, así que caía solo en la primera
+      de la fila siguiente y se leía en vertical. Ahora ocupa la fila entera.
+   2. EL COLOR NO DECÍA NADA. Todas las barras iban del mismo violeta, subiera
+      o bajara la serie. Ahora el rojo y el verde de SIWA dicen la dirección.
+   3. FALTABA LA BANDERA, que FEMÓNOE ya tiene para los 33.
+   4. FALTABA LA FIGURA. SIWA dibuja sus tendencias con ECharts; acá la página
+      es estática y sin dependencias, así que se toma el lenguaje visual —el
+      mismo verde, el mismo rojo, la figura al lado del número y no en su
+      lugar— y el SVG se dibuja a mano, como ya se dibuja el mapa. */
+
+.bandas li {
+  display: grid;
+  grid-template-columns: minmax(150px, 20ch) auto minmax(90px, 1fr) auto;
+  gap: 14px; align-items: center; padding: 9px 0; font-size: var(--t-chico);
+  border-bottom: 1px solid color-mix(in srgb, var(--linea) 60%, transparent);
+}
+.bandas .banda { display: flex; align-items: center; gap: 9px; color: var(--texto2); }
+.bandas .cuenta { color: var(--texto2); font-variant-numeric: tabular-nums; }
+
+/* La nota ocupa la fila entera y arranca debajo del nombre, no al costado. */
+.bandas .nota-fecha {
+  grid-column: 1 / -1; margin: 2px 0 0; color: var(--texto2);
+  font-size: var(--t-micro); max-width: 92ch;
+}
+
+/* El rojo y el verde son los de SIWA, leídos de su propia hoja el 2/10/2026:
+   así las dos plataformas de la casa dicen lo mismo con el mismo color. */
+.bandas li.sube .lleno { background: var(--rojo); }
+.bandas li.baja .lleno { background: var(--verde); }
+.bandas li.sube .chispa { color: var(--rojo); }
+.bandas li.baja .chispa { color: var(--verde); }
+.bandas li.sube .cuenta b { color: var(--rojo); }
+.bandas li.baja .cuenta b { color: var(--verde); }
+
+/* --- El horizonte, por eje ------------------------------------------------
+   La sección se llama «cómo viene cada eje» y mostraba una sola lista: medido
+   el 2/10/2026, diez de las once lecturas eran de seguridad. Ahora va un
+   bloque por eje, y el que no tiene lecturas lo dice con sus números. */
+/* OJO: `.eje` ya existe en este archivo (línea 255) para la pastilla de eje del
+   pulso, y es `inline-grid`. Al reusar el nombre acá, las tres secciones del
+   horizonte quedaban en línea, de 21 px de alto y una encima de la otra. Por
+   eso este bloque lleva nombre propio. */
+.bloque-eje { margin: 0 0 var(--aire-4); }
+.bloque-eje h3 {
+  margin: 0 0 2px; font-size: 1rem; letter-spacing: .02em;
+  text-transform: capitalize;
+}
+.bloque-eje .de-donde {
+  margin: 0 0 var(--aire-2); font-size: var(--t-micro); color: var(--texto2);
+}
+.bloque-eje .de-donde code {
+  font-size: .94em; padding: 1px 5px; border-radius: 3px;
+  background: color-mix(in srgb, var(--acero) 14%, transparent);
+}
+.bloque-eje .callados {
+  margin: var(--aire-1) 0 0; font-size: var(--t-micro); color: var(--texto2);
+  max-width: 92ch; border-left: 2px solid var(--linea); padding-left: 11px;
+}
+
+/* --- La figura ------------------------------------------------------------
+   Era una línea sola y la dirección la leyó como un dibujo: no se veía contra
+   qué se medía. Ahora la figura dice las tres cosas que dice el número —el
+   tramo reciente sombreado, la mediana larga punteada y un punto en la mediana
+   de cada tramo—, y al apoyar el puntero se lee en palabras. */
+.chispa { display: block; overflow: visible; }
+.chispa .linea { fill: none; stroke: currentColor; stroke-width: 1.5;
+  stroke-linejoin: round; stroke-linecap: round; }
+.chispa .tramo { fill: currentColor; opacity: .09; }
+.chispa .mediana { stroke: var(--acero); stroke-width: 1;
+  stroke-dasharray: 3 3; opacity: .75; }
+.chispa .punto { fill: currentColor; stroke: var(--fondo); stroke-width: 1.2; }
+
+.bandera {
+  display: block; flex: none; width: 24px; height: 17px; object-fit: cover;
+  border-radius: 2px; border: 1px solid var(--linea);
+}
+
+.leyenda-color {
+  font-size: var(--t-micro); color: var(--texto2); max-width: 86ch;
+  margin: 0 0 var(--aire-2);
+}
+.leyenda-color .llave {
+  display: inline-block; width: 22px; height: 7px; border-radius: 4px;
+  margin-right: 5px; vertical-align: middle;
+}
+.leyenda-color .llave.sube { background: var(--rojo); }
+.leyenda-color .llave.baja { background: var(--verde); }
+
+/* La fecha del calendario, con bandera al lado de la sigla. */
+.calendario .pais { display: inline-flex; align-items: center; gap: 7px; flex: none; }
+.calendario .pais .iso { font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+.calendario li { flex-wrap: wrap; }
+.calendario .que { flex: 1 1 auto; min-width: 12ch; }
+.calendario .nota-fecha {
+  flex: 1 0 100%; margin: 4px 0 0 106px; color: var(--texto2);
+  font-size: var(--t-micro); max-width: 92ch;
+}
+
+@media (max-width: 900px) {
+  .bandas li { grid-template-columns: 1fr auto; }
+  .bandas .banda { grid-column: 1 / -1; }
+  .bandas .riel { grid-column: 1 / -1; order: 4; }
+  .bandas .cuenta { grid-column: 1 / -1; }
+  .calendario .nota-fecha { margin-left: 0; }
+}
+
+.bandas .riel {
+  position: relative; height: 9px; border-radius: 5px;
+  background: color-mix(in srgb, var(--acero) 16%, transparent);
+}
+.bandas .lleno { position: absolute; inset: 0 auto 0 0; border-radius: 5px;
+  background: var(--violeta); }
+/* El filete marca lo anunciado. Si la barra no llega, se prometió de más. */
+.bandas .anuncio {
+  position: absolute; top: -4px; bottom: -4px; width: 2px;
+  background: var(--azul); border-radius: 1px;
+}
+:root[data-tema="oscuro"] .bandas .anuncio { background: #EAF2F6; }
+.bandas.vacias .banda, .bandas.vacias .cuenta { opacity: .65; }
+
+}
+
+/* --- La página de método ---------------------------------------------------- */
+
+.ciclo { list-style: none; counter-reset: etapa; padding: 0; margin: 0; }
+.ciclo li {
+  position: relative; padding: 0 0 var(--aire-3) 46px;
+  border-left: 2px solid var(--linea); margin-left: 13px;
+}
+.ciclo li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.ciclo li::before {
+  counter-increment: etapa; content: counter(etapa);
+  position: absolute; left: -15px; top: -2px;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--violeta); color: #fff; font-size: var(--t-chico); font-weight: 700;
+}
+.ciclo li > b { font-size: var(--t-cuerpo); }
+.ciclo .etapa {
+  font-size: var(--t-micro); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--violeta); margin-left: 8px;
+}
+.ciclo p { margin: var(--aire-1) 0 0; font-size: var(--t-chico); color: var(--texto2); }
+
+.no-hace { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--aire-2);
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+.no-hace li {
+  border: 1px solid var(--linea); border-radius: var(--radio);
+  background: var(--superficie); padding: 15px 17px;
+}
+.no-hace li > b { font-size: var(--t-chico); }
+.no-hace p { margin: 6px 0 0; font-size: var(--t-chico); color: var(--texto2); }
+
+/* --- Las zonas transfronterizas --------------------------------------------- */
+
+.mosaico.zonas { grid-template-columns: repeat(auto-fill, minmax(275px, 1fr)); }
+.celda.zona .banderas { display: flex; gap: 3px; flex: none; }
+.celda.zona .banderas img {
+  width: 22px; height: 16px; border-radius: 2px; object-fit: cover;
+  border: 1px solid var(--linea);
+}
+.celda.zona .quien b { line-height: 1.3; }
+.celda.zona { border-style: dashed; }
+.celda.zona.viva { border-style: solid; border-color: var(--violeta); }
+
+/* --- La apertura -------------------------------------------------------------
+   Banda oscura con el mapa de protagonista. Es el dispositivo que usa SIWA, y
+   lo que la doctrina permite para análisis: el sitio sigue siendo de fondo
+   claro, y la apertura es la foto oscura. Impacto arriba, lectura abajo. */
+
+.apertura {
+  position: relative; isolation: isolate;
+  /* De borde a borde de la pantalla, pero con el contenido alineado a la misma
+     columna que el resto del sitio. La banda es del ancho de la ventana; el
+     texto y el mapa siguen dentro de los 1180 px, porque si no se despegarían
+     de todo lo que viene abajo. */
+  margin-top: calc(var(--aire-5) * -1);
+  margin-bottom: var(--aire-5);
+  margin-inline: calc(50% - 50vw);
+  padding-block: var(--aire-6);
+  padding-inline: max(24px, calc(50vw - (var(--ancho) / 2)));
+  background: var(--azul);
+  color: #EAF2F6;
+  display: grid; grid-template-columns: 1.05fr .95fr;
+  gap: var(--aire-5); align-items: center;
+  overflow: hidden;
+}
+/* Un halo violeta detrás del mapa: da profundidad sin agregar una imagen que
+   después haya que licenciar, y el violeta es el de la casa. */
+.apertura::before {
+  content: ""; position: absolute; z-index: -1;
+  right: -8%; top: -30%; width: 70%; aspect-ratio: 1;
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--violeta-claro) 34%, transparent) 0%,
+    transparent 62%);
+}
+.apertura .sobre {
+  margin: 0 0 var(--aire-2); font-size: var(--t-micro);
+  letter-spacing: .16em; text-transform: uppercase;
+  color: color-mix(in srgb, #EAF2F6 62%, transparent);
+}
+.apertura h2 {
+  margin: 0 0 var(--aire-3); font-size: var(--t-display);
+  line-height: 1.08; font-weight: 700; letter-spacing: -.025em; color: #fff;
+}
+.apertura h2 em { font-style: normal; color: var(--violeta-claro); }
+.apertura .bajada {
+  margin: 0 0 var(--aire-4); font-size: 1.02rem; max-width: 46ch;
+  color: color-mix(in srgb, #EAF2F6 84%, transparent);
+}
+.apertura .bajada b { color: #fff; }
+.apertura-acciones { display: flex; gap: 12px; flex-wrap: wrap; }
+.boton {
+  display: inline-block; padding: 11px 20px; border-radius: 999px;
+  background: var(--violeta-claro); color: var(--azul);
+  font-size: var(--t-chico); font-weight: 700; text-decoration: none;
+  border: 1px solid var(--violeta-claro);
+  transition: transform .12s ease, filter .12s ease;
+}
+.boton:hover { transform: translateY(-1px); filter: brightness(1.08); }
+.boton.hueco { background: transparent; color: #EAF2F6;
+  border-color: color-mix(in srgb, #EAF2F6 38%, transparent); }
+.boton.hueco:hover { border-color: #EAF2F6; }
+.apertura-mapa { margin: 0; }
+.apertura-mapa svg { width: 100%; height: auto; display: block; }
+/* En la apertura oscura, los Estados sin alerta se dibujan en un azul apenas
+   mas claro que el fondo: se ve la region sin competir con lo que importa. */
+.apertura-mapa svg.mapa .pais path,
+.apertura-mapa svg.mapa .pais .marca { fill: #10293A; stroke: #21455A; }
+.apertura-mapa svg.mapa .pais.viva path,
+.apertura-mapa svg.mapa .pais.viva .marca {
+  fill: var(--violeta-claro); stroke: #fff; stroke-width: .7;
+}
+.apertura-mapa svg.mapa .pais:hover path,
+.apertura-mapa svg.mapa .pais:hover .marca { fill: var(--violeta); }
+.apertura-mapa figcaption {
+  margin-top: var(--aire-2); font-size: var(--t-micro);
+  color: color-mix(in srgb, #EAF2F6 58%, transparent);
+}
+
+@media (max-width: 900px) {
+  .apertura { grid-template-columns: 1fr; gap: var(--aire-3);
+    padding: var(--aire-5) 24px; }
+  .apertura-mapa { max-width: 420px; }
+}
+@media (max-width: 560px) {
+  .apertura { padding-block: var(--aire-4); padding-inline: 16px; }
+}
+
+/* --- El pulso de la región --------------------------------------------------
+   Un tablero que sólo muestra alertas parece vacío cuando no hay ninguna, y
+   eso es falso: la plataforma mide todos los días. El pulso muestra el trabajo
+   que se hace cuando no pasa nada, que es la mayor parte del tiempo. */
+
+.pulso-caja { margin-top: var(--aire-4); border-top: 1px solid rgba(234,242,246,.14);
+  padding-top: var(--aire-3); }
+.pulso-lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; }
+.pulso-lista li {
+  /* La primera columna era de 21 px fijos, de cuando la sigla era una letra
+     sola. Con «Gob/Seg/Info» cortaba el texto: `auto` la deja crecer. */
+  display: grid; grid-template-columns: auto 128px 1fr auto;
+  gap: 11px; align-items: center; font-size: var(--t-micro);
+}
+.pulso-lista .que { color: color-mix(in srgb, #EAF2F6 70%, transparent); }
+.pulso-lista .cuenta { color: color-mix(in srgb, #EAF2F6 52%, transparent);
+  font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pulso-lista .eje { background: rgba(234,242,246,.13); color: #EAF2F6; border: none; }
+.pulso-lista .eje.viva { background: var(--violeta-claro); color: var(--azul);
+  box-shadow: none; }
+svg.pulso { width: 100%; height: 26px; display: block; overflow: visible; }
+svg.pulso polygon { fill: color-mix(in srgb, var(--violeta-claro) 24%, transparent); }
+svg.pulso polyline { fill: none; stroke: var(--violeta-claro); stroke-width: 1.2;
+  vector-effect: non-scaling-stroke; }
+
+@media (max-width: 560px) {
+  .pulso-lista li { grid-template-columns: 21px 1fr; }
+  .pulso-lista .cuenta, svg.pulso { grid-column: 1 / -1; }
+}
+
+/* --- Movimiento -------------------------------------------------------------
+   Poco y con una razón: el mapa se enciende para que el ojo vea CUÁLES están
+   encendidos, y las cifras suben para que se lean como cifras y no como texto.
+   Nada se mueve en bucle, nada tapa contenido, y todo se apaga entero si el
+   sistema pide menos movimiento. */
+
+@keyframes aparecer { from { opacity: 0; transform: translateY(10px); } }
+@keyframes encender {
+  from { fill: #10293A; }
+  60%  { fill: #fff; }
+  to   { fill: var(--violeta-claro); }
+}
+@keyframes latir {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.apertura-texto > * { animation: aparecer .5s both cubic-bezier(.2, .7, .3, 1); }
+.apertura-texto > *:nth-child(2) { animation-delay: .06s; }
+.apertura-texto > *:nth-child(3) { animation-delay: .12s; }
+.apertura-texto > *:nth-child(4) { animation-delay: .18s; }
+.apertura-texto > *:nth-child(5) { animation-delay: .24s; }
+.apertura-mapa { animation: aparecer .7s .1s both cubic-bezier(.2, .7, .3, 1); }
+
+/* Los Estados con alerta se encienden al cargar, uno detrás de otro. */
+.apertura-mapa svg.mapa .pais.viva path,
+.apertura-mapa svg.mapa .pais.viva .marca {
+  animation: encender 1.1s .6s both ease-out;
+}
+.apertura-mapa svg.mapa .pais.viva:nth-of-type(2n) path { animation-delay: .85s; }
+.apertura-mapa svg.mapa .pais.viva:nth-of-type(3n) path { animation-delay: 1.1s; }
+
+/* El pulso se dibuja de izquierda a derecha, como se lee. */
+svg.pulso polyline {
+  stroke-dasharray: 1; stroke-dashoffset: 1; pathLength: 1;
+  animation: latir 1.4s .5s both ease-out;
+}
+
+.celda, .tarjeta, .marcador { animation: aparecer .45s both ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .apertura-texto > *, .apertura-mapa, .celda, .tarjeta, .marcador,
+  .apertura-mapa svg.mapa .pais.viva path,
+  .apertura-mapa svg.mapa .pais.viva .marca, svg.pulso polyline {
+    animation: none !important;
+  }
+  svg.pulso polyline { stroke-dasharray: none; stroke-dashoffset: 0; }
+}
+
+/* --- La textura de la apertura ----------------------------------------------
+   El fondo es la región misma, ampliada y desenfocada: los contornos reales de
+   los 33, no una imagen de archivo. Da profundidad sin agregar peso ni una
+   licencia de terceros a un sitio que se publica bajo AGPL, y es propio: no hay
+   otro tablero que use su propia cartografía como textura. */
+
+.apertura-fondo {
+  position: absolute; inset: -55% -42% -55% 8%; z-index: -1;
+  opacity: .14; pointer-events: none;
+  filter: blur(2.5px);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 18%, transparent 68%);
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 18%, transparent 68%);
+}
+.apertura-fondo svg.mapa { width: 100%; height: 100%; }
+.apertura-fondo svg.mapa .pais path,
+.apertura-fondo svg.mapa .pais .marca {
+  fill: none; stroke: var(--violeta-claro); stroke-width: .3;
+}
+/* Sobre la textura, el mapa real gana por relleno y por borde. */
+.apertura-mapa { position: relative; z-index: 1; }
+
+@media (max-width: 900px) { .apertura-fondo { inset: -10% -20% auto -10%; opacity: .32; } }
+
+/* --- Las zonas sobre el mapa ------------------------------------------------
+   Una zona no se dibuja como polígono porque no tenemos su geometría, y
+   trazarla a mano sería inventar un límite. Se dibuja lo que sí es verdadero:
+   que une a dos o tres Estados. */
+
+svg.mapa .zonas-capa { pointer-events: none; }
+svg.mapa .zona line {
+  stroke: var(--acero); stroke-width: 1.1; stroke-dasharray: 2.5 2.5; opacity: .62;
+}
+svg.mapa .zona circle { fill: var(--superficie); stroke: var(--acero); stroke-width: 1.3; }
+svg.mapa .zona.viva line { stroke: var(--violeta); opacity: .95; stroke-dasharray: none;
+  stroke-width: 1; }
+svg.mapa .zona.viva circle { fill: var(--violeta); stroke: var(--superficie);
+  stroke-width: 1.4; }
+
+/* Sobre la apertura oscura, con los colores de esa banda. */
+.apertura-mapa svg.mapa .zona line { stroke: #6B8FA6; opacity: .45; stroke-width: .9; }
+.apertura-mapa svg.mapa .zona circle { fill: #0B1E2B; stroke: #7FA3B8; stroke-width: 1.2; }
+.apertura-mapa svg.mapa .zona.viva line { stroke: var(--violeta-claro); opacity: 1; }
+.apertura-mapa svg.mapa .zona.viva circle { fill: var(--violeta-claro); stroke: #fff; }
+/* En la textura del fondo las zonas no van: ahí sólo hay contorno. */
+.apertura-fondo svg.mapa .zonas-capa { display: none; }
+
+/* Lo que se buscó y no se halló, al lado de la fecha. Una fecha verificada sin
+   éxito no es lo mismo que una que nadie miró, y el lector tiene que poder
+   distinguirlas sin preguntar. */
+.calendario .nota-fecha {
+  grid-column: 1 / -1; font-size: var(--t-micro); color: var(--texto2);
+  line-height: 1.5; margin-top: 4px;
+}
+.calendario li { flex-wrap: wrap; }
+.calendario .sello.ok { color: var(--violeta); font-weight: 700; }
+
+/* --- Lo que está vivo, se mueve. Y nada más -------------------------------
+   La dirección pidió el 2/10/2026 que el tablero se vea «vivo, latiendo, que
+   evoluciona». La regla con que la Oficina lo cumple sin faltar a la casa:
+
+       NO SE MUEVE NADA QUE NO SEA UN DATO.
+
+   La línea se traza de izquierda a derecha porque eso ES la serie: el tiempo
+   pasando. El último punto late sólo mientras la alerta está vigente, y se
+   queda quieto cuando vence. La barra de plazo avanza hasta donde de verdad
+   llegó, y sólo late cuando falta poco de verdad —el último quinto del plazo o
+   tres días, lo que llegue antes—. La sigla del mosaico late sólo si ese eje
+   tiene alerta vigente en ese Estado.
+
+   Un tablero de alerta temprana que se mueve por decoración le está diciendo al
+   lector que pasa algo cuando no pasa nada. Eso es exactamente lo que la casa
+   no hace.
+
+   Todo esto se apaga entero más abajo con `prefers-reduced-motion`. Una
+   animación que no se puede desactivar es una animación que excluye gente. */
+
+/* La serie se traza sola. El largo del trazo lo calcula el generador y lo
+   escribe en el atributo, así que no hace falta una línea de JavaScript: la
+   página sigue siendo un archivo estático que funciona sin red y se imprime. */
+/* Al estirar el SVG, el grosor del trazo se estiraría con él y la línea saldría
+   más gruesa en un lado. `non-scaling-stroke` lo mantiene parejo, que es lo que
+   ya hace el pulso de la apertura. */
+.chispa polyline, .chispa line, .chispa circle { vector-effect: non-scaling-stroke; }
+.chispa .trazo {
+  stroke-dashoffset: var(--largo, 400);
+  animation: trazar 1.1s cubic-bezier(.4, 0, .2, 1) forwards;
+}
+@keyframes trazar { to { stroke-dashoffset: 0; } }
+
+/* El punto del final aparece cuando la línea termina de llegar. */
+.chispa .punta { opacity: 0; animation: asomar .3s ease .95s forwards; }
+@keyframes asomar { to { opacity: 1; } }
+
+/* Y late mientras la alerta esté vigente. Cuando vence, deja de latir: la
+   figura de una alerta cerrada tiene que verse cerrada. */
+.chispa .punta.late {
+  animation: asomar .3s ease .95s forwards, latir 2.4s ease-in-out 1.3s infinite;
+}
+@keyframes latir {
+  0%, 100% { r: 3.2; opacity: 1; }
+  50%      { r: 4.6; opacity: .75; }
+}
+
+/* La barra de plazo avanza hasta donde llegó el plazo de verdad. */
+.plazo .lleno.avanza {
+  width: var(--hasta, 0%);
+  animation: avanzar 1s cubic-bezier(.4, 0, .2, 1);
+}
+@keyframes avanzar { from { width: 0; } }
+
+/* Y late sólo cuando falta poco. El color no cambia: cambiar a rojo sería la
+   Oficina opinando sobre si el vencimiento es bueno o malo, y no le toca. */
+.plazo.cerca .lleno { animation: avanzar 1s cubic-bezier(.4,0,.2,1), respirar 1.8s ease-in-out 1s infinite; }
+@keyframes respirar { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+
+/* La sigla del mosaico late si ese eje tiene alerta vigente en ese Estado.
+   Es el mismo latido y el mismo compás que el punto de la figura: una sola
+   idea visual en todo el sitio, para que el lector la aprenda una vez. */
+.eje.viva.late { animation: pulsar 2.4s ease-in-out infinite; }
+@keyframes pulsar {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--violeta) 45%, transparent); }
+  60%      { box-shadow: 0 0 0 5px color-mix(in srgb, var(--violeta) 0%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Al estirar el SVG, el grosor del trazo se estiraría con él y la línea saldría
+   más gruesa en un lado. `non-scaling-stroke` lo mantiene parejo, que es lo que
+   ya hace el pulso de la apertura. */
+.chispa polyline, .chispa line, .chispa circle { vector-effect: non-scaling-stroke; }
+.chispa .trazo { animation: none; stroke-dashoffset: 0; }
+  .chispa .punta, .chispa .punta.late { animation: none; opacity: 1; }
+  .plazo .lleno.avanza, .plazo.cerca .lleno { animation: none; }
+  .eje.viva.late { animation: none; }
+}
+
+/* --- El pulso dentro de la ficha de un Estado ----------------------------
+   Al tocar un Estado, la figura que estaba latiendo en la portada sigue
+   latiendo acá. Antes la ficha era sólo texto y lo vivo se apagaba al abrirla,
+   que es justo al revés de lo que uno espera: se entra para ver MÁS. */
+.pulso-ficha { display: grid; gap: var(--aire-2); margin: 0 0 var(--aire-3); }
+.pulso-ficha .fila {
+  border: 1px solid var(--linea); border-radius: var(--radio);
+  padding: 10px 12px; background: var(--superficie);
+}
+.pulso-ficha .fila.viva { border-color: var(--violeta); }
+.pulso-ficha .rot {
+  display: block; font-size: var(--t-micro); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .07em; color: var(--texto2);
+  margin-bottom: 4px;
+}
+.pulso-ficha .fila.viva .rot { color: var(--violeta); }
+.pulso-ficha .rot i {
+  font-style: normal; font-weight: 400; letter-spacing: .03em;
+  text-transform: none; opacity: .85;
+}
+.pulso-ficha .chispa { width: 100%; height: 40px; display: block; }
+.pulso-ficha small {
+  display: block; margin-top: 4px; font-size: var(--t-micro); color: var(--texto2);
+}
+
+/* --- El pulso sobre el mapa ----------------------------------------------
+   Una onda que se abre desde el centro de cada Estado con alerta vigente, y
+   sólo de ésos. Es el mismo latido del mosaico y del punto de la figura, dicho
+   sobre la geografía: el lector aprende el gesto una vez y lo reconoce en los
+   tres lugares.
+
+   Se anima `transform: scale()` y no el atributo `r`. Animar `r` por CSS
+   funciona en algunos navegadores y en otros no; `transform` con
+   `transform-box: fill-box` funciona en todos, y acá no hay forma de probar en
+   el navegador de cada lector. */
+.mapa .foco .onda {
+  fill: none;
+  stroke: var(--violeta);
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: onda 3.2s cubic-bezier(.2, .6, .3, 1) var(--retraso, 0s) infinite;
+}
+/* El foco tenue: una señal que pasó el umbral y todavía no tiene alerta. Más
+   chico, más lento y en acero, no en violeta: el violeta está reservado para lo
+   que la casa ya anunció y se juega. */
+.mapa .foco.tenue .onda {
+  stroke: var(--acero); stroke-width: 1;
+  animation-duration: 4.6s;
+}
+.mapa .foco.tenue .nucleo { fill: var(--acero); animation-duration: 4.6s; }
+.mapa .foco.tenue { opacity: .75; }
+
+/* La segunda onda sale a mitad de camino de la primera: así el foco late en
+   lugar de parpadear. */
+.mapa .foco .onda.tarde { animation-delay: calc(var(--retraso, 0s) + 1.6s); }
+@keyframes onda {
+  0%   { transform: scale(.45); opacity: 0; }
+  12%  { opacity: .85; }
+  100% { transform: scale(4.2); opacity: 0; }
+}
+.mapa .foco .nucleo {
+  fill: var(--violeta);
+  animation: nucleo 3.2s ease-in-out var(--retraso, 0s) infinite;
+}
+@keyframes nucleo { 0%, 100% { opacity: .95; } 50% { opacity: .55; } }
+
+/* --- Las figuras se construyen -------------------------------------------
+   El área del pulso de la apertura se revela de izquierda a derecha, que es el
+   sentido en que corre el tiempo en esa figura. Un barrido con `clip-path` no
+   necesita saber el largo del trazo ni una línea de JavaScript. */
+.pulso.construye { clip-path: inset(0 0 0 0); animation: barrer 1.4s cubic-bezier(.4, 0, .2, 1); }
+@keyframes barrer { from { clip-path: inset(0 100% 0 0); } }
+
+/* La escala de Kent se arma celda por celda y la banda elegida entra última:
+   primero se ve la vara, después dónde cae el juicio. Es el orden en que hay
+   que leerla. */
+.kent .paso { animation: celda .4s ease backwards; }
+.kent .paso:nth-child(2)  { animation-delay: .05s; }
+.kent .paso:nth-child(3)  { animation-delay: .10s; }
+.kent .paso:nth-child(4)  { animation-delay: .15s; }
+.kent .paso:nth-child(5)  { animation-delay: .20s; }
+.kent .paso:nth-child(6)  { animation-delay: .25s; }
+.kent .paso:nth-child(7)  { animation-delay: .30s; }
+.kent .paso:nth-child(8)  { animation-delay: .35s; }
+@keyframes celda { from { opacity: 0; transform: translateY(3px); } }
+.kent .paso.aqui { animation: marcar .5s cubic-bezier(.34, 1.4, .64, 1) .45s backwards; }
+@keyframes marcar { from { opacity: 0; transform: scale(.7); } }
+
+/* Las barras del marcador crecen hasta su valor. Crecen de cero porque de cero
+   arrancan: el marcador todavía no tiene una sola alerta puntuada. */
+.marcador .riel .lleno { animation: crecer 1.1s cubic-bezier(.4, 0, .2, 1); }
+@keyframes crecer { from { width: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mapa .foco .onda, .mapa .foco .nucleo { animation: none; }
+  .mapa .foco .onda { opacity: .5; }
+  .pulso.construye { animation: none; clip-path: none; }
+  .kent .paso, .kent .paso.aqui { animation: none; }
+  .marcador .riel .lleno { animation: none; }
+}
+
+/* --- Las piezas se arman al abrir la página ------------------------------
+   Precisión a la regla: lo que NO PUEDE moverse de forma continua es lo que no
+   es un dato, porque un movimiento que no para dice que algo está pasando. Una
+   entrada **ocurre una vez y se termina**: dice que la página se está armando,
+   que es verdad mientras ocurre y deja de decir nada apenas termina.
+
+   El retraso lo escribe el generador en `--orden`, porque son 43 celdas y
+   hacerlo con `nth-child` sería una lista absurda de mantener. */
+.celda.entra {
+  animation: entrar .42s cubic-bezier(.3, 0, .2, 1) backwards;
+  animation-delay: calc(var(--orden, 0) * 22ms);
+}
+@keyframes entrar { from { opacity: 0; transform: translateY(8px); } }
+
+/* El mapa se revela de arriba abajo, una sola vez. Es la figura construyéndose:
+   no afirma nada sobre ningún país, que es lo que la hace admisible. */
+.mapa { animation: revelar 1.3s cubic-bezier(.4, 0, .2, 1); }
+@keyframes revelar { from { clip-path: inset(0 0 100% 0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .celda.entra { animation: none; }
+  .mapa { animation: none; }
+}
+
+/* --- Una alerta descartada se ve descartada -----------------------------
+   No va en violeta: el violeta de la casa marca lo que está vivo. Va en el
+   naranja, que en este tablero ya significa «acá hay algo que mirar y no es
+   una alerta en curso». Y va ARRIBA del hecho anunciado, porque si se lee el
+   hecho primero se lo lee como si la casa lo estuviera sosteniendo. */
+.descarte {
+  border: 1px solid var(--naranja);
+  border-left-width: 4px;
+  border-radius: var(--radio);
+  background: color-mix(in srgb, var(--naranja) 8%, transparent);
+  padding: 13px 15px;
+  margin: 0 0 var(--aire-3);
+  font-size: var(--t-chico);
+}
+.descarte p { margin: 8px 0 0; color: var(--texto2); }
+.alerta .descarte { margin-bottom: var(--aire-2); font-size: var(--t-micro); }
+
+/* --- La serie con su escala ----------------------------------------------
+   La figura era una línea sin un solo número: decía que la punteada marcaba la
+   mediana y no decía cuánto valía, ni cuál era el máximo, ni qué días cubría.
+   La escala va en HTML y no adentro del SVG, porque el dibujo se estira para
+   ocupar su caja y un `<text>` adentro se estiraría con él. */
+.serie { display: grid; grid-template-columns: auto 1fr; gap: 0 8px; }
+.serie .eje-y {
+  display: flex; flex-direction: column; justify-content: space-between;
+  align-items: flex-end; text-align: right;
+  font-size: var(--t-micro); color: var(--texto2);
+  font-variant-numeric: tabular-nums; line-height: 1;
+  border-right: 1px solid var(--linea); padding-right: 6px;
+}
+.serie .eje-y .unidad { opacity: .7; font-size: .92em; }
+.serie .trama { position: relative; min-width: 0; }
+.serie .rot-mediana {
+  position: absolute; right: 2px; top: var(--y, 50%);
+  transform: translateY(-115%);
+  font-size: var(--t-micro); color: var(--texto2);
+  background: var(--superficie); padding: 0 3px; border-radius: 2px;
+  font-variant-numeric: tabular-nums; pointer-events: none; white-space: nowrap;
+}
+.serie .eje-x {
+  grid-column: 2; display: flex; justify-content: space-between;
+  font-size: var(--t-micro); color: var(--texto2); margin-top: 3px;
+  border-top: 1px solid var(--linea); padding-top: 3px;
+}
+/* Dentro de la apertura, que es oscura, la etiqueta no puede llevar el fondo
+   claro de las tarjetas. */
+.apertura .serie .rot-mediana { background: transparent; }
+
+/* --- Lo que llega a la vista, entra -------------------------------------
+   La dirección pidió el 2/10/2026 más movimiento y desplazamiento en todo el
+   sitio, no sólo en la portada. Esto es una **entrada**, no un movimiento
+   continuo: ocurre una vez, cuando la pieza llega a la pantalla, y se termina.
+   Dice «esto acaba de llegar», que es verdad mientras ocurre.
+
+   Sin JavaScript no hay forma de saber cuándo una pieza entra en pantalla, así
+   que hay un observador de cinco líneas. Si no corre —porque el navegador es
+   viejo o el lector apagó los programas— la clase `visible` se pone igual al
+   cargar y no se pierde nada: el estado por defecto del sitio es «todo a la
+   vista», y la animación es lo que se agrega. Nunca al revés. */
+.revela { opacity: 0; transform: translateY(14px); }
+.revela.visible {
+  opacity: 1; transform: none;
+  transition: opacity .5s ease, transform .5s cubic-bezier(.2, .7, .3, 1);
+  transition-delay: calc(var(--orden, 0) * 45ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revela { opacity: 1; transform: none; }
+  .revela.visible { transition: none; }
+}

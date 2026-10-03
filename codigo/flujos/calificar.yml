@@ -1,0 +1,58 @@
+name: FEMÓNOE · calificar fuentes
+
+# Las tres capas que no gastan tokens de conversación, más la propuesta de
+# letra que hace el modelo gratuito. **Nada de esto califica nada**: deja el
+# legajo medido y una propuesta al lado, y la letra la pone una persona.
+# `doctrina/fuentes.md` §1. Se automatiza el proceso, nunca el juicio.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "40 5 * * 1"        # lunes, después de la corrida diaria
+
+# Todo flujo que empuja a main comparte este grupo, para que nunca corran dos
+# a la vez. No es prolijidad: tres flujos distintos escriben redes.json, y ese
+# archivo NO lo regenera el robot —lleva las calificaciones de fuentes escritas
+# a mano—. Con `git pull --rebase -X theirs`, el segundo en llegar no falla:
+# pisa en silencio lo que escribió el primero, y nada se pone en rojo.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+jobs:
+  calificar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Quiénes son, en los hechos, una sola fuente
+        run: python sindicacion.py --escribir
+        continue-on-error: true
+
+      - name: La misma fuente cargada dos veces
+        run: python calificar.py --duplicados
+        continue-on-error: true
+
+      - name: Legajo de las que siguen sin calificar
+        run: python calificar.py --legajo
+        continue-on-error: true
+
+      - name: Propuesta de letra · modelo gratuito
+        run: python calificar.py --proponer
+        env:
+          GROQ_CLAVE: ${{ secrets.GROQ_CLAVE }}
+        continue-on-error: true
+
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          git add legajos sindicacion.json
+          git commit -m "Legajos y propuesta de calificación $(date +%F)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push

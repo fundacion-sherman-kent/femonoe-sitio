@@ -1,0 +1,79 @@
+name: FEMÓNOE · expandir el padrón de fuentes
+
+# Propone fuentes nuevas con un modelo gratuito, les busca el feed, lo verifica y
+# —si se pide— las incorpora marcadas «sin calificar»: se leen, pero no cuentan
+# como familia independiente hasta que una persona las califique.
+
+on:
+  workflow_dispatch:
+    inputs:
+      estados:
+        description: "Estados (ISO3 separados por espacio) o --todos"
+        type: string
+        default: "--todos"
+      incorporar:
+        description: "Sumar al padrón lo verificado"
+        type: boolean
+        default: false
+      vector:
+        description: "Qué se expande"
+        type: choice
+        default: todo
+        options: [todo, sitios, canales, instituciones]
+
+permissions:
+  contents: write
+
+# Todo flujo que empuja a main comparte este grupo, para que nunca corran dos
+# a la vez. No es prolijidad: tres flujos distintos escriben redes.json, y ese
+# archivo NO lo regenera el robot —lleva las calificaciones de fuentes escritas
+# a mano—. Con `git pull --rebase -X theirs`, el segundo en llegar no falla:
+# pisa en silencio lo que escribió el primero, y nada se pone en rojo.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+env:
+  PYTHONIOENCODING: utf-8
+
+jobs:
+  expandir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash -eo pipefail {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+
+      - name: Instituciones · autoridad electoral, boletín oficial, policía, defensoría
+        if: inputs.vector == 'instituciones'
+        run: python expandir.py ${{ inputs.estados }} --instituciones ${{ inputs.incorporar && '--incorporar' || '' }}
+        env:
+          GROQ_CLAVE: ${{ secrets.GROQ_CLAVE }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+
+      - name: Sitios · proponer, descubrir y verificar
+        if: inputs.vector == 'sitios' || inputs.vector == 'todo'
+        run: python expandir.py ${{ inputs.estados }} ${{ inputs.incorporar && '--incorporar' || '' }}
+        env:
+          GROQ_CLAVE: ${{ secrets.GROQ_CLAVE }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+
+      - name: Canales · YouTube, Telegram público y Mastodon
+        if: inputs.vector == 'canales' || inputs.vector == 'todo'
+        run: python canales.py ${{ inputs.estados }} ${{ inputs.incorporar && '--incorporar' || '' }}
+        env:
+          GROQ_CLAVE: ${{ secrets.GROQ_CLAVE }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          git add propuestas redes.json
+          git commit -m "Fuentes propuestas y verificadas $(date +%F)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push

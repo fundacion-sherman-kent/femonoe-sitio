@@ -1,0 +1,269 @@
+{
+ "nota": "Los 33 Estados del padrón de la Fundación (fuentes/paises.md). Fuente única de FEMÓNOE.",
+ "estados": [
+  {
+   "iso3": "ARG",
+   "iso2": "AR",
+   "iso_num": 32,
+   "nombre": "Argentina",
+   "nombre_en": "Argentina",
+   "bloque": "Cono Sur"
+  },
+  {
+   "iso3": "BRA",
+   "iso2": "BR",
+   "iso_num": 76,
+   "nombre": "Brasil",
+   "nombre_en": "Brazil",
+   "bloque": "Cono Sur"
+  },
+  {
+   "iso3": "CHL",
+   "iso2": "CL",
+   "iso_num": 152,
+   "nombre": "Chile",
+   "nombre_en": "Chile",
+   "bloque": "Cono Sur"
+  },
+  {
+   "iso3": "PRY",
+   "iso2": "PY",
+   "iso_num": 600,
+   "nombre": "Paraguay",
+   "nombre_en": "Paraguay",
+   "bloque": "Cono Sur"
+  },
+  {
+   "iso3": "URY",
+   "iso2": "UY",
+   "iso_num": 858,
+   "nombre": "Uruguay",
+   "nombre_en": "Uruguay",
+   "bloque": "Cono Sur"
+  },
+  {
+   "iso3": "BOL",
+   "iso2": "BO",
+   "iso_num": 68,
+   "nombre": "Bolivia",
+   "nombre_en": "Bolivia",
+   "bloque": "Andina"
+  },
+  {
+   "iso3": "COL",
+   "iso2": "CO",
+   "iso_num": 170,
+   "nombre": "Colombia",
+   "nombre_en": "Colombia",
+   "bloque": "Andina"
+  },
+  {
+   "iso3": "ECU",
+   "iso2": "EC",
+   "iso_num": 218,
+   "nombre": "Ecuador",
+   "nombre_en": "Ecuador",
+   "bloque": "Andina"
+  },
+  {
+   "iso3": "PER",
+   "iso2": "PE",
+   "iso_num": 604,
+   "nombre": "Perú",
+   "nombre_en": "Peru",
+   "bloque": "Andina"
+  },
+  {
+   "iso3": "VEN",
+   "iso2": "VE",
+   "iso_num": 862,
+   "nombre": "Venezuela",
+   "nombre_en": "Venezuela",
+   "bloque": "Andina"
+  },
+  {
+   "iso3": "GUY",
+   "iso2": "GY",
+   "iso_num": 328,
+   "nombre": "Guyana",
+   "nombre_en": "Guyana",
+   "bloque": "Guayanas"
+  },
+  {
+   "iso3": "SUR",
+   "iso2": "SR",
+   "iso_num": 740,
+   "nombre": "Surinam",
+   "nombre_en": "Suriname",
+   "bloque": "Guayanas"
+  },
+  {
+   "iso3": "MEX",
+   "iso2": "MX",
+   "iso_num": 484,
+   "nombre": "México",
+   "nombre_en": "Mexico",
+   "bloque": "México y Centroamérica"
+  },
+  {
+   "iso3": "BLZ",
+   "iso2": "BZ",
+   "iso_num": 84,
+   "nombre": "Belice",
+   "nombre_en": "Belize",
+   "bloque": "México y Centroamérica"
+  },
+  {
+   "iso3": "CRI",
+   "iso2": "CR",
+   "iso_num": 188,
+   "nombre": "Costa Rica",
+   "nombre_en": "Costa Rica",
+   "bloque": "México y Centroamérica"
+  },
+  {
+   "iso3": "SLV",
+   "iso2": "SV",
+   "iso_num": 222,
+   "nombre": "El Salvador",
+   "nombre_en": "El Salvador",
+   "bloque": "México y Centroamérica"
+  },
+  {
+   "iso3": "GTM",
+   "iso2": "GT",
+   "iso_num": 320,
+   "nombre": "Guatemala",
+   "nombre_en": "Guatemala",
+   "bloque": "México y Centroamérica"
+  },
+  {
+   "iso3": "HND",
+   "iso2": "HN",
+   "iso_num": 340,
+   "nombre": "Honduras",
+   "nombre_en": "Honduras",
+   "bloque": "México y Centroamérica"
+  },
+  {
+   "iso3": "NIC",
+   "iso2": "NI",
+   "iso_num": 558,
+   "nombre": "Nicaragua",
+   "nombre_en": "Nicaragua",
+   "bloque": "México y Centroamérica"
+  },
+  {
+   "iso3": "PAN",
+   "iso2": "PA",
+   "iso_num": 591,
+   "nombre": "Panamá",
+   "nombre_en": "Panama",
+   "bloque": "México y Centroamérica"
+  },
+  {
+   "iso3": "CUB",
+   "iso2": "CU",
+   "iso_num": 192,
+   "nombre": "Cuba",
+   "nombre_en": "Cuba",
+   "bloque": "Caribe"
+  },
+  {
+   "iso3": "DOM",
+   "iso2": "DO",
+   "iso_num": 214,
+   "nombre": "República Dominicana",
+   "nombre_en": "Dominican Republic",
+   "bloque": "Caribe"
+  },
+  {
+   "iso3": "HTI",
+   "iso2": "HT",
+   "iso_num": 332,
+   "nombre": "Haití",
+   "nombre_en": "Haiti",
+   "bloque": "Caribe"
+  },
+  {
+   "iso3": "JAM",
+   "iso2": "JM",
+   "iso_num": 388,
+   "nombre": "Jamaica",
+   "nombre_en": "Jamaica",
+   "bloque": "Caribe"
+  },
+  {
+   "iso3": "TTO",
+   "iso2": "TT",
+   "iso_num": 780,
+   "nombre": "Trinidad y Tobago",
+   "nombre_en": "Trinidad and Tobago",
+   "bloque": "Caribe"
+  },
+  {
+   "iso3": "BHS",
+   "iso2": "BS",
+   "iso_num": 44,
+   "nombre": "Bahamas",
+   "nombre_en": "Bahamas",
+   "bloque": "Caribe"
+  },
+  {
+   "iso3": "BRB",
+   "iso2": "BB",
+   "iso_num": 52,
+   "nombre": "Barbados",
+   "nombre_en": "Barbados",
+   "bloque": "Caribe"
+  },
+  {
+   "iso3": "ATG",
+   "iso2": "AG",
+   "iso_num": 28,
+   "nombre": "Antigua y Barbuda",
+   "nombre_en": "Antigua and Barbuda",
+   "bloque": "Caribe oriental"
+  },
+  {
+   "iso3": "DMA",
+   "iso2": "DM",
+   "iso_num": 212,
+   "nombre": "Dominica",
+   "nombre_en": "Dominica",
+   "bloque": "Caribe oriental"
+  },
+  {
+   "iso3": "GRD",
+   "iso2": "GD",
+   "iso_num": 308,
+   "nombre": "Granada",
+   "nombre_en": "Grenada",
+   "bloque": "Caribe oriental"
+  },
+  {
+   "iso3": "KNA",
+   "iso2": "KN",
+   "iso_num": 659,
+   "nombre": "San Cristóbal y Nieves",
+   "nombre_en": "Saint Kitts and Nevis",
+   "bloque": "Caribe oriental"
+  },
+  {
+   "iso3": "LCA",
+   "iso2": "LC",
+   "iso_num": 662,
+   "nombre": "Santa Lucía",
+   "nombre_en": "Saint Lucia",
+   "bloque": "Caribe oriental"
+  },
+  {
+   "iso3": "VCT",
+   "iso2": "VC",
+   "iso_num": 670,
+   "nombre": "San Vicente y las Granadinas",
+   "nombre_en": "Saint Vincent and the Grenadines",
+   "bloque": "Caribe oriental"
+  }
+ ]
+}

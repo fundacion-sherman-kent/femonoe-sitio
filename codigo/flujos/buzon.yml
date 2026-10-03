@@ -1,0 +1,48 @@
+name: FEMÓNOE · buzón
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 */4 * * *"   # cada cuatro horas: Telegram guarda lo pendiente sólo 24 h
+
+permissions:
+  contents: write
+
+# Todo flujo que empuja a main comparte este grupo, para que nunca corran dos
+# a la vez. No es prolijidad: tres flujos distintos escriben redes.json, y ese
+# archivo NO lo regenera el robot —lleva las calificaciones de fuentes escritas
+# a mano—. Con `git pull --rebase -X theirs`, el segundo en llegar no falla:
+# pisa en silencio lo que escribió el primero, y nada se pone en rojo.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+jobs:
+  buzon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Leer el buzón de Telegram
+        run: python colectores/buzon.py
+        continue-on-error: true
+        env:
+          BUZON_REMITENTES: ${{ secrets.BUZON_REMITENTES }}
+          PYTHONIOENCODING: utf-8
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      - name: Leer el buzón de WhatsApp
+        run: python colectores/buzon_whatsapp.py
+        continue-on-error: true
+        env:
+          PYTHONIOENCODING: utf-8
+          WA_ROBOT_CLAVE: ${{ secrets.WA_ROBOT_CLAVE }}
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          git add datos
+          git commit -m "Buzón $(date +%F\ %H:%M)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push

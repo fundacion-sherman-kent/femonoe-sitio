@@ -1,0 +1,254 @@
+{
+ "version": "1.0",
+ "fecha": "2026-09-21",
+ "cambios": [
+  "0.2 · I-2b: el bloqueo de sitios se mide contra lo habitual del país. En Venezuela, Colombia y México hay bloqueos confirmados casi todos los días (295, 283 y 234 de 400).",
+  "0.3 · Jubilado el buscador de GDELT: falló dos corridas seguidas y devuelve series distintas entre consultas. Protestas y violencia pasan a los archivos diarios de hechos de GDELT (G-1 y S-1), que son fijos.",
+  "0.3 · ACLED baja a corroboración: su cuenta sólo entrega hechos de más de doce meses (date_recency, corte 21/9/2025). Vuelve a ser disparador si ACLED levanta la restricción.",
+  "0.3 · Cortes de internet: hacen falta 3 alertas críticas en el día. Con 1 sola disparaban 10 veces por semana; con 3, 1,3.",
+  "0.4 · Bloqueo nuevo: hacen falta 5 sitios bloqueados, no 1. Con 1, Venezuela disparaba por un solo sitio tras 28 días quietos (6 avisos en 90 días contra 2).",
+  "0.5 · Nueva familia «redes»: Telegram, Mastodon, Bluesky y YouTube, clasificados por país y eje. Confirma, no dispara. Suma I-5, difusión coordinada: el mismo texto el mismo día en tres cuentas o más.",
+  "0.6 · 24/9/2026 · Una familia no corrobora hasta tener 60 días de recolección propia (familias.desde). Lo encontró el analista de indicadores en la primera alerta: la familia de redes figuraba como segunda fuente tres días después de arrancar."
+ ],
+ "estado": "PROPUESTA de la Oficina (direccion/ideas/I-08-umbrales.md). No se mueve durante la prueba salvo una corrección declarada.",
+ "comun": {
+  "dias_base": 28,
+  "semanas_base": 52,
+  "horas_corroboracion": 72,
+  "persistencia_corridas": 2,
+  "poisson_p": 0.001,
+  "multiplicador_calendario_dias": 21
+ },
+ "diarias": {
+  "eventos_protesta": {
+   "eje": "gobernabilidad",
+   "codigo": "G-1",
+   "familia": "hechos_gdelt",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 5
+  },
+  "eventos_violencia": {
+   "eje": "seguridad",
+   "codigo": "S-1",
+   "familia": "hechos_gdelt",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 8
+  },
+  "ooni_confirmados": {
+   "eje": "entorno informativo",
+   "codigo": "I-2b",
+   "familia": "ooni",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 5,
+   "abre": false
+  },
+  "ooni_tasa": {
+   "eje": "entorno informativo",
+   "codigo": "I-2c",
+   "familia": "ooni",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 20,
+   "nota": "En partes por mil: 20 = 2 % de las mediciones del país dieron bloqueo confirmado. Se calcula sólo con 100 mediciones o más.",
+   "abre": false
+  },
+  "ooni_panel": {
+   "eje": "entorno informativo",
+   "codigo": "I-2d",
+   "familia": "ooni",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 20,
+   "nota": "Partes por mil, sobre los dominios que el país YA venía midiendo. Un sitio que aparece por primera vez en la lista de prueba no puede mover la señal."
+  },
+  "ioda_alertas": {
+   "eje": "entorno informativo",
+   "codigo": "I-1b",
+   "familia": "ioda",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 3,
+   "abre": false
+  },
+  "cloudflare_cortes": {
+   "eje": "entorno informativo",
+   "codigo": "I-3b",
+   "familia": "cloudflare",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 1,
+   "nota": "Cortes de internet anotados por Cloudflare. Familia distinta de IODA —académica— y de OONI —voluntarios—: corrobora de verdad y no por parentesco."
+  },
+  "cloudflare_deliberados": {
+   "eje": "entorno informativo",
+   "codigo": "I-3c",
+   "familia": "cloudflare",
+   "veces_mediana": 1,
+   "z_robusto": 1,
+   "piso": 1,
+   "nota": "Cortes que Cloudflare atribuye a una decisión de gobierno. Uno solo abre: no hace falta un desvío estadístico para que un apagón dispuesto sea noticia. La atribución es de Cloudflare, no de la casa, y así se cita."
+  },
+  "redes_gobernabilidad": {
+   "eje": "gobernabilidad",
+   "codigo": "G-4r",
+   "familia": "redes",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 5,
+   "abre": false
+  },
+  "redes_seguridad": {
+   "eje": "seguridad",
+   "codigo": "S-5r",
+   "familia": "redes",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 5,
+   "abre": false
+  },
+  "redes_informativo": {
+   "eje": "entorno informativo",
+   "codigo": "I-6r",
+   "familia": "redes",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 5,
+   "abre": false
+  },
+  "redes_coordinado": {
+   "eje": "entorno informativo",
+   "codigo": "I-5",
+   "familia": "redes",
+   "veces_mediana": 3,
+   "z_robusto": 3,
+   "piso": 2,
+   "abre": false,
+   "nota": "Una noticia replicada por varios medios también cuenta como difusión coordinada: lo distingue una persona"
+  }
+ },
+ "calendario": {
+  "veces_mediana": 2,
+  "z_robusto": 2.5
+ },
+ "semanales": {
+  "acled_protesta": {
+   "eje": "gobernabilidad",
+   "codigo": "G-1b",
+   "familia": "acled",
+   "percentil": 90,
+   "veces_mediana": 2,
+   "piso": 5,
+   "abre": false
+  },
+  "acled_violencia": {
+   "eje": "seguridad",
+   "codigo": "S-1b",
+   "familia": "acled",
+   "percentil": 90,
+   "veces_mediana": 2,
+   "piso": 5,
+   "abre": false
+  },
+  "acled_muertes": {
+   "eje": "seguridad",
+   "codigo": "S-2",
+   "familia": "acled",
+   "semanas_base": 12,
+   "veces_mediana": 2,
+   "piso": 10,
+   "abre": false
+  }
+ },
+ "hechos_duros": {
+  "acled_hecho_grave": {
+   "eje": "seguridad",
+   "codigo": "S-3",
+   "familia": "acled",
+   "muertes_minimas": 10
+  },
+  "ioda_corte": {
+   "eje": "entorno informativo",
+   "codigo": "I-1",
+   "familia": "ioda",
+   "nivel": "critical",
+   "criticas_minimas": 3
+  },
+  "ooni_bloqueo": {
+   "eje": "entorno informativo",
+   "codigo": "I-2",
+   "familia": "ooni",
+   "confirmados_minimos": 5,
+   "dias_sin_previo": 28
+  }
+ },
+ "prioridad": [
+  "hecho_duro",
+  "dos_ejes",
+  "familias",
+  "tamano_desvio"
+ ],
+ "tope_semanal": 5,
+ "tope_semanal_regla": "5 alertas NUEVAS por semana (decisión de la dirección, 22/9/2026). No limita las vigentes a la vez.",
+ "marcador": {
+  "visible_desde": "Beta (20/10/2026)",
+  "leyenda": "en calibración",
+  "hasta": "20 alertas vencidas",
+  "decision": "dirección, 22/9/2026"
+ },
+ "familias": {
+  "_nota": "Desde cuándo mide cada familia. Una familia con menos de dias_para_corroborar días de recolección propia aparece como evidencia pero NO cuenta como segunda fuente: sin línea de base no puede decir si algo se salió de lo normal. Las fechas de las notas que trae un feed no sirven para deducirlo, porque un feed leído hoy devuelve material viejo.",
+  "dias_para_corroborar": 60,
+  "ooni": {
+   "desde": "2025-08-16",
+   "nota": "400 días de relleno"
+  },
+  "ioda": {
+   "desde": "2025-08-16",
+   "nota": "400 días de relleno"
+  },
+  "hechos_gdelt": {
+   "desde": "2025-08-16",
+   "nota": "archivos diarios, 400 días"
+  },
+  "acled": {
+   "desde": "2025-08-16",
+   "nota": "atrasada 12 meses en origen"
+  },
+  "redes": {
+   "desde": "2026-09-20",
+   "nota": "arrancó el 20/9/2026 y saltó en los 33 Estados a la vez; el 24/9 se corrigió además la lectura de fechas, que descartaba en silencio la mayoría de los feeds"
+  },
+  "ooni_panel_historia": {
+   "desde": "2026-06-01",
+   "nota": "La serie de panel fijo se rellenó el 27/9/2026 con historia real de OONI —119 días, 25 Estados—, no estimada: para cada mes se armó el panel con la referencia que le correspondía y se recalcularon sus días, con la misma regla del colector corrida hacia atrás. Línea de base medida en esos cuatro meses: **sólo Cuba** cruza el 2 %, y sólo durante el episodio en curso."
+  },
+  "cloudflare": {
+   "desde": "2025-08-27",
+   "nota": "Nace madura: el colector pide 400 días de historia en su primera corrida, así que tiene línea de base propia desde el día uno. No es una excepción a la regla de los 60 días: es la regla cumplida con historia real en vez de esperada."
+  }
+ },
+ "redes_coordinado_definicion": {
+  "desde": "2026-09-27",
+  "cuenta": "grupos de fuentes independientes, no cuentas",
+  "texto_minimo": 40,
+  "por_que": "Hasta el 27/9 la señal contaba tres CUENTAS con el mismo texto. Medido ese día sobre cinco días de material: de 43 marcas, 39 salían de mensajes que eran sólo un enlace —la huella se calcula sin las direcciones, así que todos los mensajes sin texto propio caían en la misma huella; una marca juntaba diez cuentas de once países—. Ahora se exige texto real (40 caracteres tras quitar las direcciones) y se cuentan fuentes independientes según sindicacion.json. La serie se rehizo entera con la definición nueva: quedó 1 marca donde había 52."
+ },
+ "ooni_definicion": {
+  "desde": "2026-09-27",
+  "abre": "ooni_panel",
+  "corroboran": [
+   "ooni_tasa",
+   "ooni_confirmados"
+  ],
+  "por_que": "Tres formas de mirar lo mismo y dos cegueras, las dos pagadas el 27/9/2026. El RECUENTO sube cuando hay más bloqueo y también cuando hay más gente midiendo. La TASA arregla eso y crea la ceguera opuesta: en Cuba los confirmados cayeron 86 % entre el 20 y el 26 y la tasa quedó plana, porque cayó el denominador. Y ninguna de las dos resuelve el fondo: si cambia la lista de sitios que la sonda prueba, las dos se mueven sin que el Estado haya hecho nada —cinco de los ocho dominios del episodio cubano no se midieron ni una vez en agosto—. El PANEL FIJO compara lo comparable: sólo dominios con historia propia de medición. Probado contra el caso cubano, separó lo que las otras dos no podían: el padrón ya estaba censurado antes del 18 (9,6 %, no 0), y aun así hubo un aumento real (a 25,6 %), fuera del ruido de muestreo.",
+  "cobertura": "25 de los 33 Estados tienen panel utilizable. Los ocho que no —Guyana, Bahamas, Barbados, Dominica, Granada, San Cristóbal, Santa Lucía y San Vicente— no tienen sondas suficientes de OONI, y se declara en vez de estimarse."
+ },
+ "zonas": {
+  "activas": true,
+  "concentracion_maxima": 0.75,
+  "por_que": "Ningun Estado puede aportar mas de tres cuartos del total para que la señal cuente como de zona. Sumar antes de medir deja que un pais solo se disfrace de zona: sin esta prueba, cinco de siete señales eran un pais con nombre prestado. Un hecho de frontera se ve de los dos lados."
+ }
+}

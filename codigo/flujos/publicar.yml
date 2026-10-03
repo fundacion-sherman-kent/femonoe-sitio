@@ -1,0 +1,101 @@
+name: FEMÓNOE · publicar el sitio
+
+# Empuja el tablero ya construido al depósito PÚBLICO `femonoe-sitio`, que es
+# el que sirve femonoe.fundacionkent.org.
+#
+# Por qué dos depósitos y no uno. Este depósito guarda 61.373 mensajes de 990
+# cuentas recolectadas de canales públicos. La autorización de la Dirección del
+# 20/9/2026 que habilitó esa recolección fija que el contenido **se usa como
+# fuente y no se republica**, y prohíbe toda compilación de perfiles. Abrir
+# este depósito publicaría el corpus entero. Así que se publica **sólo lo que
+# se sirve**: el sitio construido y el código, que es a lo que obliga la AGPL.
+#
+# Lo que NO cruza, y se controla antes de empujar: el corpus de mensajes, el
+# padrón de fuentes, los expedientes de alerta en crudo, el buzón y los
+# legajos. El control de abajo frena la publicación si algo de eso aparece.
+
+on:
+  workflow_run:
+    workflows: ["FEMÓNOE · corrida diaria", "FEMÓNOE · corrida horaria"]
+    types: [completed]
+  workflow_dispatch:
+
+concurrency:
+  group: femonoe-sitio
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Construir el tablero
+        run: python tablero.py
+
+      - name: Armar lo que se publica
+        run: |
+          mkdir -p sitio/codigo/colectores sitio/codigo/flujos
+          cp -r tablero/. sitio/
+          rm -rf sitio/propuestas
+          # El CNAME espera al DNS. Con el archivo puesto, Pages se muda al
+          # dominio propio y **deja de servir en github.io**: si el registro
+          # todavía no existe, el sitio queda inalcanzable. Pasó el 1/10/2026.
+          # Cuando el CNAME esté en SiteGround, se renombra y vuelve solo.
+          rm -f sitio/CNAME.cuando-el-dns-este
+          test -f tablero/CNAME && cp tablero/CNAME sitio/CNAME || true
+          cp *.py sitio/codigo/
+          cp colectores/*.py sitio/codigo/colectores/
+          cp .github/workflows/*.yml sitio/codigo/flujos/
+          cp umbrales.json padron.json disarm.json LICENSE sitio/codigo/
+          cp LICENSE README-SITIO.md sitio/ 2>/dev/null || cp LICENSE sitio/
+          mv sitio/README-SITIO.md sitio/README.md 2>/dev/null || true
+
+      # Dos controles antes de empujar, y los dos frenan. El de marcas se
+      # agregó el 2/10/2026, después de que la dirección encontrara diecinueve
+      # asteriscos crudos a la vista leyendo una captura: ése es el peor lugar
+      # donde puede aparecer un defecto de edición.
+      - name: Control · que no quede Markdown crudo a la vista
+        run: python control_marcas.py sitio
+
+      - name: Control · que no cruce ningún dato
+        # Frena la publicación antes de empujar. Es la única barrera entre el
+        # corpus y la web, así que falla ruidosamente y no continúa.
+        run: |
+          set -e
+          for prohibido in "redes.json" "mensajes" "buzon.json" "legajos" "curaduria" "senales" "alertas/"; do
+            if find sitio -path "*$prohibido*" | grep -q .; then
+              echo "FRENADO: apareció «$prohibido» en lo que se iba a publicar."
+              find sitio -path "*$prohibido*"
+              exit 1
+            fi
+          done
+          echo "Control pasado: ni corpus, ni padrón, ni expedientes en crudo."
+
+      - name: Empujar al depósito público
+        env:
+          LLAVE: ${{ secrets.SITIO_LLAVE }}
+        run: |
+          mkdir -p ~/.ssh && echo "$LLAVE" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+          cd sitio
+          git init -q
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Sitio $(date +%F\ %H:%M)" || { echo "Sin cambios"; exit 0; }
+          git push -q --force git@github.com:fundacion-sherman-kent/femonoe-sitio.git HEAD:main
+          # El mensaje dice la dirección que FUNCIONA, no la que se desea.
+          # Hasta el 2/10/2026 anunciaba femonoe.fundacionkent.org, que todavía
+          # no resuelve porque falta el registro en SiteGround: quien leía el
+          # registro de la corrida creía publicado algo inalcanzable.
+          if [ -f sitio/CNAME ]; then
+            echo "Publicado en https://$(cat sitio/CNAME)"
+          else
+            echo "Publicado en https://fundacion-sherman-kent.github.io/femonoe-sitio/"
+            echo "  (el dominio propio femonoe.fundacionkent.org espera el registro CNAME en SiteGround)"
+          fi

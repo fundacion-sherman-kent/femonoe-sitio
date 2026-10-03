@@ -1,0 +1,54 @@
+name: FEMÓNOE · calendario institucional
+
+# El calendario cambia despacio: se actualiza una vez por semana. De él sale el
+# multiplicador que baja el umbral de 3 a 2 desvíos cuando un país tiene una
+# elección o un vencimiento dentro de los 21 días.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 8 * * 1"   # lunes, antes de la corrida diaria
+
+permissions:
+  contents: write
+
+# Todo flujo que empuja a main comparte este grupo, para que nunca corran dos
+# a la vez. No es prolijidad: tres flujos distintos escriben redes.json, y ese
+# archivo NO lo regenera el robot —lleva las calificaciones de fuentes escritas
+# a mano—. Con `git pull --rebase -X theirs`, el segundo en llegar no falla:
+# pisa en silencio lo que escribió el primero, y nada se pone en rojo.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+env:
+  PYTHONIOENCODING: utf-8
+
+jobs:
+  calendario:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    defaults:
+      run:
+        shell: bash -eo pipefail {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Elecciones y fechas institucionales de los 33
+        run: python colectores/calendario.py
+        working-directory: .
+      # La fecha de Wikidata es el punto de partida; la que vale es la del
+      # organismo electoral del país.
+      - name: Confirmar contra la autoridad electoral
+        run: python confirmar.py
+        continue-on-error: true
+
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          git add calendario.json
+          git commit -m "Calendario $(date +%F)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push

@@ -1,0 +1,89 @@
+name: FEMÓNOE · corrida horaria
+
+# La primera capa del tiempo real. Baja la latencia de 24 horas a una, gratis.
+#
+# POR QUÉ NO CORRE TODO. El robot gratuito trae 2.000 minutos mensuales en
+# depósito privado. Medido el 1/10/2026: la corrida diaria tarda 26 minutos y
+# consume unos 780 al mes, y el buzón otros 30. Quedan unos 1.150 para las 720
+# corridas horarias del mes, es decir **1,5 minutos por corrida**. No es una
+# estimación de escritorio: sale de las corridas reales.
+#
+# Así que acá entra sólo lo barato y lo que de verdad cambia dentro de la hora:
+#
+#   ENTRA           OONI agregado (una consulta), IODA (una consulta), el
+#                   retiro del vigía de organismos —un pedido, porque el barrido
+#                   lo hace Cloudflare gratis—, el detector y el tablero.
+#   NO ENTRA        las redes —leen cientos de feeds y tardan minutos—,
+#                   OONI sobre panel fijo —dos consultas por Estado, cuatro
+#                   minutos—, ACLED, GDELT y el calendario. Todo eso sigue en
+#                   la corrida diaria, que es donde su costo se justifica.
+#
+# Si en alguna corrida el presupuesto se vuelve estrecho, lo que se achica es
+# la frecuencia, nunca el estándar del juicio.
+
+on:
+  schedule:
+    - cron: "17 * * * *"      # a los 17 de cada hora, lejos del pico en punto
+  workflow_dispatch:
+
+# El mismo portón que los demás: nunca dos flujos empujando a main a la vez.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+jobs:
+  horaria:
+    runs-on: ubuntu-latest
+    # Techo duro. Un colector que se cuelga no puede vaciar el presupuesto del
+    # mes: la corrida se corta y la siguiente lo intenta de nuevo. Perder una
+    # hora de latencia es barato; quedarse sin minutos en el día 20 no lo es.
+    timeout-minutes: 4
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: OONI · bloqueos confirmados
+        run: python ooni.py
+        working-directory: colectores
+        timeout-minutes: 1
+        continue-on-error: true
+
+      - name: IODA · cortes de conectividad
+        run: python ioda.py
+        working-directory: colectores
+        timeout-minutes: 1
+        continue-on-error: true
+
+      # El vigía propiamente dicho corre en Cloudflare cada dos minutos y no
+      # gasta ni un minuto del presupuesto de GitHub. Acá sólo se retira lo que
+      # encontró: si no se movió nada —el caso normal— es un pedido y un segundo.
+      - name: Vigía · lo que publicaron las autoridades electorales
+        # Dos caminos en un paso: retira lo que encontró el vigía de Cloudflare
+        # y mira por su cuenta los que a Cloudflare le cierran la puerta.
+        run: python vigia.py
+        working-directory: colectores
+        env:
+          WA_ROBOT_CLAVE: ${{ secrets.WA_ROBOT_CLAVE }}
+        # 3 y no 2: desde el 2/10/2026 este paso además mira por su cuenta los
+        # organismos que el vigía no alcanza, y eso son hasta seis portadas más.
+        timeout-minutes: 3
+        continue-on-error: true
+
+      - name: Detector
+        run: python detector.py
+
+      - name: Tablero
+        run: python tablero.py
+
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          git add datos senales tablero vigia
+          git commit -m "Horaria $(date +%F\ %H:%M)" || { echo "Sin novedades"; exit 0; }
+          git pull --rebase -X theirs
+          git push
