@@ -1,0 +1,32 @@
+name: Sonda · alcance del token de Cloudflare
+
+# Prueba de un minuto, a mano y no programada. Responde una sola pregunta:
+# el token que ya está cargado —creado para Workers AI— ¿alcanza también para
+# **desplegar** un Worker con disparador horario? De eso depende si la capa
+# siempre encendida se puede montar sin abrir ninguna cuenta nueva.
+#
+# No imprime el token ni ningún valor: sólo el código HTTP de cada prueba.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sonda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Probar alcance
+        env:
+          T: ${{ secrets.CF_WORKERS_TOKEN }}
+          C: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          api() { curl -s -o /tmp/r.json -w "%{http_code}" -H "Authorization: Bearer $T" \
+                   -H "Content-Type: application/json" "https://api.cloudflare.com/client/v4$1"; }
+          echo "1) token vivo .............. $(api /user/tokens/verify)"
+          jq -r '.result.status // "sin status"' /tmp/r.json | sed 's/^/   estado: /'
+          echo "2) listar Workers .......... $(api /accounts/$C/workers/scripts)"
+          jq -r 'if .success then "   puede listar: " + ((.result|length)|tostring) + " worker(s)" else "   negado: " + ((.errors[0].message)//"?") end' /tmp/r.json
+          echo "3) listar depositos KV ..... $(api /accounts/$C/storage/kv/namespaces)"
+          jq -r 'if .success then "   puede listar: " + ((.result|length)|tostring) + " deposito(s)" else "   negado: " + ((.errors[0].message)//"?") end' /tmp/r.json
+          echo "4) Workers AI (lo que ya usa SIWA)"
+          echo "   $(api /accounts/$C/ai/models/search?per_page=1)"

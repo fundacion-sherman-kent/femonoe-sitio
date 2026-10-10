@@ -1,0 +1,69 @@
+name: FEMÓNOE · calendario institucional
+
+# El calendario cambia despacio: se actualiza una vez por semana. De él sale el
+# multiplicador que baja el umbral de 3 a 2 desvíos cuando un país tiene una
+# elección o un vencimiento dentro de los 21 días.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 8 * * 1"   # lunes, antes de la corrida diaria
+
+permissions:
+  contents: write
+
+# Todo flujo que empuja a main comparte este grupo, para que nunca corran dos
+# a la vez. No es prolijidad: tres flujos distintos escriben redes.json, y ese
+# archivo NO lo regenera el robot —lleva las calificaciones de fuentes escritas
+# a mano—. Con `git pull --rebase -X theirs`, el segundo en llegar no falla:
+# pisa en silencio lo que escribió el primero, y nada se pone en rojo.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+env:
+  PYTHONIOENCODING: utf-8
+
+jobs:
+  calendario:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    defaults:
+      run:
+        shell: bash -eo pipefail {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Elecciones y fechas institucionales de los 33
+        run: python colectores/calendario.py
+        working-directory: .
+      # La fecha de Wikidata es el punto de partida; la que vale es la del
+      # organismo electoral del país.
+      - name: Confirmar contra la autoridad electoral
+        run: python confirmar.py
+        continue-on-error: true
+
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          # `git add -A` sobre la raíz, y no una lista de rutas.
+          #
+          # **Por qué.** Este mismo defecto tumbó el motor de automejora el
+          # 28/9 y la corrida diaria del 3 al 5/10, tres días seguidos: un
+          # programa escribe un archivo que no está en la lista del `git add`
+          # —acá fue `calendario.json`, que escriben `elecciones.py` y
+          # `confirmar.py`—, el árbol queda sucio y `git pull --rebase` se
+          # niega. Lo peor es que la recolección **sí había funcionado**: el
+          # commit local decía «18 archivos, 9.036 líneas». Se recolectaba y se
+          # tiraba, todos los días, sin que nadie se enterara.
+          #
+          # El 2/10 se arregló en el motor y **no se buscó en los demás
+          # flujos**. Por eso ahora se arregla el patrón en todos a la vez: una
+          # lista de rutas envejece cada vez que un colector escribe algo nuevo,
+          # y `.gitignore` ya cuida lo que no debe versionarse.
+          git add -A
+          git commit -m "Calendario $(date +%F)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push

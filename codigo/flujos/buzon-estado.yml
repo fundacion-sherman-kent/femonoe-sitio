@@ -1,0 +1,15 @@
+name: FEMÓNOE · estado del buzón de WhatsApp
+
+on:
+  workflow_dispatch:
+
+jobs:
+  estado:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Qué llegó al receptor
+        run: |
+          curl -s -X POST "$(cat whatsapp-buzon/url.txt)/estado" -H "Authorization: Bearer ${{ secrets.WA_ROBOT_CLAVE }}"
+          echo

@@ -1,0 +1,73 @@
+name: FEMÓNOE · calificar fuentes
+
+# Las tres capas que no gastan tokens de conversación, más la propuesta de
+# letra que hace el modelo gratuito. **Nada de esto califica nada**: deja el
+# legajo medido y una propuesta al lado, y la letra la pone una persona.
+# `doctrina/fuentes.md` §1. Se automatiza el proceso, nunca el juicio.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "40 5 * * 1"        # lunes, después de la corrida diaria
+
+# Todo flujo que empuja a main comparte este grupo, para que nunca corran dos
+# a la vez. No es prolijidad: tres flujos distintos escriben redes.json, y ese
+# archivo NO lo regenera el robot —lleva las calificaciones de fuentes escritas
+# a mano—. Con `git pull --rebase -X theirs`, el segundo en llegar no falla:
+# pisa en silencio lo que escribió el primero, y nada se pone en rojo.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+jobs:
+  calificar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Quiénes son, en los hechos, una sola fuente
+        run: python sindicacion.py --escribir
+        continue-on-error: true
+
+      - name: La misma fuente cargada dos veces
+        run: python calificar.py --duplicados
+        continue-on-error: true
+
+      - name: Legajo de las que siguen sin calificar
+        run: python calificar.py --legajo
+        continue-on-error: true
+
+      - name: Propuesta de letra · modelo gratuito
+        run: python calificar.py --proponer
+        env:
+          GROQ_CLAVE: ${{ secrets.GROQ_CLAVE }}
+        continue-on-error: true
+
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          # `git add -A` sobre la raíz, y no una lista de rutas.
+          #
+          # **Por qué.** Este mismo defecto tumbó el motor de automejora el
+          # 28/9 y la corrida diaria del 3 al 5/10, tres días seguidos: un
+          # programa escribe un archivo que no está en la lista del `git add`
+          # —acá fue `calendario.json`, que escriben `elecciones.py` y
+          # `confirmar.py`—, el árbol queda sucio y `git pull --rebase` se
+          # niega. Lo peor es que la recolección **sí había funcionado**: el
+          # commit local decía «18 archivos, 9.036 líneas». Se recolectaba y se
+          # tiraba, todos los días, sin que nadie se enterara.
+          #
+          # El 2/10 se arregló en el motor y **no se buscó en los demás
+          # flujos**. Por eso ahora se arregla el patrón en todos a la vez: una
+          # lista de rutas envejece cada vez que un colector escribe algo nuevo,
+          # y `.gitignore` ya cuida lo que no debe versionarse.
+          git add -A
+          git commit -m "Legajos y propuesta de calificación $(date +%F)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push

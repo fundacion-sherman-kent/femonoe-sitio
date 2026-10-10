@@ -1,0 +1,262 @@
+{
+ "generado_nota": "Catálogo de la guía de FEMÓNOE. Lo escribe tablero.py con cada corrida: los 33 Estados salen del padrón.",
+ "ejes_orden": [
+  "Gobernabilidad",
+  "Seguridad",
+  "Entorno informativo"
+ ],
+ "temas": [
+  {
+   "slug": "alertas",
+   "eje": "General",
+   "rotulo": "Las alertas vigentes"
+  },
+  {
+   "slug": "mosaico",
+   "eje": "General",
+   "rotulo": "Los 33 Estados y el mapa"
+  },
+  {
+   "slug": "marcador",
+   "eje": "General",
+   "rotulo": "El marcador de aciertos"
+  },
+  {
+   "slug": "calendario",
+   "eje": "General",
+   "rotulo": "El calendario institucional"
+  },
+  {
+   "slug": "mosaico",
+   "eje": "Gobernabilidad",
+   "rotulo": "Los 33 Estados en gobernabilidad"
+  },
+  {
+   "slug": "alertas",
+   "eje": "Gobernabilidad",
+   "rotulo": "Alertas de gobernabilidad"
+  },
+  {
+   "slug": "mosaico",
+   "eje": "Seguridad",
+   "rotulo": "Los 33 Estados en seguridad"
+  },
+  {
+   "slug": "alertas",
+   "eje": "Seguridad",
+   "rotulo": "Alertas de seguridad"
+  },
+  {
+   "slug": "mosaico",
+   "eje": "Entorno informativo",
+   "rotulo": "Los 33 Estados en entorno informativo"
+  },
+  {
+   "slug": "alertas",
+   "eje": "Entorno informativo",
+   "rotulo": "Alertas de entorno informativo"
+  }
+ ],
+ "paises": [
+  {
+   "slug": "ARG",
+   "rotulo": "Argentina"
+  },
+  {
+   "slug": "BRA",
+   "rotulo": "Brasil"
+  },
+  {
+   "slug": "CHL",
+   "rotulo": "Chile"
+  },
+  {
+   "slug": "PRY",
+   "rotulo": "Paraguay"
+  },
+  {
+   "slug": "URY",
+   "rotulo": "Uruguay"
+  },
+  {
+   "slug": "BOL",
+   "rotulo": "Bolivia"
+  },
+  {
+   "slug": "COL",
+   "rotulo": "Colombia"
+  },
+  {
+   "slug": "ECU",
+   "rotulo": "Ecuador"
+  },
+  {
+   "slug": "PER",
+   "rotulo": "Perú"
+  },
+  {
+   "slug": "VEN",
+   "rotulo": "Venezuela"
+  },
+  {
+   "slug": "GUY",
+   "rotulo": "Guyana"
+  },
+  {
+   "slug": "SUR",
+   "rotulo": "Surinam"
+  },
+  {
+   "slug": "MEX",
+   "rotulo": "México"
+  },
+  {
+   "slug": "BLZ",
+   "rotulo": "Belice"
+  },
+  {
+   "slug": "CRI",
+   "rotulo": "Costa Rica"
+  },
+  {
+   "slug": "SLV",
+   "rotulo": "El Salvador"
+  },
+  {
+   "slug": "GTM",
+   "rotulo": "Guatemala"
+  },
+  {
+   "slug": "HND",
+   "rotulo": "Honduras"
+  },
+  {
+   "slug": "NIC",
+   "rotulo": "Nicaragua"
+  },
+  {
+   "slug": "PAN",
+   "rotulo": "Panamá"
+  },
+  {
+   "slug": "CUB",
+   "rotulo": "Cuba"
+  },
+  {
+   "slug": "DOM",
+   "rotulo": "República Dominicana"
+  },
+  {
+   "slug": "HTI",
+   "rotulo": "Haití"
+  },
+  {
+   "slug": "JAM",
+   "rotulo": "Jamaica"
+  },
+  {
+   "slug": "TTO",
+   "rotulo": "Trinidad y Tobago"
+  },
+  {
+   "slug": "BHS",
+   "rotulo": "Bahamas"
+  },
+  {
+   "slug": "BRB",
+   "rotulo": "Barbados"
+  },
+  {
+   "slug": "ATG",
+   "rotulo": "Antigua y Barbuda"
+  },
+  {
+   "slug": "DMA",
+   "rotulo": "Dominica"
+  },
+  {
+   "slug": "GRD",
+   "rotulo": "Granada"
+  },
+  {
+   "slug": "KNA",
+   "rotulo": "San Cristóbal y Nieves"
+  },
+  {
+   "slug": "LCA",
+   "rotulo": "Santa Lucía"
+  },
+  {
+   "slug": "VCT",
+   "rotulo": "San Vicente y las Granadinas"
+  }
+ ],
+ "herramientas": [
+  {
+   "archivo": "mosaico",
+   "rotulo": "El mosaico de los 33 y el mapa",
+   "s": "mapa paises estados mosaico banderas ejes letras region"
+  },
+  {
+   "archivo": "alertas",
+   "rotulo": "Las alertas, con el disenso al lado",
+   "s": "alerta vigente probabilidad plazo decimo hombre chispa"
+  },
+  {
+   "archivo": "marcador",
+   "rotulo": "El marcador de aciertos",
+   "s": "marcador acierto calibracion kent banda"
+  },
+  {
+   "archivo": "calendario",
+   "rotulo": "El calendario institucional",
+   "s": "elecciones calendario fechas comicios referendum"
+  }
+ ],
+ "faq": [
+  {
+   "q": "que es femonoe que es esto para que sirve plataforma",
+   "r": "FEMÓNOE es la plataforma de alerta temprana de la Fundación Sherman Kent para los 33 Estados de América Latina y el Caribe, en tres ejes: gobernabilidad, seguridad y entorno informativo. Cada alerta dice qué podría pasar, con qué probabilidad y en qué plazo —y al vencer se publica si acertó."
+  },
+  {
+   "q": "como nace se hace proceso capas quien escribe el juicio",
+   "r": "En cuatro pasos. 1) El robot compara cada país con su propia línea de base y deja las señales que se salen de lo habitual. 2) Se exige corroboración: dos familias de fuentes independientes, o la credibilidad desciende y queda rotulado. 3) El equipo de análisis escribe el juicio, y el décimo hombre lo impugna. 4) Al vencer el plazo se marca el resultado. La máquina nunca alerta sola, y la Oficina nunca publica sola: la dirección cura cada alerta antes de que salga."
+  },
+  {
+   "q": "decimo hombre disenso quien discute impugna",
+   "r": "El décimo hombre es el disenso obligatorio de la casa: si la Oficina anuncia que algo va a pasar, él construye el mejor caso posible para que no pase, con su propia evidencia. No tiene que estar convencido: ese es el punto. Su dictamen se publica al lado de la alerta, con la respuesta de la Oficina. Sin dictamen, la alerta no sale."
+  },
+  {
+   "q": "naranja color punto que significa",
+   "r": "El naranja señala una sola cosa en toda la página: una alerta que venció sin evidencia suficiente para calificarla. Ni acertó ni falló: no se pudo saber, y se dice."
+  },
+  {
+   "q": "aciertan marcador acierto calibracion tasa miden resultado",
+   "r": "El criterio con que se va a dar por cumplida o fallada se fija cuando nace la alerta, antes de saber el resultado. Por eso el marcador no se puede acomodar después. El tablero lo muestra banda por banda del léxico de Kent, y hasta reunir 20 alertas vencidas lleva la leyenda «en calibración»."
+  },
+  {
+   "q": "de donde salen los datos fuentes fuente",
+   "r": "De fuentes públicas y abiertas: mediciones de bloqueo y de cortes de conectividad, registros de hechos de protesta y violencia, prensa y canales públicos leídos por vías abiertas. Cada señal declara de qué familia de fuentes viene. Con una sola familia, el dato entra rotulado y no sostiene un juicio de confianza alta."
+  },
+  {
+   "q": "umbral tope semanal cuantas emiten por que no aparece ninguna",
+   "r": "El umbral es relativo a cada país: se compara contra lo que ese país tiene por costumbre, no contra un promedio de la región. Un Estado sin alertas es un Estado cuyas mediciones no se apartaron de su propia línea de base. Rige además un tope de 5 alertas nuevas por semana."
+  },
+  {
+   "q": "chispa grafico linea punteada que es ese dibujo",
+   "r": "Es la serie de los últimos 30 días que originó la alerta. La línea punteada marca la mediana de ese Estado: el lector ve el dato y su línea de base juntos, y no depende de la palabra de la casa."
+  },
+  {
+   "q": "cada cuanto se actualiza frecuencia robot",
+   "r": "El robot corre todos los días y deja sus señales fechadas. El calendario institucional se actualiza una vez por semana."
+  },
+  {
+   "q": "diferencia con siwa observatorio",
+   "r": "SIWA dice cómo está cada país, con cifras calificadas. FEMÓNOE dice qué está por pasar, con probabilidad y plazo. Son dos registros distintos de la misma casa, y la ficha de cada Estado enlaza a su página en SIWA."
+  },
+  {
+   "q": "quien firma responsable autor",
+   "r": "Las firma el Equipo de Análisis de la Fundación Sherman Kent, sin nombres propios: las alertas hablan de indicadores y de hechos, nunca de personas."
+  }
+ ]
+}

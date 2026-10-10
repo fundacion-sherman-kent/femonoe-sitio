@@ -1,0 +1,71 @@
+name: FEMÓNOE · motor de automejora
+
+# Una vez por semana: mide el pulso de las señales, la salud de cada fuente, la
+# cobertura de los 33 y la calibración; aprende de lo que la dirección corrigió
+# al curar; y escribe las dos propuestas. **No aplica nada.**
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "40 8 * * 1"   # lunes, después del calendario
+
+permissions:
+  contents: write
+
+# Todo flujo que empuja a main comparte este grupo, para que nunca corran dos
+# a la vez. No es prolijidad: tres flujos distintos escriben redes.json, y ese
+# archivo NO lo regenera el robot —lleva las calificaciones de fuentes escritas
+# a mano—. Con `git pull --rebase -X theirs`, el segundo en llegar no falla:
+# pisa en silencio lo que escribió el primero, y nada se pone en rojo.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+env:
+  PYTHONIOENCODING: utf-8
+
+jobs:
+  mejoras:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash -eo pipefail {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+
+      # Primero se comprueba qué fuentes siguen publicando: si el padrón miente,
+      # el motor mide cobertura que no existe.
+      - name: Verificar el padrón de fuentes
+        run: python verificar.py --marcar
+        continue-on-error: true
+
+      - name: Motor de automejora
+        run: python mejoras.py
+        env:
+          GROQ_CLAVE: ${{ secrets.GROQ_CLAVE }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+
+      - name: Aprendiz de curaduría
+        run: python aprendiz.py
+
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          # `datos` estaba faltando, y por eso este flujo se cayó el 28/9/2026 y
+          # quedó caído: `verificar.py --marcar` escribe datos/verificacion.json,
+          # que no entraba en el `git add`, así que el arbol quedaba sucio y el
+          # rebase se negaba —«Please commit or stash them»—. Consecuencia: el
+          # padrón de fuentes del tablero se congeló ocho días en el 24/9 y el
+          # motor de automejora no corrió ni una vez en esa semana.
+          #
+          # `git add -A` sobre las rutas que este flujo toca, y nada más: así un
+          # archivo nuevo que escriba cualquiera de los tres programas entra
+          # solo y no vuelve a tumbar la corrida.
+          git add -A
+          git commit -m "Mejoras propuestas $(date +%F)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push

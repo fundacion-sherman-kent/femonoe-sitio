@@ -1,0 +1,76 @@
+name: FEMÓNOE · diagnóstico
+
+# Cada diagnóstico se pide aparte: correr los dos para mirar uno gasta minutos
+# del presupuesto mensual del robot sin que nadie lo haya pedido.
+on:
+  workflow_dispatch:
+    inputs:
+      acled:
+        description: "Preguntar hasta qué fecha entrega ACLED"
+        type: boolean
+        default: false
+      vigia:
+        description: "Mirar el estado del vigía de organismos"
+        type: boolean
+        default: true
+      rechazos:
+        description: "¿Llega el robot de GitHub adonde no llega Cloudflare?"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  acled:
+    if: inputs.acled
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: ¿Hasta qué fecha entrega ACLED?
+        run: python colectores/diagnostico_acled.py
+        working-directory: .
+        env:
+          PYTHONPATH: colectores
+          PYTHONIOENCODING: utf-8
+          ACLED_USUARIO: ${{ secrets.ACLED_USUARIO }}
+          ACLED_CLAVE: ${{ secrets.ACLED_CLAVE }}
+
+  # El vigía corre en Cloudflare y su estado vive ahí, no en el depósito. Este
+  # trabajo es la única forma de MIRARLO: la Oficina no declara que vigila
+  # porque el código diga que vigila, lo declara porque leyó el estado.
+  vigia:
+    if: inputs.vigia
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: ¿Está vigilando de verdad?
+        run: python vigia.py --estado
+        working-directory: colectores
+        env:
+          PYTHONIOENCODING: utf-8
+          WA_ROBOT_CLAVE: ${{ secrets.WA_ROBOT_CLAVE }}
+
+  # Seis organismos rechazan al vigía desde Cloudflare y responden 200 desde la
+  # máquina de la Oficina, con el MISMO nombre y sin disfraz. O sea que no
+  # rechazan a FEMÓNOE: rechazan a esa red. Este trabajo mide la tercera red
+  # —la del robot de GitHub— para saber si desde ahí se los puede vigilar.
+  rechazos:
+    if: inputs.rechazos
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: ¿Desde acá responden?
+        run: python sondeo_rechazos.py
+        working-directory: vigia
+        env:
+          PYTHONIOENCODING: utf-8

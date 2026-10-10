@@ -1,0 +1,162 @@
+name: FEMÓNOE · corrida horaria
+
+# La primera capa del tiempo real. Baja la latencia de 24 horas a cuatro sin
+# costo, y a una cuando la dirección cree la llave que deja disparar a Cloudflare.
+#
+# POR QUÉ NO CORRE TODO. El robot gratuito trae 2.000 minutos mensuales en
+# depósito privado. Medido el 1/10/2026: la corrida diaria tarda 26 minutos y
+# consume unos 780 al mes, y el buzón otros 30. Quedan unos 1.150 para las 720
+# corridas horarias del mes, es decir **1,5 minutos por corrida**. No es una
+# estimación de escritorio: sale de las corridas reales.
+#
+# Así que acá entra sólo lo barato y lo que de verdad cambia dentro de la hora:
+#
+#   ENTRA           OONI agregado (una consulta), IODA (una consulta), el
+#                   retiro del vigía de organismos —un pedido, porque el barrido
+#                   lo hace Cloudflare gratis—, el detector y el tablero.
+#   NO ENTRA        las redes —leen cientos de feeds y tardan minutos—,
+#                   OONI sobre panel fijo —dos consultas por Estado, cuatro
+#                   minutos—, ACLED, GDELT y el calendario. Todo eso sigue en
+#                   la corrida diaria, que es donde su costo se justifica.
+#
+# Si en alguna corrida el presupuesto se vuelve estrecho, lo que se achica es
+# la frecuencia, nunca el estándar del juicio.
+
+on:
+  # **No hay disparador programado, y es una decisión medida.**
+  #
+  # Medido el 7/10/2026 sobre las corridas reales del depósito: GitHub crea
+  # entre siete y diez corridas programadas por día en este depósito, **y no
+  # más, pidiera lo que se pidiera**. Con un pedido por hora entregó 4,4 por
+  # día. Cambiado a un pedido cada diez minutos —seis veces más— entregó las
+  # mismas 4,4. Y ninguna de las que faltan quedó cancelada ni atrasada:
+  # directamente **no se crearon**.
+  #
+  # El costo apareció donde no se lo estaba buscando. El buzón —que es lo que
+  # responde a una persona que escribe— venía entregando 6 de 6 todos los días
+  # del 22 al 29/9. El 1/10 entró esta capa horaria y el buzón cayó a 3 de 6, y
+  # ahí se quedó una semana. La capa horaria no sumó corridas: **le sacó la
+  # mitad al buzón**.
+  #
+  # Así que esta capa deja de pedirle al reloj de GitHub y se cuelga del buzón,
+  # que corre cada cuatro horas y que sí entrega. `workflow_run` no pasa por el
+  # reparto de las corridas programadas: el flujo de publicación lo usa desde
+  # el primer día y entregó las cincuenta. Resultado, sin pedir nada nuevo: el
+  # buzón recupera sus 6 y esta capa pasa de 4,4 a 6 por día.
+  #
+  # La hora de verdad —veinticuatro corridas— necesita que dispare el Worker de
+  # Cloudflare, y eso necesita una llave de GitHub que sólo puede crear la
+  # dirección: direccion/instructivos/llave-github-para-el-vigia.md
+  workflow_run:
+    workflows: ["FEMÓNOE · buzón"]
+    types: [completed]
+  workflow_dispatch:
+
+# El mismo portón que los demás: nunca dos flujos empujando a main a la vez.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+jobs:
+  # **Acá vivía un trabajo llamado `freno`**, que preguntaba cuándo había
+  # terminado bien la última corrida y no dejaba arrancar si hacía menos de
+  # cincuenta minutos. Se fue el 7/10/2026, medido:
+  #
+  #   Hacía cinco segundos de trabajo y **costaba un minuto facturado**, porque
+  #   GitHub cobra cada trabajo redondeado al minuto entero. A veinticuatro
+  #   corridas por día son **720 minutos al mes**: más de un tercio de los 2.000
+  #   del plan, gastados en un guardia.
+  #
+  # Y ya no hace falta. Mientras el disparador sea el buzón, las corridas van
+  # separadas por cuatro horas; cuando lo sea el reloj de Cloudflare, por una
+  # hora exacta. Si alguna vez se cruzan dos, el portón de `concurrency` las
+  # pone en fila y ninguna corrompe nada: lo único que se pierde es un minuto.
+  horaria:
+    runs-on: ubuntu-latest
+    # Techo duro. Un colector que se cuelga no puede vaciar el presupuesto del
+    # mes: la corrida se corta y la siguiente lo intenta de nuevo. Perder una
+    # hora de latencia es barato; quedarse sin minutos en el día 20 no lo es.
+    timeout-minutes: 4
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # **Los tres colectores corren a la vez, y no en fila.**
+      #
+      # POR QUÉ. GitHub cobra cada trabajo redondeado al minuto entero. Medido
+      # el 7/10/2026 sobre corridas reales: en fila el trabajo tardaba 70 a 86
+      # segundos, o sea **dos** minutos facturados. En paralelo tarda lo que
+      # tarda el más lento —IODA, unos 40 segundos— y entra en **uno**. A
+      # veinticuatro corridas por día, 720 minutos al mes de diferencia.
+      #
+      # **ES SEGURO, y se verificó ANTES de hacerlo.** Los tres escriben
+      # archivos distintos: cada señal es su propio CSV —`ooni_*`, `ioda_*`,
+      # `vigia_*`, `oficial_*`— y el vigía además escribe una instantánea por
+      # organismo. No hay dos procesos tocando el mismo archivo. Si algún día
+      # un colector nuevo escribiera donde escribe otro, **vuelve a la fila**:
+      # el dato publicado vale más que el minuto ahorrado.
+      #
+      # Ninguno puede tumbar la corrida, igual que antes. Pero el que falla
+      # **deja rastro**: se dice que falló y se imprime su salida completa. Un
+      # colector que se cae en silencio es el defecto que ya costó tres días de
+      # recolección entre el 3 y el 5/10.
+      - name: Recolección horaria · OONI, IODA y el vigía a la vez
+        working-directory: colectores
+        env:
+          WA_ROBOT_CLAVE: ${{ secrets.WA_ROBOT_CLAVE }}
+        timeout-minutes: 3
+        run: |
+          python ooni.py  > ooni.salida  2>&1 & p_ooni=$!
+          python ioda.py  > ioda.salida  2>&1 & p_ioda=$!
+          python vigia.py > vigia.salida 2>&1 & p_vigia=$!
+          falla=0
+          for par in "ooni:$p_ooni" "ioda:$p_ioda" "vigia:$p_vigia"; do
+            nombre=${par%%:*}
+            if wait "${par##*:}"; then
+              echo "────── $nombre: bien"
+            else
+              echo "────── $nombre: FALLÓ"
+              falla=1
+            fi
+            cat "$nombre.salida" || true
+          done
+          # Se borran para que no entren al depósito por el `git add -A`.
+          rm -f ooni.salida ioda.salida vigia.salida
+          if [ "$falla" != 0 ]; then
+            echo "Algún colector falló. La corrida sigue: el detector juzga con lo que haya,"
+            echo "y la falta queda a la vista acá arriba en lugar de desaparecer."
+          fi
+
+      - name: Detector
+        run: python detector.py
+
+      - name: Tablero
+        run: python tablero.py
+
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          # `git add -A` sobre la raíz, y no una lista de rutas.
+          #
+          # **Por qué.** Este mismo defecto tumbó el motor de automejora el
+          # 28/9 y la corrida diaria del 3 al 5/10, tres días seguidos: un
+          # programa escribe un archivo que no está en la lista del `git add`
+          # —acá fue `calendario.json`, que escriben `elecciones.py` y
+          # `confirmar.py`—, el árbol queda sucio y `git pull --rebase` se
+          # niega. Lo peor es que la recolección **sí había funcionado**: el
+          # commit local decía «18 archivos, 9.036 líneas». Se recolectaba y se
+          # tiraba, todos los días, sin que nadie se enterara.
+          #
+          # El 2/10 se arregló en el motor y **no se buscó en los demás
+          # flujos**. Por eso ahora se arregla el patrón en todos a la vez: una
+          # lista de rutas envejece cada vez que un colector escribe algo nuevo,
+          # y `.gitignore` ya cuida lo que no debe versionarse.
+          git add -A
+          git commit -m "Horaria $(date +%F\ %H:%M)" || { echo "Sin novedades"; exit 0; }
+          git pull --rebase -X theirs
+          git push

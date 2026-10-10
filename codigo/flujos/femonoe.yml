@@ -1,0 +1,196 @@
+name: FEMÓNOE · corrida diaria
+
+on:
+  workflow_dispatch:
+    inputs:
+      relleno:
+        description: "Traer la historia larga (400 días) para el ensayo"
+        type: boolean
+        default: false
+      solo:
+        description: "Correr una sola fuente"
+        type: choice
+        default: todas
+        options: [todas, ooni, ioda, acled, hechos, redes, contexto]
+  schedule:
+    - cron: "10 9 * * *"   # 6:10 en la Argentina; SIWA corre entre las 5:40 y las 7:50 UTC
+
+permissions:
+  contents: write
+
+# Todo flujo que empuja a main comparte este grupo, para que nunca corran dos
+# a la vez. No es prolijidad: tres flujos distintos escriben redes.json, y ese
+# archivo NO lo regenera el robot —lleva las calificaciones de fuentes escritas
+# a mano—. Con `git pull --rebase -X theirs`, el segundo en llegar no falla:
+# pisa en silencio lo que escribió el primero, y nada se pone en rojo.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+env:
+  RELLENO: ${{ inputs.relleno && '1' || '0' }}
+  PYTHONIOENCODING: utf-8
+
+jobs:
+  # Los archivos diarios de hechos van aparte: son muchos y pesados, y si el
+  # colector se queda sin tiempo no arrastra al resto de la corrida.
+  hechos:
+    if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'hechos'
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Hechos de GDELT · protestas y violencia
+        run: python colectores/eventos.py
+        continue-on-error: true
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          # `git add -A` sobre la raíz, y no una lista de rutas.
+          #
+          # **Por qué.** Este mismo defecto tumbó el motor de automejora el
+          # 28/9 y la corrida diaria del 3 al 5/10, tres días seguidos: un
+          # programa escribe un archivo que no está en la lista del `git add`
+          # —acá fue `calendario.json`, que escriben `elecciones.py` y
+          # `confirmar.py`—, el árbol queda sucio y `git pull --rebase` se
+          # niega. Lo peor es que la recolección **sí había funcionado**: el
+          # commit local decía «18 archivos, 9.036 líneas». Se recolectaba y se
+          # tiraba, todos los días, sin que nadie se enterara.
+          #
+          # El 2/10 se arregló en el motor y **no se buscó en los demás
+          # flujos**. Por eso ahora se arregla el patrón en todos a la vez: una
+          # lista de rutas envejece cada vez que un colector escribe algo nuevo,
+          # y `.gitignore` ya cuida lo que no debe versionarse.
+          git add -A
+          git commit -m "Hechos $(date +%F)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push
+
+  fuentes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    needs: hechos
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Traer lo que dejaron los hechos
+        run: git pull --ff-only
+
+      - name: OONI · bloqueos
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'ooni'
+        run: python colectores/ooni.py
+        continue-on-error: true
+      - name: OONI · panel fijo de dominios
+        # Compara lo comparable: sólo dominios con historia propia de medición.
+        # Tarda unos cuatro minutos, dos consultas por Estado.
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'ooni'
+        run: python colectores/ooni_panel.py
+        continue-on-error: true
+      - name: Cloudflare Radar · cortes anotados, con su causa
+        # Segunda familia para el eje informativo, con infraestructura propia:
+        # ni academica como IODA ni de voluntarios como OONI. Y anota la CAUSA,
+        # que es lo que faltaba para pasar de «hubo una caida» a «y esto la
+        # origino». Sin la llave se detiene declarandolo.
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'ooni'
+        run: python radar.py
+        working-directory: colectores
+        env:
+          CLOUDFLARE_RADAR: ${{ secrets.CLOUDFLARE_RADAR }}
+        timeout-minutes: 3
+        continue-on-error: true
+      - name: IODA · cortes de conectividad
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'ioda'
+        run: python colectores/ioda.py
+        continue-on-error: true
+      - name: ACLED · protestas y violencia
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'acled'
+        run: python colectores/acled.py
+        continue-on-error: true
+        env:
+          ACLED_USUARIO: ${{ secrets.ACLED_USUARIO }}
+          ACLED_CLAVE: ${{ secrets.ACLED_CLAVE }}
+      - name: Redes y mensajería · Telegram, Mastodon, Bluesky y YouTube
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'redes'
+        run: python colectores/redes.py
+        working-directory: .
+        continue-on-error: true
+      - name: Sindicación · quiénes son, en los hechos, una sola fuente
+        # Corre DESPUÉS de redes.py, con los mensajes del día ya guardados, y
+        # deja los grupos listos para la corrida siguiente. `doctrina/fuentes.md`
+        # §2: tres medios que citan el mismo cable son una fuente, no tres.
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'redes'
+        run: python sindicacion.py --escribir
+        continue-on-error: true
+      - name: Contexto · desastres naturales
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'contexto'
+        run: python colectores/contexto.py
+        continue-on-error: true
+
+      - name: Calendario electoral · ElectionGuide (IFES)
+        # Segunda fuente del calendario. Wikidata sola daba siete fechas para
+        # 33 Estados en doce meses, porque sus elecciones de la region no
+        # tienen fecha cargada. Medido el 2/10/2026.
+        if: inputs.solo == '' || inputs.solo == 'todas'
+        run: python colectores/elecciones.py
+        timeout-minutes: 3
+        continue-on-error: true
+
+      - name: Calendario · cotejar las fechas contra su autoridad electoral
+        # Ningun dato queda congelado en el valor con que entro: la fecha se
+        # vuelve a buscar en el sitio del organismo hasta que la publique.
+        # Acta del 2/10/2026.
+        if: inputs.solo == '' || inputs.solo == 'todas'
+        run: python confirmar.py
+        timeout-minutes: 5
+        continue-on-error: true
+
+      # Dos lecturas de SIWA, por HTTP y en un solo sentido: no se toca su
+      # depósito. Los corredores son la primera evidencia BILATERAL que tiene la
+      # plataforma —las zonas se medían sumando series nacionales, que describe
+      # a los dos Estados y no al cruce—. La frescura dice contra qué base se
+      # interpretaría lo que el vigía encuentre.
+      - name: SIWA · corredores comerciales de las zonas
+        run: python colectores/siwa_corredores.py
+        timeout-minutes: 2
+        continue-on-error: true
+
+      - name: SIWA · frescura cruzada con el vigía
+        run: python colectores/siwa_frescura.py
+        timeout-minutes: 2
+        continue-on-error: true
+        env:
+          WA_ROBOT_CLAVE: ${{ secrets.WA_ROBOT_CLAVE }}
+
+      - name: Detector
+        run: python detector.py
+      - name: Tablero
+        run: python tablero.py
+
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          # `git add -A` sobre la raíz, y no una lista de rutas.
+          #
+          # **Por qué.** Este mismo defecto tumbó el motor de automejora el
+          # 28/9 y la corrida diaria del 3 al 5/10, tres días seguidos: un
+          # programa escribe un archivo que no está en la lista del `git add`
+          # —acá fue `calendario.json`, que escriben `elecciones.py` y
+          # `confirmar.py`—, el árbol queda sucio y `git pull --rebase` se
+          # niega. Lo peor es que la recolección **sí había funcionado**: el
+          # commit local decía «18 archivos, 9.036 líneas». Se recolectaba y se
+          # tiraba, todos los días, sin que nadie se enterara.
+          #
+          # El 2/10 se arregló en el motor y **no se buscó en los demás
+          # flujos**. Por eso ahora se arregla el patrón en todos a la vez: una
+          # lista de rutas envejece cada vez que un colector escribe algo nuevo,
+          # y `.gitignore` ya cuida lo que no debe versionarse.
+          git add -A
+          git commit -m "FEMÓNOE $(date +%F)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push
