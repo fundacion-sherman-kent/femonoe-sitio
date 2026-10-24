@@ -1,0 +1,11 @@
+{
+ "estados": 33,
+ "alertas": 5,
+ "fuentes": 8,
+ "actualizado": "2026-10-24",
+ "que_cuenta": {
+  "estados": "Estados del padrón que la plataforma vigila.",
+  "alertas": "Alertas que salieron: las vigentes y las ya resueltas. No cuenta las descartadas, que nunca se publicaron.",
+  "fuentes": "Familias de fuentes acreditadas en la página de método."
+ }
+}

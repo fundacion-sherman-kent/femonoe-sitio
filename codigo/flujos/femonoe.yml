@@ -1,0 +1,344 @@
+name: FEMÓNOE · corrida diaria
+
+on:
+  workflow_dispatch:
+    inputs:
+      relleno:
+        description: "Traer la historia larga (400 días) para el ensayo"
+        type: boolean
+        default: false
+      solo:
+        description: "Correr una sola fuente"
+        type: choice
+        default: todas
+        options: [todas, ooni, ioda, acled, hechos, redes, contexto]
+  schedule:
+    - cron: "10 9 * * *"   # 6:10 en la Argentina; SIWA corre entre las 5:40 y las 7:50 UTC
+
+permissions:
+  contents: write
+  actions: read      # para que el medidor de minutos pueda contar las corridas
+
+# Todo flujo que empuja a main comparte este grupo, para que nunca corran dos
+# a la vez. No es prolijidad: tres flujos distintos escriben redes.json, y ese
+# archivo NO lo regenera el robot —lleva las calificaciones de fuentes escritas
+# a mano—. Con `git pull --rebase -X theirs`, el segundo en llegar no falla:
+# pisa en silencio lo que escribió el primero, y nada se pone en rojo.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+env:
+  RELLENO: ${{ inputs.relleno && '1' || '0' }}
+  PYTHONIOENCODING: utf-8
+
+# **CADA PASO CON SU PROPIO TOPE DE TIEMPO**, desde el 21/10/2026.
+#
+# El 15/10 el paso de OONI sobre el panel fijo —que tarda 72 segundos— se colgó
+# **59 minutos**, y lo mató el tope del trabajo: la corrida de las 09:11 quedó
+# cancelada y costó **62 minutos**, el 3 % de los minutos del mes en una sola
+# corrida.
+#
+# Todos los colectores ya toleraban fallar, y está bien: una fuente caída no
+# debe tumbar la recolección. Pero **un paso colgado nunca falla** —se queda
+# esperando— así que esa tolerancia no se activaba nunca. **El tope es lo que
+# convierte un cuelgue en una falla**, y recién entonces la tolerancia sirve.
+#
+# Los valores salen de medir cinco corridas buenas: unas tres veces el peor
+# tiempo observado, con piso de dos minutos. Y **la suma de los topes queda por
+# debajo del tope del trabajo**, que es la propiedad que importa: ningún paso
+# puede ya comerse lo de los demás.
+#
+# **Y UN LÍMITE QUE CONVIENE SABER:** con `RELLENO=1` los topes se ensanchan,
+# pero **la corrida completa de relleno no entra igual en el tope del trabajo**.
+# Eso ya estaba decidido el 7/10/2026: el relleno de la historia larga **corre
+# en la PC de la dirección**, donde tardó veintitrés minutos y no gastó ni un
+# minuto del robot. Los topes anchos están para que un relleno parcial no se
+# corte, no para prometer que el completo cabe.
+
+jobs:
+  # Los archivos diarios de hechos van aparte: son muchos y pesados, y si el
+  # colector se queda sin tiempo no arrastra al resto de la corrida.
+  hechos:
+    if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'hechos'
+    # **La máquina queda fijada, y no es «la última» por azar.**
+    #
+    # Autorizado por la dirección el 14/10/2026. GitHub está cambiando lo que
+    # `ubuntu-latest` significa —de Ubuntu 24.04 a 26.04—, y textual de su
+    # anuncio: «se desplegará a lo largo de varias semanas a partir del 19 de
+    # octubre» y «la migración se completará el 19 de noviembre».
+    #
+    # El riesgo no es que el robot se rompa: las versiones del software que usa
+    # son idénticas en las dos imágenes. El riesgo es que **durante un mes cada
+    # corrida caiga en cualquiera de las dos**, de modo que una falla aparecería
+    # un día y desaparecería al siguiente, sin causa visible. Para una casa que
+    # publica juicios y promete que la misma entrada da la misma salida, eso es
+    # peor que una rotura franca. GitHub avisa además que el 21 % de los
+    # depósitos tiene al menos un trabajo que fallaría al arrancar en la nueva.
+    #
+    # Se vuelve a `ubuntu-latest` cuando la Oficina haya probado `ubuntu-26.04`
+    # en un flujo aparte y con tiempo. **Hasta entonces esto no se toca.**
+    runs-on: ubuntu-24.04
+    timeout-minutes: 110
+    permissions:
+      contents: write
+      actions: read
+    outputs:
+      correr: ${{ steps.ya_corrio_hoy.outputs.correr }}
+    steps:
+      # **¿La edición de hoy ya salió?**
+      #
+      # La diaria tiene dos disparadores: el vigía de Cloudflare a las 09:11,
+      # que llega puntual, y el reloj de GitHub a las 09:10, que llega entre
+      # seis y diez horas tarde (medido el 13/10/2026). El de GitHub se conserva
+      # como respaldo —si el vigía cayera, la edición sale igual— y este paso
+      # evita que el que llega tarde repita lo que ya se hizo.
+      #
+      # Va acá dentro y no en un trabajo aparte: un trabajo aparte paga un
+      # minuto entero por cinco segundos de trabajo, que es lo que costaba 720
+      # minutos al mes en la capa horaria. Un paso más del trabajo que ya se
+      # está pagando no cuesta nada.
+      #
+      # **El freno gobierna el trabajo pesado y no este.** `hechos` cuesta un
+      # minuto y es idempotente —reescribe las filas del mismo día—, así que
+      # repetirlo no hace daño; `fuentes` cuesta cinco. Frenar sólo el segundo
+      # deja el desperdicio de una corrida repetida en UN minuto en lugar de
+      # seis, y evita tener que colgarle una condición a cada paso, que es
+      # donde se cuelan los olvidos.
+      #
+      # Con `workflow_dispatch` NO frena nunca: si una persona la dispara a
+      # mano, es porque quiere correrla, y una herramienta que decide que no
+      # hace falta es una herramienta que discute.
+      - name: ¿La edición de hoy ya salió?
+        timeout-minutes: 2   # medido: 0 s
+        id: ya_corrio_hoy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Disparada a mano: se corre, sin preguntar."
+            echo "correr=si" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          ultima=$(gh run list --workflow=femonoe.yml --status=success -L 1 \
+                     --json updatedAt -q '.[0].updatedAt' \
+                     -R "$GITHUB_REPOSITORY" 2>/dev/null || true)
+          if [ -z "$ultima" ]; then
+            echo "Sin corridas buenas previas: se corre."
+            echo "correr=si" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if [ "${ultima%%T*}" = "$(date -u +%F)" ]; then
+            echo "La edición de hoy ya salió a las ${ultima#*T}. No se repite."
+            echo "correr=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "La última edición buena fue el ${ultima%%T*}. Se corre."
+            echo "correr=si" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Hechos de GDELT · protestas y violencia
+        # Se ensancha solo si la corrida pide la historia larga: `RELLENO=1`
+        # lleva este colector de diez días a cuatrocientos.
+        timeout-minutes: ${{ inputs.relleno && 100 || 2 }}   # medido: 11 s; con relleno baja 400 archivos
+        # `solo` no lo gobernaba, y `solo` existe justamente para correr un
+        # colector: una corrida de relleno de otra fuente arrastraba la bajada
+        # de 400 archivos de GDELT, que son veinte minutos del robot que nadie
+        # pidió. Hallado el 22/10/2026 al querer rellenar ACLED sola.
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'eventos'
+        run: python colectores/eventos.py
+        continue-on-error: true
+      - name: Guardar
+        timeout-minutes: 3   # medido: 2 s; empuja al depósito
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          # `git add -A` sobre la raíz, y no una lista de rutas.
+          #
+          # **Por qué.** Este mismo defecto tumbó el motor de automejora el
+          # 28/9 y la corrida diaria del 3 al 5/10, tres días seguidos: un
+          # programa escribe un archivo que no está en la lista del `git add`
+          # —acá fue `calendario.json`, que escriben `elecciones.py` y
+          # `confirmar.py`—, el árbol queda sucio y `git pull --rebase` se
+          # niega. Lo peor es que la recolección **sí había funcionado**: el
+          # commit local decía «18 archivos, 9.036 líneas». Se recolectaba y se
+          # tiraba, todos los días, sin que nadie se enterara.
+          #
+          # El 2/10 se arregló en el motor y **no se buscó en los demás
+          # flujos**. Por eso ahora se arregla el patrón en todos a la vez: una
+          # lista de rutas envejece cada vez que un colector escribe algo nuevo,
+          # y `.gitignore` ya cuida lo que no debe versionarse.
+          git add -A
+          git commit -m "Hechos $(date +%F)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push
+
+  fuentes:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    needs: hechos
+    # `always()` está a propósito: un fallo de GDELT no debe frenar el resto de
+    # la recolección. Lo que se agrega es el freno del mismo día —y nada más—:
+    # si `hechos` falló antes de contestar, la salida llega vacía, la condición
+    # se cumple y esto corre igual, que es lo que hacía antes.
+    if: always() && needs.hechos.outputs.correr != 'no'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Traer lo que dejaron los hechos
+        timeout-minutes: 2   # medido: 1 s
+        run: git pull --ff-only
+
+      - name: OONI · bloqueos
+        # Se ensancha solo si la corrida pide la historia larga: `RELLENO=1`
+        # lleva este colector de diez días a cuatrocientos.
+        timeout-minutes: ${{ inputs.relleno && 20 || 2 }}   # medido: 2 s; con relleno, 400 días
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'ooni'
+        run: python colectores/ooni.py
+        continue-on-error: true
+      - name: OONI · panel fijo de dominios
+        # Se ensancha solo si la corrida pide la historia larga: `RELLENO=1`
+        # lleva este colector de diez días a cuatrocientos.
+        timeout-minutes: ${{ inputs.relleno && 30 || 4 }}   # medido: 72 s; con relleno, 400 días
+        # Compara lo comparable: sólo dominios con historia propia de medición.
+        # Tarda unos cuatro minutos, dos consultas por Estado.
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'ooni'
+        run: python colectores/ooni_panel.py
+        continue-on-error: true
+      - name: Cloudflare Radar · cortes anotados, con su causa
+        timeout-minutes: 3   # medido: 1 s · el tope que ya tenía, más ancho que el medido
+        # Segunda familia para el eje informativo, con infraestructura propia:
+        # ni academica como IODA ni de voluntarios como OONI. Y anota la CAUSA,
+        # que es lo que faltaba para pasar de «hubo una caida» a «y esto la
+        # origino». Sin la llave se detiene declarandolo.
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'ooni'
+        run: python radar.py
+        working-directory: colectores
+        env:
+          CLOUDFLARE_RADAR: ${{ secrets.CLOUDFLARE_RADAR }}
+        continue-on-error: true
+      - name: IODA · cortes de conectividad
+        # Se ensancha solo si la corrida pide la historia larga: `RELLENO=1`
+        # lleva este colector de diez días a cuatrocientos.
+        timeout-minutes: ${{ inputs.relleno && 20 || 2 }}   # medido: 13 s; con relleno, 400 días
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'ioda'
+        run: python colectores/ioda.py
+        continue-on-error: true
+      - name: ACLED · protestas y violencia
+        # Se ensancha solo si la corrida pide la historia larga: `RELLENO=1`
+        # lleva este colector de diez días a cuatrocientos.
+        timeout-minutes: ${{ inputs.relleno && 30 || 4 }}   # medido: 61 s; con relleno, 400 días
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'acled'
+        run: python colectores/acled.py
+        continue-on-error: true
+        env:
+          ACLED_USUARIO: ${{ secrets.ACLED_USUARIO }}
+          ACLED_CLAVE: ${{ secrets.ACLED_CLAVE }}
+      - name: Redes y mensajería · Telegram, Mastodon, Bluesky y YouTube
+        timeout-minutes: 8   # medido: 137 s · lee 436 fuentes, por eso el tope es más ancho
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'redes'
+        run: python colectores/redes.py
+        working-directory: .
+        continue-on-error: true
+      - name: Sindicación · quiénes son, en los hechos, una sola fuente
+        timeout-minutes: 2   # medido: 0 s
+        # Corre DESPUÉS de redes.py, con los mensajes del día ya guardados, y
+        # deja los grupos listos para la corrida siguiente. `doctrina/fuentes.md`
+        # §2: tres medios que citan el mismo cable son una fuente, no tres.
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'redes'
+        run: python sindicacion.py --escribir
+        continue-on-error: true
+      - name: Contexto · desastres naturales
+        timeout-minutes: 2   # medido: 2 s
+        if: inputs.solo == '' || inputs.solo == 'todas' || inputs.solo == 'contexto'
+        run: python colectores/contexto.py
+        continue-on-error: true
+
+      - name: Calendario electoral · ElectionGuide (IFES)
+        timeout-minutes: 3   # medido: 1 s · el tope que ya tenía, más ancho que el medido
+        # Segunda fuente del calendario. Wikidata sola daba siete fechas para
+        # 33 Estados en doce meses, porque sus elecciones de la region no
+        # tienen fecha cargada. Medido el 2/10/2026.
+        if: inputs.solo == '' || inputs.solo == 'todas'
+        run: python colectores/elecciones.py
+        continue-on-error: true
+
+      - name: Calendario · cotejar las fechas contra su autoridad electoral
+        timeout-minutes: 5   # medido: 9 s · el tope que ya tenía, más ancho que el medido
+        # Ningun dato queda congelado en el valor con que entro: la fecha se
+        # vuelve a buscar en el sitio del organismo hasta que la publique.
+        # Acta del 2/10/2026.
+        if: inputs.solo == '' || inputs.solo == 'todas'
+        run: python confirmar.py
+        continue-on-error: true
+
+      # Dos lecturas de SIWA, por HTTP y en un solo sentido: no se toca su
+      # depósito. Los corredores son la primera evidencia BILATERAL que tiene la
+      # plataforma —las zonas se medían sumando series nacionales, que describe
+      # a los dos Estados y no al cruce—. La frescura dice contra qué base se
+      # interpretaría lo que el vigía encuentre.
+      - name: SIWA · corredores comerciales de las zonas
+        timeout-minutes: 2   # medido: 1 s
+        run: python colectores/siwa_corredores.py
+        continue-on-error: true
+
+      - name: SIWA · frescura cruzada con el vigía
+        timeout-minutes: 2   # medido: 2 s
+        run: python colectores/siwa_frescura.py
+        continue-on-error: true
+        env:
+          WA_ROBOT_CLAVE: ${{ secrets.WA_ROBOT_CLAVE }}
+
+      # Va ANTES del detector a propósito: si una serie quedó afirmando sobre
+      # días que su fuente no contestó, el defecto no debe llegar al juicio.
+      # No lleva `continue-on-error`: si se pone en rojo, la edición del día no
+      # sale y queda publicada la de ayer, que es el estado seguro. Sólo se
+      # pone en rojo ante una regresión NUEVA; lo ya declarado nunca la activa.
+      - name: Control de frescura · ninguna serie escribe sobre lo que no ve
+        timeout-minutes: 2   # medido: 1 s
+        run: python control_frescura.py
+
+      - name: Detector
+        timeout-minutes: 2   # medido: 1 s
+        run: python detector.py
+      - name: Tablero
+        timeout-minutes: 2   # medido: 2 s
+        run: python tablero.py
+
+      # Cuánto lleva gastado el robot este mes, y aviso si aprieta. La cuota
+      # son 2.000 minutos y cuando se acaban no se degrada nada: se para todo.
+      # Lleva libro, así que cada día pregunta sólo por las corridas nuevas.
+      - name: Minutos · cuánto lleva gastado el robot este mes
+        timeout-minutes: 6   # la primera pasada cuenta el mes entero; las demás, un día
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          BUZON_REMITENTES: ${{ secrets.BUZON_REMITENTES }}
+        run: python minutos.py
+
+      - name: Guardar
+        timeout-minutes: 3   # medido: 2 s; empuja al depósito
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          # `git add -A` sobre la raíz, y no una lista de rutas.
+          #
+          # **Por qué.** Este mismo defecto tumbó el motor de automejora el
+          # 28/9 y la corrida diaria del 3 al 5/10, tres días seguidos: un
+          # programa escribe un archivo que no está en la lista del `git add`
+          # —acá fue `calendario.json`, que escriben `elecciones.py` y
+          # `confirmar.py`—, el árbol queda sucio y `git pull --rebase` se
+          # niega. Lo peor es que la recolección **sí había funcionado**: el
+          # commit local decía «18 archivos, 9.036 líneas». Se recolectaba y se
+          # tiraba, todos los días, sin que nadie se enterara.
+          #
+          # El 2/10 se arregló en el motor y **no se buscó en los demás
+          # flujos**. Por eso ahora se arregla el patrón en todos a la vez: una
+          # lista de rutas envejece cada vez que un colector escribe algo nuevo,
+          # y `.gitignore` ya cuida lo que no debe versionarse.
+          git add -A
+          git commit -m "FEMÓNOE $(date +%F)" || echo "Sin novedades"
+          git pull --rebase -X theirs
+          git push
