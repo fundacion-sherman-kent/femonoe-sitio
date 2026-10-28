@@ -1,0 +1,327 @@
+name: FEMÓNOE · corrida horaria
+
+# La primera capa del tiempo real. Baja la latencia de 24 horas a cuatro sin
+# costo, y a una cuando la dirección cree la llave que deja disparar a Cloudflare.
+#
+# POR QUÉ NO CORRE TODO. El robot gratuito trae 2.000 minutos mensuales en
+# depósito privado. Medido el 1/10/2026: la corrida diaria tarda 26 minutos y
+# consume unos 780 al mes, y el buzón otros 30. Quedan unos 1.150 para las 720
+# corridas horarias del mes, es decir **1,5 minutos por corrida**. No es una
+# estimación de escritorio: sale de las corridas reales.
+#
+# Así que acá entra sólo lo barato y lo que de verdad cambia dentro de la hora:
+#
+#   ENTRA           OONI agregado (una consulta), IODA (una consulta), el
+#                   retiro del vigía de organismos —un pedido, porque el barrido
+#                   lo hace Cloudflare gratis—, el detector y el tablero.
+#   NO ENTRA        las redes —leen cientos de feeds y tardan minutos—,
+#                   OONI sobre panel fijo —dos consultas por Estado, cuatro
+#                   minutos—, ACLED, GDELT y el calendario. Todo eso sigue en
+#                   la corrida diaria, que es donde su costo se justifica.
+#
+# Si en alguna corrida el presupuesto se vuelve estrecho, lo que se achica es
+# la frecuencia, nunca el estándar del juicio.
+
+on:
+  # **No hay disparador programado, y es una decisión medida.**
+  #
+  # Medido el 7/10/2026 sobre las corridas reales del depósito: GitHub crea
+  # entre siete y diez corridas programadas por día en este depósito, **y no
+  # más, pidiera lo que se pidiera**. Con un pedido por hora entregó 4,4 por
+  # día. Cambiado a un pedido cada diez minutos —seis veces más— entregó las
+  # mismas 4,4. Y ninguna de las que faltan quedó cancelada ni atrasada:
+  # directamente **no se crearon**.
+  #
+  # El costo apareció donde no se lo estaba buscando. El buzón —que es lo que
+  # responde a una persona que escribe— venía entregando 6 de 6 todos los días
+  # del 22 al 29/9. El 1/10 entró esta capa horaria y el buzón cayó a 3 de 6, y
+  # ahí se quedó una semana. La capa horaria no sumó corridas: **le sacó la
+  # mitad al buzón**.
+  #
+  # Así que esta capa deja de pedirle al reloj de GitHub y se cuelga del buzón,
+  # que corre cada cuatro horas y que sí entrega. `workflow_run` no pasa por el
+  # reparto de las corridas programadas: el flujo de publicación lo usa desde
+  # el primer día y entregó las cincuenta. Resultado, sin pedir nada nuevo: el
+  # buzón recupera sus 6 y esta capa pasa de 4,4 a 6 por día.
+  #
+  # La hora de verdad —veinticuatro corridas— necesita que dispare el Worker de
+  # Cloudflare, y eso necesita una llave de GitHub que sólo puede crear la
+  # dirección: direccion/instructivos/llave-github-para-el-vigia.md
+  # **El único disparador es el vigía de Cloudflare**, que llama por
+  # `workflow_dispatch`. Acá estuvo colgado del buzón entre el 7 y el 21/10,
+  # cuando el reloj programado de GitHub era lo único que había y entregaba
+  # cuatro corridas diarias a horas cualesquiera.
+  #
+  # **Se saca el 21/10/2026, autorizado, porque era repetido y costaba.** Desde
+  # que la dirección puso la llave, el 14/10, Cloudflare entregó **24 de 24 seis
+  # días seguidos**; las cuatro que agregaba el buzón eran corridas de más, a 1,5
+  # minutos facturados cada una: 6 minutos por día.
+  #
+  # LO QUE SE PIERDE, declarado: el respaldo. Si la llave se borrara o el Worker
+  # cayera, esta capa **no corre y nadie recibe un aviso**. Lo que lo haría
+  # visible es la frescura del tablero y el diagnóstico del vigía en `/estado`,
+  # que anota cada despertar. Para reponer el respaldo alcanza con devolver
+  # estas tres líneas.
+  workflow_dispatch:
+
+# El mismo portón que los demás: nunca dos flujos empujando a main a la vez.
+concurrency:
+  group: femonoe-main
+  cancel-in-progress: false
+
+jobs:
+  # **Acá vivía un trabajo llamado `freno`**, que preguntaba cuándo había
+  # terminado bien la última corrida y no dejaba arrancar si hacía menos de
+  # cincuenta minutos. Se fue el 7/10/2026, medido:
+  #
+  #   Hacía cinco segundos de trabajo y **costaba un minuto facturado**, porque
+  #   GitHub cobra cada trabajo redondeado al minuto entero. A veinticuatro
+  #   corridas por día son **720 minutos al mes**: más de un tercio de los 2.000
+  #   del plan, gastados en un guardia.
+  #
+  # Y ya no hace falta. Mientras el disparador sea el buzón, las corridas van
+  # separadas por cuatro horas; cuando lo sea el reloj de Cloudflare, por una
+  # hora exacta. Si alguna vez se cruzan dos, el portón de `concurrency` las
+  # pone en fila y ninguna corrompe nada: lo único que se pierde es un minuto.
+  horaria:
+    # **La máquina queda fijada, y no es «la última» por azar.**
+    #
+    # Autorizado por la dirección el 14/10/2026. GitHub está cambiando lo que
+    # `ubuntu-latest` significa —de Ubuntu 24.04 a 26.04—, y textual de su
+    # anuncio: «se desplegará a lo largo de varias semanas a partir del 19 de
+    # octubre» y «la migración se completará el 19 de noviembre».
+    #
+    # El riesgo no es que el robot se rompa: las versiones del software que usa
+    # son idénticas en las dos imágenes. El riesgo es que **durante un mes cada
+    # corrida caiga en cualquiera de las dos**, de modo que una falla aparecería
+    # un día y desaparecería al siguiente, sin causa visible. Para una casa que
+    # publica juicios y promete que la misma entrada da la misma salida, eso es
+    # peor que una rotura franca. GitHub avisa además que el 21 % de los
+    # depósitos tiene al menos un trabajo que fallaría al arrancar en la nueva.
+    #
+    # Se vuelve a `ubuntu-latest` cuando la Oficina haya probado `ubuntu-26.04`
+    # en un flujo aparte y con tiempo. **Hasta entonces esto no se toca.**
+    runs-on: ubuntu-24.04
+    # Techo duro. Un colector que se cuelga no puede vaciar el presupuesto del
+    # mes: la corrida se corta y la siguiente lo intenta de nuevo. Perder una
+    # hora de latencia es barato; quedarse sin minutos en el día 20 no lo es.
+    timeout-minutes: 4
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # **Los tres colectores corren a la vez, y no en fila.**
+      #
+      # POR QUÉ. GitHub cobra cada trabajo redondeado al minuto entero. Medido
+      # el 7/10/2026 sobre corridas reales: en fila el trabajo tardaba 70 a 86
+      # segundos, o sea **dos** minutos facturados. En paralelo tarda lo que
+      # tarda el más lento —IODA, unos 40 segundos— y entra en **uno**. A
+      # veinticuatro corridas por día, 720 minutos al mes de diferencia.
+      #
+      # **ES SEGURO, y se verificó ANTES de hacerlo.** Los tres escriben
+      # archivos distintos: cada señal es su propio CSV —`ooni_*`, `ioda_*`,
+      # `vigia_*`, `oficial_*`— y el vigía además escribe una instantánea por
+      # organismo. No hay dos procesos tocando el mismo archivo. Si algún día
+      # un colector nuevo escribiera donde escribe otro, **vuelve a la fila**:
+      # el dato publicado vale más que el minuto ahorrado.
+      #
+      # Ninguno puede tumbar la corrida, igual que antes. Pero el que falla
+      # **deja rastro**: se dice que falló y se imprime su salida completa. Un
+      # colector que se cae en silencio es el defecto que ya costó tres días de
+      # recolección entre el 3 y el 5/10.
+      - name: Recolección horaria · OONI, IODA y el vigía a la vez
+        working-directory: colectores
+        env:
+          WA_ROBOT_CLAVE: ${{ secrets.WA_ROBOT_CLAVE }}
+        # **Cada colector con su propio tope, y el paso no puede tumbar la
+        # corrida.** Es la lección del 11/10/2026 a las 20:10: al juntar los
+        # tres en un paso perdieron el `timeout-minutes` y el
+        # `continue-on-error` que cada uno tenía suelto, uno se colgó, agotó
+        # los tres minutos del paso y **se llevó la corrida entera** — el
+        # detector y el tablero no corrieron—. Antes de juntarlos eso no podía
+        # pasar, así que el aislamiento se devuelve: `timeout` acota a cada uno
+        # por separado y devuelve 124, que el informe de abajo muestra como
+        # falla de ESE colector mientras los otros dos siguen.
+        timeout-minutes: 5
+        continue-on-error: true
+        run: |
+          timeout 100 python ooni.py  > ooni.salida  2>&1 & p_ooni=$!
+          timeout 100 python ioda.py  > ioda.salida  2>&1 & p_ioda=$!
+          timeout 170 python vigia.py > vigia.salida 2>&1 & p_vigia=$!
+          falla=0
+          for par in "ooni:$p_ooni" "ioda:$p_ioda" "vigia:$p_vigia"; do
+            nombre=${par%%:*}
+            if wait "${par##*:}"; then
+              echo "────── $nombre: bien"
+            else
+              codigo=$?
+              if [ "$codigo" = 124 ]; then
+                echo "────── $nombre: SE COLGÓ y se lo cortó por tiempo"
+              else
+                echo "────── $nombre: FALLÓ (código $codigo)"
+              fi
+              falla=1
+            fi
+            cat "$nombre.salida" || true
+          done
+          # Se borran para que no entren al depósito por el `git add -A`.
+          rm -f ooni.salida ioda.salida vigia.salida
+          if [ "$falla" != 0 ]; then
+            echo "Algún colector falló. La corrida sigue: el detector juzga con lo que haya,"
+            echo "y la falta queda a la vista acá arriba en lugar de desaparecer."
+          fi
+
+      - name: Detector
+        run: python detector.py
+
+      # **El aviso: que una señal repetida llegue a una persona el mismo día.**
+      #
+      # Va después del detector porque mira lo que el detector acaba de
+      # escribir, y antes de Guardar porque deja un archivo de estado que tiene
+      # que viajar en el mismo commit.
+      #
+      # **No juzga y no abre alertas.** Dice «mirá esto». El acta es explícita:
+      # se automatiza el proceso, nunca el juicio. Nació el 21/10/2026, cuando
+      # se midió que entre el 13 y el 21 no se abrió una sola alerta mientras
+      # el detector marcaba señales seis de nueve días, y que Brasil estuvo
+      # tres días marcado —con elecciones a cuatro— sin que nada avisara.
+      - name: Aviso · señales repetidas que nadie juzgó
+        run: python aviso.py
+        timeout-minutes: 2
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          BUZON_REMITENTES: ${{ secrets.BUZON_REMITENTES }}
+
+      - name: Tablero
+        run: python tablero.py
+
+      - name: Guardar
+        run: |
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          # `git add -A` sobre la raíz, y no una lista de rutas.
+          #
+          # **Por qué.** Este mismo defecto tumbó el motor de automejora el
+          # 28/9 y la corrida diaria del 3 al 5/10, tres días seguidos: un
+          # programa escribe un archivo que no está en la lista del `git add`
+          # —acá fue `calendario.json`, que escriben `elecciones.py` y
+          # `confirmar.py`—, el árbol queda sucio y `git pull --rebase` se
+          # niega. Lo peor es que la recolección **sí había funcionado**: el
+          # commit local decía «18 archivos, 9.036 líneas». Se recolectaba y se
+          # tiraba, todos los días, sin que nadie se enterara.
+          #
+          # El 2/10 se arregló en el motor y **no se buscó en los demás
+          # flujos**. Por eso ahora se arregla el patrón en todos a la vez: una
+          # lista de rutas envejece cada vez que un colector escribe algo nuevo,
+          # y `.gitignore` ya cuida lo que no debe versionarse.
+          git add -A
+          git commit -m "Horaria $(date +%F\ %H:%M)" || { echo "Sin novedades"; exit 0; }
+          git pull --rebase -X theirs
+          git push
+
+      # ─────────────────────────────────────────────────────────────────────
+      # PUBLICAR, QUE HASTA EL 21/10/2026 ERA UN FLUJO APARTE.
+      #
+      # POR QUÉ SE MUDÓ, con el número que lo decidió. Publicar hace catorce
+      # segundos de trabajo, pero al ser un flujo aparte era un **trabajo**
+      # aparte, y GitHub cobra un minuto entero por trabajo. Mientras la capa
+      # horaria corría seis veces por día eso costaba 180 minutos al mes y se
+      # podía tolerar; cuando la llave de la dirección la llevó a 24 corridas
+      # —el 14/10— pasó a costar **29 minutos diarios**, el renglón más caro
+      # del robot después de la corrida diaria. Acá adentro no cuesta nada: el
+      # trabajo ya se está pagando, y 41 segundos más 14 siguen entrando en un
+      # minuto facturado.
+      #
+      # LOS DOS CONTROLES SE MUDARON INTACTOS, y es lo único que importa de
+      # esta mudanza. El de datos es **la única barrera entre el corpus de
+      # 61.373 mensajes de 990 cuentas y la web**: la autorización del 20/9 que
+      # habilitó esa recolección dice que el contenido se usa como fuente y no
+      # se republica. Si alguna vez hay que elegir entre publicar rápido y ese
+      # control, **gana el control**: falla ruidosamente y no continúa.
+      #
+      # Y LA CORRIDA DIARIA SIGUE PUBLICANDO POR SU PROPIO FLUJO, una vez al
+      # día. No se le cuelga de acá para que su edición no espere hasta la hora
+      # siguiente.
+      - name: Armar lo que se publica
+        run: |
+          mkdir -p sitio/codigo/colectores sitio/codigo/flujos
+          cp -r tablero/. sitio/
+          rm -rf sitio/propuestas
+          # Los archivos que empiezan con guión bajo son controles de la
+          # Oficina y no parte del sitio: hoy, el recorte cuadrado con que se
+          # comprueba cómo se ve la tarjeta en WhatsApp.
+          rm -f sitio/marca/_*
+          # **El CNAME ya está puesto: FEMÓNOE vive en su dominio propio desde
+          # el 21/10/2026.** La dirección creó el registro en SiteGround ese día
+          # y la Oficina comprobó en el DNS público que `femonoe.fundacionkent.org`
+          # resuelve a `fundacion-sherman-kent.github.io` antes de poner el
+          # archivo, porque el orden importa: con el archivo puesto Pages sirve
+          # **sólo** el dominio propio y deja de responder en github.io, de modo
+          # que ponerlo antes habría dejado el sitio inalcanzable. Pasó el
+          # 1/10/2026 y por eso el archivo estuvo cinco semanas esperando con
+          # otro nombre.
+          rm -f sitio/CNAME.cuando-el-dns-este
+          test -f tablero/CNAME && cp tablero/CNAME sitio/CNAME || true
+          cp *.py sitio/codigo/
+          cp colectores/*.py sitio/codigo/colectores/
+          cp .github/workflows/*.yml sitio/codigo/flujos/
+          cp umbrales.json padron.json disarm.json LICENSE sitio/codigo/
+          cp LICENSE README-SITIO.md sitio/ 2>/dev/null || cp LICENSE sitio/
+          mv sitio/README-SITIO.md sitio/README.md 2>/dev/null || true
+
+      # Dos controles antes de empujar, y los dos frenan. El de marcas se
+      # agregó el 2/10/2026, después de que la dirección encontrara diecinueve
+      # asteriscos crudos a la vista leyendo una captura: ése es el peor lugar
+      # donde puede aparecer un defecto de edición.
+      - name: Control · que no quede Markdown crudo a la vista
+        run: python control_marcas.py sitio
+
+      - name: Control · que no cruce ningún dato
+        # Frena la publicación antes de empujar. Es la única barrera entre el
+        # corpus y la web, así que falla ruidosamente y no continúa.
+        run: |
+          set -e
+          for prohibido in "redes.json" "mensajes" "buzon.json" "legajos" "curaduria" "senales" "alertas/"; do
+            if find sitio -path "*$prohibido*" | grep -q .; then
+              echo "FRENADO: apareció «$prohibido» en lo que se iba a publicar."
+              find sitio -path "*$prohibido*"
+              exit 1
+            fi
+          done
+          echo "Control pasado: ni corpus, ni padrón, ni expedientes en crudo."
+
+      - name: Empujar al depósito público
+        env:
+          LLAVE: ${{ secrets.SITIO_LLAVE }}
+        run: |
+          mkdir -p ~/.ssh && echo "$LLAVE" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+          cd sitio
+          git init -q
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Sitio $(date +%F\ %H:%M)" || { echo "Sin cambios"; exit 0; }
+          git push -q --force git@github.com:fundacion-sherman-kent/femonoe-sitio.git HEAD:main
+          # El mensaje dice la dirección que FUNCIONA, no la que se desea.
+          # Hasta el 2/10/2026 anunciaba femonoe.fundacionkent.org, que todavía
+          # no resuelve porque falta el registro en SiteGround: quien leía el
+          # registro de la corrida creía publicado algo inalcanzable.
+          # `CNAME` a secas y no `sitio/CNAME`: en este punto el paso ya hizo
+          # `cd sitio`, así que la ruta con carpeta buscaba `sitio/sitio/CNAME`
+          # y nunca existía. El 21/10/2026 el sitio ya se servía en el dominio
+          # propio y la corrida seguía anunciando la dirección de github.io.
+          # Es el mismo defecto que el acta anotó el 2/10 —el registro diciendo
+          # una dirección que no es— dado vuelta.
+          if [ -f CNAME ]; then
+            echo "Publicado en https://$(cat CNAME)"
+          else
+            echo "Publicado en https://fundacion-sherman-kent.github.io/femonoe-sitio/"
+            echo "  (el dominio propio femonoe.fundacionkent.org espera el registro CNAME en SiteGround)"
+          fi

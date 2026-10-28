@@ -1,0 +1,138 @@
+name: FEMÓNOE · publicar el sitio
+
+# Empuja el tablero ya construido al depósito PÚBLICO `femonoe-sitio`, que es
+# el que sirve femonoe.fundacionkent.org.
+#
+# Por qué dos depósitos y no uno. Este depósito guarda 61.373 mensajes de 990
+# cuentas recolectadas de canales públicos. La autorización de la Dirección del
+# 20/9/2026 que habilitó esa recolección fija que el contenido **se usa como
+# fuente y no se republica**, y prohíbe toda compilación de perfiles. Abrir
+# este depósito publicaría el corpus entero. Así que se publica **sólo lo que
+# se sirve**: el sitio construido y el código, que es a lo que obliga la AGPL.
+#
+# Lo que NO cruza, y se controla antes de empujar: el corpus de mensajes, el
+# padrón de fuentes, los expedientes de alerta en crudo, el buzón y los
+# legajos. El control de abajo frena la publicación si algo de eso aparece.
+
+on:
+  workflow_run:
+    # **Sólo la corrida diaria.** La horaria publica por su cuenta desde el
+    # 21/10/2026: colgarla de acá costaba un minuto facturado por cada una de
+    # sus 24 corridas, o 29 minutos diarios, para hacer catorce segundos de
+    # trabajo. La diaria sí se queda acá —una vez al día cuesta un minuto— para
+    # que su edición no tenga que esperar a la hora siguiente.
+    workflows: ["FEMÓNOE · corrida diaria"]
+    types: [completed]
+  workflow_dispatch:
+
+concurrency:
+  group: femonoe-sitio
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    # **La máquina queda fijada, y no es «la última» por azar.**
+    #
+    # Autorizado por la dirección el 14/10/2026. GitHub está cambiando lo que
+    # `ubuntu-latest` significa —de Ubuntu 24.04 a 26.04—, y textual de su
+    # anuncio: «se desplegará a lo largo de varias semanas a partir del 19 de
+    # octubre» y «la migración se completará el 19 de noviembre».
+    #
+    # El riesgo no es que el robot se rompa: las versiones del software que usa
+    # son idénticas en las dos imágenes. El riesgo es que **durante un mes cada
+    # corrida caiga en cualquiera de las dos**, de modo que una falla aparecería
+    # un día y desaparecería al siguiente, sin causa visible. Para una casa que
+    # publica juicios y promete que la misma entrada da la misma salida, eso es
+    # peor que una rotura franca. GitHub avisa además que el 21 % de los
+    # depósitos tiene al menos un trabajo que fallaría al arrancar en la nueva.
+    #
+    # Se vuelve a `ubuntu-latest` cuando la Oficina haya probado `ubuntu-26.04`
+    # en un flujo aparte y con tiempo. **Hasta entonces esto no se toca.**
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Construir el tablero
+        run: python tablero.py
+
+      - name: Armar lo que se publica
+        run: |
+          mkdir -p sitio/codigo/colectores sitio/codigo/flujos
+          cp -r tablero/. sitio/
+          rm -rf sitio/propuestas
+          # Los archivos que empiezan con guión bajo son controles de la
+          # Oficina y no parte del sitio: hoy, el recorte cuadrado con que se
+          # comprueba cómo se ve la tarjeta en WhatsApp.
+          rm -f sitio/marca/_*
+          # **El CNAME ya está puesto: FEMÓNOE vive en su dominio propio desde
+          # el 21/10/2026.** La dirección creó el registro en SiteGround ese día
+          # y la Oficina comprobó en el DNS público que `femonoe.fundacionkent.org`
+          # resuelve a `fundacion-sherman-kent.github.io` antes de poner el
+          # archivo, porque el orden importa: con el archivo puesto Pages sirve
+          # **sólo** el dominio propio y deja de responder en github.io, de modo
+          # que ponerlo antes habría dejado el sitio inalcanzable. Pasó el
+          # 1/10/2026 y por eso el archivo estuvo cinco semanas esperando con
+          # otro nombre.
+          rm -f sitio/CNAME.cuando-el-dns-este
+          test -f tablero/CNAME && cp tablero/CNAME sitio/CNAME || true
+          cp *.py sitio/codigo/
+          cp colectores/*.py sitio/codigo/colectores/
+          cp .github/workflows/*.yml sitio/codigo/flujos/
+          cp umbrales.json padron.json disarm.json LICENSE sitio/codigo/
+          cp LICENSE README-SITIO.md sitio/ 2>/dev/null || cp LICENSE sitio/
+          mv sitio/README-SITIO.md sitio/README.md 2>/dev/null || true
+
+      # Dos controles antes de empujar, y los dos frenan. El de marcas se
+      # agregó el 2/10/2026, después de que la dirección encontrara diecinueve
+      # asteriscos crudos a la vista leyendo una captura: ése es el peor lugar
+      # donde puede aparecer un defecto de edición.
+      - name: Control · que no quede Markdown crudo a la vista
+        run: python control_marcas.py sitio
+
+      - name: Control · que no cruce ningún dato
+        # Frena la publicación antes de empujar. Es la única barrera entre el
+        # corpus y la web, así que falla ruidosamente y no continúa.
+        run: |
+          set -e
+          for prohibido in "redes.json" "mensajes" "buzon.json" "legajos" "curaduria" "senales" "alertas/"; do
+            if find sitio -path "*$prohibido*" | grep -q .; then
+              echo "FRENADO: apareció «$prohibido» en lo que se iba a publicar."
+              find sitio -path "*$prohibido*"
+              exit 1
+            fi
+          done
+          echo "Control pasado: ni corpus, ni padrón, ni expedientes en crudo."
+
+      - name: Empujar al depósito público
+        env:
+          LLAVE: ${{ secrets.SITIO_LLAVE }}
+        run: |
+          mkdir -p ~/.ssh && echo "$LLAVE" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+          cd sitio
+          git init -q
+          git config user.name "robot-femonoe"
+          git config user.email "robot-femonoe@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Sitio $(date +%F\ %H:%M)" || { echo "Sin cambios"; exit 0; }
+          git push -q --force git@github.com:fundacion-sherman-kent/femonoe-sitio.git HEAD:main
+          # El mensaje dice la dirección que FUNCIONA, no la que se desea.
+          # Hasta el 2/10/2026 anunciaba femonoe.fundacionkent.org, que todavía
+          # no resuelve porque falta el registro en SiteGround: quien leía el
+          # registro de la corrida creía publicado algo inalcanzable.
+          # `CNAME` a secas y no `sitio/CNAME`: en este punto el paso ya hizo
+          # `cd sitio`, así que la ruta con carpeta buscaba `sitio/sitio/CNAME`
+          # y nunca existía. El 21/10/2026 el sitio ya se servía en el dominio
+          # propio y la corrida seguía anunciando la dirección de github.io.
+          # Es el mismo defecto que el acta anotó el 2/10 —el registro diciendo
+          # una dirección que no es— dado vuelta.
+          if [ -f CNAME ]; then
+            echo "Publicado en https://$(cat CNAME)"
+          else
+            echo "Publicado en https://fundacion-sherman-kent.github.io/femonoe-sitio/"
+            echo "  (el dominio propio femonoe.fundacionkent.org espera el registro CNAME en SiteGround)"
+          fi
