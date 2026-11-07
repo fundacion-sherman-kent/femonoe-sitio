@@ -1,0 +1,115 @@
+# -*- coding: utf-8 -*-
+"""Control de salida: que no llegue Markdown crudo a la vista del lector.
+
+**Por qué existe.** La Oficina escribe los fundamentos, los dictámenes y los
+criterios de resolución con las marcas de Markdown, porque así se redacta en el
+expediente. Cuando un campo nuevo se muestra en la página y nadie se acuerda de
+convertirlas, los asteriscos salen crudos. Medido el 2/10/2026, antes de este
+control: **diecinueve marcas a la vista del lector** repartidas en seis páginas,
+incluido un «**más de 628.755 electores inscriptos**» en el cuerpo de la alerta
+de Haití. Lo encontró la dirección leyendo una captura, que es el peor lugar
+donde puede encontrarse un defecto de edición.
+
+**Qué hace.** Mira lo que el lector ve: saca los programas, los estilos y los
+comentarios, y después busca marcas de Markdown en lo que queda. Si encuentra
+alguna, **frena la publicación**. No propone, no avisa: frena. Un control que
+sólo avisa es un control que alguien va a ignorar un viernes a la tarde.
+
+**Lo que no controla.** Si la conversión es correcta —si `**x**` quedó como
+negrita y no como otra cosa—. Eso lo mira una persona. Esto sólo garantiza que
+no queda marca cruda, que es un defecto que ninguna persona debería tener que
+buscar a mano en quince páginas.
+
+    python control_marcas.py            revisa tablero/ y frena si hay marcas
+    python control_marcas.py <carpeta>  revisa otra carpeta
+"""
+import re
+import sys
+from pathlib import Path
+
+RAIZ = Path(__file__).resolve().parent
+
+# Lo que el lector no ve no se controla: un `**` dentro de un comentario o de un
+# programa es legítimo y marcarlo sería gritar por nada.
+CITA_LITERAL = re.compile(r'(?is)<q class="literal">.*?</q>')
+SCRIPT = re.compile(r"(?is)<(script|style)[^>]*>.*?</\1>")
+COMENTARIO = re.compile(r"(?s)<!--.*?-->")
+ETIQUETA = re.compile(r"<[^>]+>")
+
+MARCAS = [
+    ("negrita", re.compile(r"\*\*")),
+    ("cursiva o viñeta", re.compile(r"(?<![\w*])\*(?!\*)\s*\S")),
+    ("título", re.compile(r"(?m)^\s*#{1,6}\s")),
+    ("código", re.compile(r"`")),
+    ("enlace", re.compile(r"\[[^\]]{1,80}\]\([^)]{1,120}\)")),
+]
+
+
+# **Marcadores de trabajo interno**, que se buscan de otra manera que las
+# marcas de Markdown: **en todo el archivo y no sólo en el texto visible**.
+#
+# POR QUÉ LA DIFERENCIA, y es el hueco por el que se escapó. El tablero lleva
+# los datos de las fichas de los 33 Estados **dentro de un `<script>`**, y el
+# navegador los convierte en el texto que la persona lee al tocar un país.
+# `visible()` borra los `<script>` —para no acusar al código de usar asteriscos—
+# y por eso este control **no veía** ese texto. Medido el 13/10/2026: el sitio
+# publicado mostraba «COMPLETAR» cinco veces, y una de ellas —el «vence
+# COMPLETAR» de la ficha de Haití— vivía justamente ahí.
+#
+# `COMPLETAR` es la marca con que `alerta.py` muestra qué le falta a un
+# expediente. Es una herramienta interna y no se publica nunca.
+PENDIENTES = [
+    ("marcador de pendiente", re.compile(r"COMPLETAR")),
+]
+
+
+def visible(html):
+    """Lo que de verdad lee una persona."""
+    return ETIQUETA.sub(" ", COMENTARIO.sub(" ", SCRIPT.sub(" ", html)))
+
+
+def revisar(carpeta):
+    paginas = sorted(Path(carpeta).rglob("*.html"))
+    if not paginas:
+        print(f"No hay páginas en {carpeta}. No se controla nada y eso también se dice.")
+        return 1
+    total = 0
+    for f in paginas:
+        crudo = f.read_text(encoding="utf-8")
+        # **Una cita no es un andamio.** Un analista puede declarar como vacío
+        # que otro archivo estaba «en plantilla con el texto COMPLETAR»: ahí la
+        # palabra es el hecho que se denuncia, no un marcador olvidado. Se marca
+        # con `<q class="literal">` al escribirla y el control la descuenta —
+        # sólo para los marcadores de pendiente, nunca para las marcas de
+        # Markdown, que crudas se ven mal venga de donde venga.
+        crudo = CITA_LITERAL.sub(" ", crudo)
+        texto = visible(crudo)
+        hallazgos = []
+        for donde, pares in ((texto, MARCAS), (crudo, PENDIENTES)):
+            for nombre, patron in pares:
+                for m in patron.finditer(donde):
+                    ctx = re.sub(r"\s+", " ",
+                                 donde[max(0, m.start() - 55):m.start() + 55]).strip()
+                    hallazgos.append((nombre, ctx))
+        if hallazgos:
+            total += len(hallazgos)
+            print(f"\n{f.as_posix()} · {len(hallazgos)} marca(s)")
+            for nombre, ctx in hallazgos[:8]:
+                print(f"   [{nombre}] …{ctx}…")
+            if len(hallazgos) > 8:
+                print(f"   … y {len(hallazgos) - 8} más")
+    print(f"\n{'=' * 62}")
+    if total:
+        print(f"  FRENADO: {total} marca(s) a la vista en "
+              f"{len(paginas)} páginas revisadas.")
+        print("  Si es una marca de Markdown, el campo que la trae hay que pasarlo")
+        print("  por `_negritas` en el generador que lo escribe. Si es un marcador")
+        print("  de pendiente, hay que pasarlo por `_o_falta` y decir con palabras")
+        print("  qué falta: el andamio no sale a la calle.")
+        return 1
+    print(f"  {len(paginas)} páginas revisadas: sin marcas de Markdown crudas\n  y sin marcadores de pendiente, tampoco dentro de los datos de las fichas.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(revisar(sys.argv[1] if len(sys.argv) > 1 else RAIZ / "tablero"))

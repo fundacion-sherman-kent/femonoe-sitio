@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /propuestas/
+
+Sitemap: https://femonoe.fundacionkent.org/sitemap.xml
