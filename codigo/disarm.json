@@ -1,0 +1,2352 @@
+{
+ "nota": "Taxonomía DISARM, del DISARM Foundation (github.com/DISARMFoundation/DISARMframeworks), CC BY 4.0. Copia local del índice de técnicas, leída el 27/9/2026. No se modifica: se cita.",
+ "leido": "2026-09-27",
+ "tecnicas": [
+  {
+   "id": "T0002",
+   "nombre": "Facilitate State Propaganda",
+   "resumen": "Organise citizens around pro-state messaging. Coordinate paid or volunteer groups to push state propaganda.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0003",
+   "nombre": "Leverage Existing Narratives",
+   "resumen": "Use or adapt existing narrative themes, where narratives are the baseline stories of a target audience. Narratives form the bedrock of our worldviews. New information is understood through a process firmly grounded in this bedrock. If new information is not consitent with the prevailing narratives o",
+   "tactica": "TA14"
+  },
+  {
+   "id": "T0004",
+   "nombre": "Develop Competing Narratives",
+   "resumen": "Advance competing narratives connected to same issue ie: on one hand deny incident while at same time expresses dismiss. Suppressing or discouraging narratives already spreading requires an alternative. The most simple set of narrative techniques in response would be the construction and promotion o",
+   "tactica": "TA14"
+  },
+  {
+   "id": "T0010",
+   "nombre": "Cultivate Ignorant Agents",
+   "resumen": "Cultivate propagandists for a cause, the goals of which are not fully comprehended, and who are used cynically by the leaders of the cause. Independent actors use social media and specialised web sites to strategically reinforce and spread messages compatible with their own. Their networks are infil",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0014",
+   "nombre": "Prepare Fundraising Campaigns",
+   "resumen": "Fundraising campaigns refer to an influence operation’s systematic effort to seek financial support for a charity, cause, or other enterprise using online activities that further promote operation information pathways while raising a profit. Many influence operations have engaged in crowdfunding ser",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0014.001",
+   "nombre": "Raise Funds from Malign Actors",
+   "resumen": "Raising funds from malign actors may include contributions from foreign agents, cutouts or proxies, shell companies, dark money groups, etc.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0014.002",
+   "nombre": "Raise Funds from Ignorant Agents",
+   "resumen": "Raising funds from ignorant agents may include scams, donations intended for one stated purpose but then used for another, etc.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0015",
+   "nombre": "Create Hashtags and Search Artefacts",
+   "resumen": "Create one or more hashtags and/or hashtag groups. Many incident-based campaigns will create hashtags to promote their fabricated event. Creating a hashtag for an incident can have two important effects: 1. Create a perception of reality around an event. Certainly only \"real\" events would be discuss",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0015.001",
+   "nombre": "Use Existing Hashtag",
+   "resumen": "Use a dedicated, existing hashtag for the campaign/incident. This Technique covers behaviours previously documented by T0104.005: Use Hashtags, which has since been deprecated.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0015.002",
+   "nombre": "Create New Hashtag",
+   "resumen": "Create a campaign/incident specific hashtag. This Technique covers behaviours previously documented by T0104.006: Create Dedicated Hashtag, which has since been deprecated.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0016",
+   "nombre": "Create Clickbait",
+   "resumen": "Create attention grabbing headlines (outrage, doubt, humour) required to drive traffic & engagement. This is a key asset.",
+   "tactica": "TA05"
+  },
+  {
+   "id": "T0017",
+   "nombre": "Conduct Fundraising",
+   "resumen": "Fundraising campaigns refer to an influence operation’s systematic effort to seek financial support for a charity, cause, or other enterprise using online activities that further promote operation information pathways while raising a profit. Many influence operations have engaged in crowdfunding ser",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0017.001",
+   "nombre": "Conduct Crowdfunding Campaigns",
+   "resumen": "An influence operation may Conduct Crowdfunding Campaigns on platforms such as GoFundMe, GiveSendGo, Tipeee, Patreon, etc.",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0018",
+   "nombre": "Purchase Targeted Advertisements",
+   "resumen": "Create or fund advertisements targeted at specific populations",
+   "tactica": "TA05"
+  },
+  {
+   "id": "T0020",
+   "nombre": "Trial Content",
+   "resumen": "Iteratively test incident performance (messages, content etc), e.g. A/B test headline/content enagagement metrics; website and/or funding campaign conversion rates",
+   "tactica": "TA08"
+  },
+  {
+   "id": "T0022",
+   "nombre": "Leverage Conspiracy Theory Narratives",
+   "resumen": "\"Conspiracy narratives\" appeal to the human desire for explanatory order, by invoking the participation of poweful (often sinister) actors in pursuit of their own political goals. These narratives are especially appealing when an audience is low-information, marginalised or otherwise inclined to rej",
+   "tactica": "TA14"
+  },
+  {
+   "id": "T0022.001",
+   "nombre": "Amplify Existing Conspiracy Theory Narratives",
+   "resumen": "An influence operation may amplify an existing conspiracy theory narrative that aligns with its incident or campaign goals. By amplifying existing conspiracy theory narratives, operators can leverage the power of the existing communities that support and propagate those theories without needing to e",
+   "tactica": "TA14"
+  },
+  {
+   "id": "T0022.002",
+   "nombre": "Develop Original Conspiracy Theory Narratives",
+   "resumen": "While this requires more resources than amplifying existing conspiracy theory narratives, an influence operation may develop original conspiracy theory narratives in order to achieve greater control and alignment over the narrative and their campaign goals. Prominent examples include the USSR's Oper",
+   "tactica": "TA14"
+  },
+  {
+   "id": "T0023",
+   "nombre": "Distort Facts",
+   "resumen": "Change, twist, or exaggerate existing facts to construct a narrative that differs from reality. Examples: images and ideas can be distorted by being placed in an improper content",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0023.001",
+   "nombre": "Reframe Context",
+   "resumen": "Reframing context refers to removing an event from its surrounding context to distort its intended meaning. Rather than deny that an event occurred, reframing context frames an event in a manner that may lead the target audience to draw a different conclusion about its intentions.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0023.002",
+   "nombre": "Edit Open-Source Content",
+   "resumen": "An influence operation may edit open-source content, such as collaborative blogs or encyclopaedias, to promote its narratives on outlets with existing credibility and audiences. Editing open-source content may allow an operation to post content on platforms without dedicating resources to the creati",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0029",
+   "nombre": "Online Polls",
+   "resumen": "Create fake online polls, or manipulate existing online polls. Data gathering tactic to target those who engage, and potentially their networks of friends/followers as well",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0039",
+   "nombre": "Bait Influencer",
+   "resumen": "Influencers are people on social media platforms who have large audiences. Threat Actors can try to trick Influencers such as celebrities, journalists, or local leaders who aren’t associated with their campaign into amplifying campaign content. This gives them access to the Influencer’s audience wit",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0040",
+   "nombre": "Demand Insurmountable Proof",
+   "resumen": "Campaigns often leverage tactical and informational asymmetries on the threat surface, as seen in the Distort and Deny strategies, and the \"firehose of misinformation\". Specifically, conspiracy theorists can be repeatedly wrong, but advocates of the truth need to be perfect. By constantly escalating",
+   "tactica": "TA14"
+  },
+  {
+   "id": "T0042",
+   "nombre": "Seed Kernel of Truth",
+   "resumen": "Wrap lies or altered context/facts around truths. Influence campaigns pursue a variety of objectives with respect to target audiences, prominent among them: 1. undermine a narrative commonly referenced in the target audience; or 2. promote a narrative less common in the target audience, but preferre",
+   "tactica": "TA08"
+  },
+  {
+   "id": "T0044",
+   "nombre": "Seed Distortions",
+   "resumen": "Try a wide variety of messages in the early hours surrounding an incident or event, to give a misleading account or impression.",
+   "tactica": "TA08"
+  },
+  {
+   "id": "T0045",
+   "nombre": "Use Fake Experts",
+   "resumen": "Use the fake experts that were set up during Establish Legitimacy. Pseudo-experts are disposable assets that often appear once and then disappear. Give \"credility\" to misinformation. Take advantage of credential bias",
+   "tactica": "TA08"
+  },
+  {
+   "id": "T0046",
+   "nombre": "Use Search Engine Optimisation",
+   "resumen": "Manipulate content engagement metrics (ie: Reddit & Twitter) to influence/impact news search results (e.g. Google), also elevates RT & Sputnik headline into Google news alert emails. aka \"Black-hat SEO\"",
+   "tactica": "TA08"
+  },
+  {
+   "id": "T0047",
+   "nombre": "Censor Social Media as a Political Force",
+   "resumen": "Use political influence or the power of state to stop critical social media comments. Government requested/driven content take downs (see Google Transperancy reports).",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0048",
+   "nombre": "Harass",
+   "resumen": "Threatening or harassing believers of opposing narratives refers to the use of intimidation techniques, including cyberbullying and doxing, to discourage opponents from voicing their dissent. An influence operation may threaten or harass believers of the opposing narratives to deter individuals from",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0048.001",
+   "nombre": "Boycott/\"Cancel\" Opponents",
+   "resumen": "Cancel culture refers to the phenomenon in which individuals collectively refrain from supporting an individual, organisation, business, or other entity, usually following a real or falsified controversy. An influence operation may exploit cancel culture by emphasising an adversary’s problematic or ",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0048.002",
+   "nombre": "Harass People Based on Identities",
+   "resumen": "Examples include social identities like gender, sexuality, race, ethnicity, religion, ability, nationality, etc. as well as roles and occupations like journalist or activist.",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0048.003",
+   "nombre": "Threaten to Dox",
+   "resumen": "Doxing refers to online harassment in which individuals publicly release private information about another individual, including names, addresses, employment information, pictures, family members, and other sensitive information. An influence operation may dox its opposition to encourage individuals",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0048.004",
+   "nombre": "Dox",
+   "resumen": "Doxing refers to online harassment in which individuals publicly release private information about another individual, including names, addresses, employment information, pictures, family members, and other sensitive information. An influence operation may dox its opposition to encourage individuals",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0049",
+   "nombre": "Flood Information Space",
+   "resumen": "Flooding sources of information (e.g. Social Media feeds) with a high volume of inauthentic content. This can be done to control/shape online conversations, drown out opposing points of view, or make it harder to find legitimate information. Bots and/or patriotic trolls are effective tools to achiev",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0049.001",
+   "nombre": "Trolls Amplify and Manipulate",
+   "resumen": "Use trolls to amplify narratives and/or manipulate narratives. Fake profiles/sockpuppets operating to support individuals/narratives from the entire political spectrum (left/right binary). Operating with increased emphasis on promoting local content and promoting real Twitter users generating their ",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0049.002",
+   "nombre": "Flood Existing Hashtag",
+   "resumen": "Hashtags can be used by communities to collate information they post about particular topics (such as their interests, or current events) and users can find communities to join by exploring hashtags they’re interested in. Threat actors can flood an existing hashtag to try to ruin hashtag functionali",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0049.003",
+   "nombre": "Bots Amplify via Automated Forwarding and Reposting",
+   "resumen": "Automated forwarding and reposting refer to the proliferation of operation content using automated means, such as artificial intelligence or social media bots. An influence operation may use automated activity to increase content exposure without dedicating the resources, including personnel and tim",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0049.004",
+   "nombre": "Utilise Spamoflauge",
+   "resumen": "Spamoflauge refers to the practice of disguising spam messages as legitimate. Spam refers to the use of electronic messaging systems to send out unrequested or unwanted messages in bulk. Simple methods of spamoflauge include replacing letters with numbers to fool keyword-based email spam filters, fo",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0049.005",
+   "nombre": "Conduct Swarming",
+   "resumen": "Swarming refers to the coordinated use of accounts to overwhelm the information space with operation content. Unlike information flooding, swarming centres exclusively around a specific event or actor rather than a general narrative. Swarming relies on “horizontal communication” between information ",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0049.006",
+   "nombre": "Conduct Keyword Squatting",
+   "resumen": "Keyword squatting refers to the creation of online content, such as websites, articles, or social media accounts, around a specific search engine-optimized term to overwhelm the search results of that term. An influence may keyword squat to increase content exposure to target audience members who qu",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0049.007",
+   "nombre": "Inauthentic Sites Amplify News and Narratives",
+   "resumen": "Inauthentic sites circulate cross-post stories and amplify narratives. Often these sites have no masthead, bylines or attribution.",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0049.008",
+   "nombre": "Generate Information Pollution",
+   "resumen": "Information Pollution occurs when threat actors attempt to ruin a source of information by flooding it with lots of inauthentic or unreliable content, intending to make it harder for legitimate users to find the information they’re looking for. This sub-technique’s objective is to reduce exposure to",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0057",
+   "nombre": "Organise Events",
+   "resumen": "Coordinate and promote real-world events across media platforms, e.g. rallies, protests, gatherings in support of incident narratives.",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0057.001",
+   "nombre": "Pay for Physical Action",
+   "resumen": "Paying for physical action occurs when an influence operation pays individuals to act in the physical realm. An influence operation may pay for physical action to create specific situations and frame them in a way that supports operation narratives, for example, paying a group of people to burn a ca",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0057.002",
+   "nombre": "Conduct Symbolic Action",
+   "resumen": "Symbolic action refers to activities specifically intended to advance an operation’s narrative by signalling something to the audience, for example, a military parade supporting a state’s narrative of military superiority. An influence operation may use symbolic action to create falsified evidence s",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0059",
+   "nombre": "Play the Long Game",
+   "resumen": "Play the long game refers to two phenomena: 1. To plan messaging and allow it to grow organically without conducting your own amplification. This is methodical and slow and requires years for the message to take hold 2. To develop a series of seemingly disconnected messaging narratives that eventual",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0060",
+   "nombre": "Continue to Amplify",
+   "resumen": "continue narrative or message amplification after the main incident work has finished",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0061",
+   "nombre": "Sell Merchandise",
+   "resumen": "Sell mechandise refers to getting the message or narrative into physical space in the offline world while making money",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0065",
+   "nombre": "Prepare Physical Broadcast Capabilities",
+   "resumen": "Create or coopt broadcast capabilities (e.g. TV, radio etc).",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0066",
+   "nombre": "Degrade Adversary",
+   "resumen": "Plan to degrade an adversary’s image or ability to act. This could include preparation and use of harmful information about the adversary’s actions or reputation.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0068",
+   "nombre": "Respond to Breaking News Event or Active Crisis",
+   "resumen": "Media attention on a story or event is heightened during a breaking news event, where unclear facts and incomplete information increase speculation, rumours, and conspiracy theories, which are all vulnerable to manipulation.",
+   "tactica": "TA14"
+  },
+  {
+   "id": "T0072",
+   "nombre": "Segment Audiences",
+   "resumen": "Create audience segmentations by features of interest to the influence campaign, including political affiliation, geographic location, income, demographics, and psychographics.",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0072.001",
+   "nombre": "Geographic Segmentation",
+   "resumen": "An influence operation may target populations in a specific geographic location, such as a region, state, or city. An influence operation may use geographic segmentation to Create Localised Content (see: Establish Legitimacy).",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0072.002",
+   "nombre": "Demographic Segmentation",
+   "resumen": "An influence operation may target populations based on demographic segmentation, including age, gender, and income. Demographic segmentation may be useful for influence operations aiming to change state policies that affect a specific population sector. For example, an influence operation attempting",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0072.003",
+   "nombre": "Economic Segmentation",
+   "resumen": "An influence operation may target populations based on their income bracket, wealth, or other financial or economic division.",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0072.004",
+   "nombre": "Psychographic Segmentation",
+   "resumen": "An influence operation may target populations based on psychographic segmentation, which uses audience values and decision-making processes. An operation may individually gather psychographic data with its own surveys or collection tools or externally purchase data from social media companies or onl",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0072.005",
+   "nombre": "Political Segmentation",
+   "resumen": "An influence operation may target populations based on their political affiliations, especially when aiming to manipulate voting or change policy.",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0073",
+   "nombre": "Determine Target Audiences",
+   "resumen": "Determining the target audiences (segments of the population) who will receive campaign narratives and artefacts intended to achieve the strategic ends.",
+   "tactica": "TA01"
+  },
+  {
+   "id": "T0074",
+   "nombre": "Determine Strategic Ends",
+   "resumen": "These are the long-term end-states the campaign aims to bring about. They typically involve an advantageous position vis-a-vis competitors in terms of power or influence. The strategic goal may be to improve or simply to hold one’s position. Competition occurs in the public sphere in the domains of ",
+   "tactica": "TA01"
+  },
+  {
+   "id": "T0074.001",
+   "nombre": "Geopolitical Advantage",
+   "resumen": "Favourable position on the international stage in terms of great power politics or regional rivalry. Geopolitics plays out in the realms of foreign policy, national security, diplomacy, and intelligence. It involves nation-state governments, heads of state, foreign ministers, intergovernmental organ",
+   "tactica": "TA01"
+  },
+  {
+   "id": "T0074.002",
+   "nombre": "Domestic Political Advantage",
+   "resumen": "Favourable position vis-à-vis national or sub-national political opponents such as political parties, interest groups, politicians, candidates.",
+   "tactica": "TA01"
+  },
+  {
+   "id": "T0074.003",
+   "nombre": "Economic Advantage",
+   "resumen": "Favourable position domestically or internationally in the realms of commerce, trade, finance, industry. Economics involves nation-states, corporations, banks, trade blocs, industry associations, cartels.",
+   "tactica": "TA01"
+  },
+  {
+   "id": "T0074.004",
+   "nombre": "Ideological Advantage",
+   "resumen": "Favourable position domestically or internationally in the market for ideas, beliefs, and world views. Competition plays out among faith systems, political systems, and value systems. It can involve sub-national, national or supra-national movements.",
+   "tactica": "TA01"
+  },
+  {
+   "id": "T0075",
+   "nombre": "Dismiss",
+   "resumen": "Push back against criticism by dismissing your critics. This might be arguing that the critics use a different standard for you than with other actors or themselves; or arguing that their criticism is biassed.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0075.001",
+   "nombre": "Discredit Credible Sources",
+   "resumen": "Plan to delegitimize the media landscape and degrade public trust in reporting, by discrediting credible sources. This makes it easier to promote influence operation content.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0076",
+   "nombre": "Distort",
+   "resumen": "Twist the narrative. Take information, or artefacts like images, and change the framing around them.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0077",
+   "nombre": "Distract",
+   "resumen": "Shift attention to a different narrative or actor, for instance by accusing critics of the same activity that they’ve accused you of (e.g. police brutality).",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0078",
+   "nombre": "Dismay",
+   "resumen": "Threaten the critic or narrator of events. For instance, threaten journalists or news outlets reporting on a story.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0079",
+   "nombre": "Divide",
+   "resumen": "Create conflict between subgroups, to widen divisions in a community",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0080",
+   "nombre": "Map Target Audience Information Environment",
+   "resumen": "Mapping the target audience information environment analyses the information space itself, including social media analytics, web traffic, and media surveys. Mapping the information environment may help the influence operation determine the most realistic and popular information channels to reach its",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0080.001",
+   "nombre": "Monitor Social Media Analytics",
+   "resumen": "An influence operation may use social media analytics to determine which factors will increase the operation content’s exposure to its target audience on social media platforms, including views, interactions, and sentiment relating to topics and content types. The social media platform itself or a t",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0080.002",
+   "nombre": "Evaluate Media Surveys",
+   "resumen": "An influence operation may evaluate its own or third-party media surveys to determine what type of content appeals to its target audience. Media surveys may provide insight into an audience’s political views, social class, general interests, or other indicators used to tailor operation messaging to ",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0080.003",
+   "nombre": "Identify Trending Topics/Hashtags",
+   "resumen": "An influence operation may identify trending hashtags on social media platforms for later use in boosting operation content. A hashtag40 refers to a word or phrase preceded by the hash symbol (#) on social media used to identify messages and posts relating to a specific topic. All public posts that ",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0080.004",
+   "nombre": "Conduct Web Traffic Analysis",
+   "resumen": "An influence operation may conduct web traffic analysis to determine which search engines, keywords, websites, and advertisements gain the most traction with its target audience.",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0080.005",
+   "nombre": "Assess Degree/Type of Media Access",
+   "resumen": "An influence operation may survey a target audience’s Internet availability and degree of media freedom to determine which target audience members will have access to operation content and on which platforms. An operation may face more difficulty targeting an information environment with heavy restr",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0081",
+   "nombre": "Identify Social and Technical Vulnerabilities",
+   "resumen": "Identifying social and technical vulnerabilities determines weaknesses within the target audience information environment for later exploitation. Vulnerabilities include decisive political issues, weak cybersecurity infrastructure, search engine data voids, and other technical and non technical weak",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0081.001",
+   "nombre": "Find Echo Chambers",
+   "resumen": "Find or plan to create areas (social media groups, search term groups, hashtag groups etc) where individuals only engage with people they agree with.",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0081.002",
+   "nombre": "Identify Data Voids",
+   "resumen": "A data void refers to a word or phrase that results in little, manipulative, or low-quality search engine data. Data voids are hard to detect and relatively harmless until exploited by an entity aiming to quickly proliferate false or misleading information during a phenomenon that causes a high numb",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0081.003",
+   "nombre": "Identify Existing Prejudices",
+   "resumen": "An influence operation may exploit existing racial, religious, demographic, or social prejudices to further polarise its target audience from the rest of the public.",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0081.004",
+   "nombre": "Identify Existing Fissures",
+   "resumen": "An influence operation may identify existing fissures to pit target populations against one another or facilitate a “divide-and-conquer\" approach to tailor operation narratives along the divides.",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0081.005",
+   "nombre": "Identify Existing Conspiracy Narratives/Suspicions",
+   "resumen": "An influence operation may assess preexisting conspiracy theories or suspicions in a population to identify existing narratives that support operational objectives.",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0081.006",
+   "nombre": "Identify Wedge Issues",
+   "resumen": "A wedge issue is a divisive political issue, usually concerning a social phenomenon, that divides individuals along a defined line. An influence operation may exploit wedge issues by intentionally polarising the public along the wedge issue line and encouraging opposition between factions.",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0081.007",
+   "nombre": "Identify Target Audience Adversaries",
+   "resumen": "An influence operation may identify or create a real or imaginary adversary to centre operation narratives against. A real adversary may include certain politicians or political parties while imaginary adversaries may include falsified “deep state”62 actors that, according to conspiracies, run the s",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0081.008",
+   "nombre": "Identify Media System Vulnerabilities",
+   "resumen": "An influence operation may exploit existing weaknesses in a target’s media system. These weaknesses may include existing biases among media agencies, vulnerability to false news agencies on social media, or existing distrust of traditional media sources. An existing distrust among the public in the ",
+   "tactica": "TA13"
+  },
+  {
+   "id": "T0082",
+   "nombre": "Develop New Narratives",
+   "resumen": "Actors may develop new narratives to further strategic or tactical goals, especially when existing narratives adequately align with the campaign goals. New narratives provide more control in terms of crafting the message to achieve specific goals. However, new narratives may require more effort to d",
+   "tactica": "TA14"
+  },
+  {
+   "id": "T0083",
+   "nombre": "Integrate Target Audience Vulnerabilities into Narrative",
+   "resumen": "An influence operation may seek to exploit the preexisting weaknesses, fears, and enemies of the target audience for integration into the operation’s narratives and overall strategy. Integrating existing vulnerabilities into the operational approach conserves resources by exploiting already weak are",
+   "tactica": "TA14"
+  },
+  {
+   "id": "T0084",
+   "nombre": "Reuse Existing Content",
+   "resumen": "When an operation recycles content from its own previous operations or plagiarises from external operations. An operation may launder information to conserve resources that would have otherwise been utilised to develop new content.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0084.001",
+   "nombre": "Use Copypasta",
+   "resumen": "Copypasta refers to a piece of text that has been copied and pasted multiple times across various online platforms. A copypasta’s final form may differ from its original source text as users add, delete, or otherwise edit the content as they repost the text.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0084.002",
+   "nombre": "Plagiarise Content",
+   "resumen": "An influence operation may take content from other sources without proper attribution. This content may be either misinformation content shared by others without malicious intent but now leveraged by the campaign as disinformation or disinformation content from other sources.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0084.003",
+   "nombre": "Deceptively Labelled or Translated",
+   "resumen": "An influence operation may take authentic content from other sources and add deceptive labels or deceptively translate the content into other langauges.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0084.004",
+   "nombre": "Appropriate Content",
+   "resumen": "An influence operation may take content from other sources with proper attribution. This content may be either misinformation content shared by others without malicious intent but now leveraged by the campaign as disinformation or disinformation content from other sources. Examples include the appro",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0085",
+   "nombre": "Develop Text-Based Content",
+   "resumen": "Creating and editing false or misleading text-based artefacts, often aligned with one or more specific narratives, for use in a disinformation campaign.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0085.001",
+   "nombre": "Develop AI-Generated Text",
+   "resumen": "AI-generated texts refers to synthetic text composed by computers using text-generating AI technology. Autonomous generation refers to content created by a bot without human input, also known as bot-created content generation. Autonomous generation represents the next step in automation after langua",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0085.003",
+   "nombre": "Develop Inauthentic News Articles",
+   "resumen": "An influence operation may develop false or misleading news articles aligned to their campaign goals or narratives.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0085.004",
+   "nombre": "Develop Document",
+   "resumen": "Produce text in the form of a document.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0085.005",
+   "nombre": "Develop Book",
+   "resumen": "Produce text content in the form of a book. This technique covers both e-books and physical books, however, the former is more easily deployed by threat actors given the lower cost to develop.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0085.006",
+   "nombre": "Develop Opinion Article",
+   "resumen": "Opinion articles (aka “Op-Eds” or “Editorials”) are articles or regular columns flagged as “opinion” posted to news sources, and can be contributed by people outside the organisation. Flagging articles as opinions allow news organisations to distinguish them from the typical expectations of objectiv",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0085.007",
+   "nombre": "Create Fake Research",
+   "resumen": "Create fake academic research. Example: fake social science research is often aimed at hot-button social issues such as gender, race and sexuality. Fake science research can target Climate Science debate or pseudoscience like anti-vaxx. This Technique previously used the ID T0019.001.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0085.008",
+   "nombre": "Machine Translated Text",
+   "resumen": "Text which has been translated into another language using machine translation tools, such as AI.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0086",
+   "nombre": "Develop Image-Based Content",
+   "resumen": "Creating and editing false or misleading visual artefacts, often aligned with one or more specific narratives, for use in a disinformation campaign. This may include photographing staged real-life situations, repurposing existing digital images, or using image creation and editing technologies.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0086.001",
+   "nombre": "Develop Memes",
+   "resumen": "Memes are one of the most important single artefact types in all of computational propaganda. Memes in this framework denotes the narrow image-based definition. But that naming is no accident, as these items have most of the important properties of Dawkins' original conception as a self-replicating ",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0086.002",
+   "nombre": "Develop AI-Generated Images (Deepfakes)",
+   "resumen": "Deepfakes refer to AI-generated falsified photos, videos, or soundbites. An influence operation may use deepfakes to depict an inauthentic situation by synthetically recreating an individual’s face, body, voice, and physical gestures.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0086.003",
+   "nombre": "Deceptively Edit Images (Cheap Fakes)",
+   "resumen": "Cheap fakes utilise less sophisticated measures of altering an image, video, or audio for example, slowing, speeding, or cutting footage to create a false context surrounding an image or event.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0086.004",
+   "nombre": "Aggregate Information into Evidence Collages",
+   "resumen": "Image files that aggregate positive evidence (Joan Donovan)",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0087",
+   "nombre": "Develop Video-Based Content",
+   "resumen": "Creating and editing false or misleading video artefacts, often aligned with one or more specific narratives, for use in a disinformation campaign. This may include staging videos of purportedly real situations, repurposing existing video artefacts, or using AI-generated video creation and editing t",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0087.001",
+   "nombre": "Develop AI-Generated Videos (Deepfakes)",
+   "resumen": "Deepfakes refer to AI-generated falsified photos, videos, or soundbites. An influence operation may use deepfakes to depict an inauthentic situation by synthetically recreating an individual’s face, body, voice, and physical gestures.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0087.002",
+   "nombre": "Deceptively Edit Video (Cheap Fakes)",
+   "resumen": "Cheap fakes utilise less sophisticated measures of altering an image, video, or audio for example, slowing, speeding, or cutting footage to create a false context surrounding an image or event.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0088",
+   "nombre": "Develop Audio-Based Content",
+   "resumen": "Creating and editing false or misleading audio artefacts, often aligned with one or more specific narratives, for use in a disinformation campaign. This may include creating completely new audio content, repurposing existing audio artefacts (including cheap fakes), or using AI-generated audio creati",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0088.001",
+   "nombre": "Develop AI-Generated Audio (Deepfakes)",
+   "resumen": "Deepfakes refer to AI-generated falsified photos, videos, or soundbites. An influence operation may use deepfakes to depict an inauthentic situation by synthetically recreating an individual’s face, body, voice, and physical gestures.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0088.002",
+   "nombre": "Deceptively Edit Audio (Cheap Fakes)",
+   "resumen": "Cheap fakes utilise less sophisticated measures of altering an image, video, or audio for example, slowing, speeding, or cutting footage to create a false context surrounding an image or event.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0089",
+   "nombre": "Obtain Private Documents",
+   "resumen": "Procuring documents that are not publicly available, by whatever means -- whether legal or illegal, highly-resourced or less so. These documents can include authentic non-public documents, authentic non-public documents have been altered, or inauthentic documents intended to appear as if they are au",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0089.001",
+   "nombre": "Obtain Authentic Documents",
+   "resumen": "Procure authentic documents that are not publicly available, by whatever means -- whether legal or illegal, highly-resourced or less so. These documents can be \"leaked\" during later stages in the operation.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0089.003",
+   "nombre": "Alter Authentic Documents",
+   "resumen": "Alter authentic documents (public or non-public) to achieve campaign goals. The altered documents are intended to appear as if they are authentic and can be \"leaked\" during later stages in the operation.",
+   "tactica": "TA06"
+  },
+  {
+   "id": "T0091",
+   "nombre": "Recruit Malign Actors",
+   "resumen": "Operators recruit bad actors paying recruiting, or exerting control over individuals includes trolls, partisans, and contractors.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0091.001",
+   "nombre": "Recruit Contractors",
+   "resumen": "Operators recruit paid contractor to support the campaign.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0091.002",
+   "nombre": "Recruit Partisans",
+   "resumen": "Operators recruit partisans (ideologically-aligned individuals) to support the campaign.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0091.003",
+   "nombre": "Enlist Troll Accounts",
+   "resumen": "An influence operation may hire trolls, or human operators of fake accounts that aim to provoke others by posting and amplifying content about controversial issues. Trolls can serve to discredit an influence operation’s opposition or bring attention to the operation’s cause through debate. Classic t",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0092",
+   "nombre": "Build Network",
+   "resumen": "Operators build their own network, creating links between accounts -- whether authentic or inauthentic -- in order amplify and promote narratives and artefacts, and encourage further growth of ther network, as well as the ongoing sharing and engagement with operational content.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0092.001",
+   "nombre": "Create Organisations",
+   "resumen": "Influence operations may establish organisations with legitimate or falsified hierarchies, staff, and content to structure operation assets, provide a sense of legitimacy to the operation, or provide institutional backing to operation activities.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0092.002",
+   "nombre": "Use Follow Trains",
+   "resumen": "A follow train is a group of people who follow each other on a social media platform, often as a way for an individual or campaign to grow its social media following. Follow trains may be a violation of platform Terms of Service. They are also known as follow-for-follow groups.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0092.003",
+   "nombre": "Create Community or Sub-Group",
+   "resumen": "When there is not an existing community or sub-group that meets a campaign's goals, an influence operation may seek to create a community or sub-group.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0093",
+   "nombre": "Acquire/Recruit Network",
+   "resumen": "Operators acquire an existing network by paying, recruiting, or exerting control over the leaders of the existing network.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0093.001",
+   "nombre": "Fund Proxies",
+   "resumen": "An influence operation may fund proxies, or external entities that work for the operation. An operation may recruit/train users with existing sympathies towards the operation’s narratives and/or goals as proxies. Funding proxies serves various purposes including: - Diversifying operation locations t",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0093.002",
+   "nombre": "Acquire Botnets",
+   "resumen": "A botnet is a group of bots that can function in coordination with each other.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0094",
+   "nombre": "Infiltrate Existing Networks",
+   "resumen": "Operators deceptively insert social assets into existing networks as group members in order to influence the members of the network and the wider information environment that the network impacts.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0094.001",
+   "nombre": "Identify Susceptible Targets in Networks",
+   "resumen": "When seeking to infiltrate an existing network, an influence operation may identify individuals and groups that might be susceptible to being co-opted or influenced.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0094.002",
+   "nombre": "Utilise Butterfly Attacks",
+   "resumen": "Butterfly attacks occur when operators pretend to be members of a certain social group, usually a group that struggles for representation. An influence operation may mimic a group to insert controversial statements into the discourse, encourage the spread of operation content, or promote harassment ",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0095",
+   "nombre": "Develop Owned Media Assets",
+   "resumen": "An owned media asset refers to an agency or organisation through which an influence operation may create, develop, and host content and narratives. Owned media assets include websites, blogs, social media pages, forums, and other platforms that facilitate the creation and organisation of content.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0096",
+   "nombre": "Leverage Content Farms",
+   "resumen": "Using the services of large-scale content providers for creating and amplifying campaign artefacts at scale.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0096.001",
+   "nombre": "Create Content Farms",
+   "resumen": "An influence operation may create an organisation for creating and amplifying campaign artefacts at scale.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0096.002",
+   "nombre": "Outsource Content Creation to External Organisations",
+   "resumen": "An influence operation may outsource content creation to external companies to avoid attribution, increase the rate of content creation, or improve content quality, i.e., by employing an organisation that can create content in the target audience’s native language. Employed organisations may include",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0097",
+   "nombre": "Present Persona",
+   "resumen": "This Technique contains different types of personas commonly taken on by threat actors during influence operations. Analysts should use T0097’s sub-techniques to document the type of persona which an account is presenting. For example, an account which describes itself as being a journalist can be t",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.100",
+   "nombre": "Individual Persona",
+   "resumen": "This sub-technique can be used to indicate that an entity is presenting itself as an individual. If the person is presenting themselves as having one of the personas listed below then these sub-techniques should be used instead, as they indicate both the type of persona they presented and that the e",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.101",
+   "nombre": "Local Persona",
+   "resumen": "A person with a local persona presents themselves as living in a particular geography or having local knowledge relevant to a narrative. While presenting as a local is not an indication of inauthentic behaviour, an influence operation may have its narratives amplified by people presenting as local t",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.102",
+   "nombre": "Journalist Persona",
+   "resumen": "A person with a journalist persona presents themselves as a reporter or journalist delivering news, conducting interviews, investigations etc. While presenting as a journalist is not an indication of inauthentic behaviour, an influence operation may have its narratives amplified by people presenting",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.103",
+   "nombre": "Activist Persona",
+   "resumen": "A person with an activist persona presents themselves as an activist; an individual who campaigns for a political cause, organises related events, etc. While presenting as an activist is not an indication of inauthentic behaviour, an influence operation may have its narratives amplified by people pr",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.104",
+   "nombre": "Hacktivist Persona",
+   "resumen": "A person with a hacktivist persona presents themselves as an activist who conducts offensive cyber operations or builds technical infrastructure for political purposes, rather than the financial motivations commonly attributed to hackers; hacktivists are hacker activists who use their technical know",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.105",
+   "nombre": "Military Personnel Persona",
+   "resumen": "A person with a military personnel persona presents themselves as a serving member or veteran of a military organisation operating in an official capacity on behalf of a government. While presenting as military personnel is not an indication of inauthentic behaviour, an influence operation may have ",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.106",
+   "nombre": "Recruiter Persona",
+   "resumen": "A person with a recruiter persona presents themselves as a potential employer or provider of freelance work. While presenting as a recruiter is not an indication of inauthentic behaviour, threat actors fabricate recruiters (T0143.002: Fabricated Persona, T0097.106: Recruiter Persona) to justify aski",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.107",
+   "nombre": "Researcher Persona",
+   "resumen": "A person with a researcher persona presents themselves as conducting research (e.g. for academic institutions, or think tanks), or having previously conducted research. While presenting as a researcher is not an indication of inauthentic behaviour, an influence operation may have its narratives ampl",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.108",
+   "nombre": "Expert Persona",
+   "resumen": "A person with an expert persona presents themselves as having expertise or experience in a field. Commonly the persona’s expertise will be called upon to add credibility to a given narrative. While presenting as an expert is not an indication of inauthentic behaviour, an influence operation may have",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.109",
+   "nombre": "Romantic Suitor Persona",
+   "resumen": "A person with a romantic suitor persona presents themselves as seeking a romantic or physical connection with another person. While presenting as seeking a romantic or physical connection is not an indication of inauthentic behaviour, threat actors can use dating apps, social media channels or datin",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.110",
+   "nombre": "Party Official Persona",
+   "resumen": "A person who presents as an official member of a political party, such as leaders of political parties, candidates standing to represent constituents, and campaign staff. Presenting as an official of a political party is not an indication of inauthentic behaviour, however threat actors may fabricate",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.111",
+   "nombre": "Government Official Persona",
+   "resumen": "A person who presents as an active or previous government official has the government official persona. These are officials serving in government, such as heads of government departments, leaders of countries, and members of government selected to represent constituents. Presenting as a government o",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.112",
+   "nombre": "Government Employee Persona",
+   "resumen": "A person who presents as an active or previous civil servant has the government employee persona. These are professionals hired to serve in government institutions and departments, not officials selected to represent constituents, or assigned official roles in government (such as heads of department",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.200",
+   "nombre": "Institutional Persona",
+   "resumen": "This Technique can be used to indicate that an entity is presenting itself as an institution. If the organisation is presenting itself as having one of the personas listed below then these Techniques should be used instead, as they indicate both that the entity presented itself as an institution, an",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.201",
+   "nombre": "Local Institution Persona",
+   "resumen": "Institutions which present themselves as operating in a particular geography, or as having local knowledge relevant to a narrative, are presenting a local institution persona. While presenting as a local institution is not an indication of inauthentic behaviour, threat actors may present themselves ",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.202",
+   "nombre": "News Outlet Persona",
+   "resumen": "An institution with a news outlet persona presents itself as an organisation which delivers new information to its target audience. While presenting as a news outlet is not an indication of inauthentic behaviour, an influence operation may have its narratives amplified by news organisations. Threat ",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.203",
+   "nombre": "Fact Checking Organisation Persona",
+   "resumen": "An institution with a fact checking organisation persona presents itself as an organisation which produces reports which assess the validity of others’ reporting / statements. While presenting as a fact checking organisation is not an indication of inauthentic behaviour, an influence operation may h",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.204",
+   "nombre": "Think Tank Persona",
+   "resumen": "An institution with a think tank persona presents itself as a think tank; an organisation that aims to conduct original research and propose new policies or solutions, especially for social and scientific problems. While presenting as a think tank is not an indication of inauthentic behaviour, think",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.205",
+   "nombre": "Business Persona",
+   "resumen": "An institution with a business persona presents itself as a for-profit organisation which provides goods or services for a price. While presenting as a business is not an indication of inauthentic behaviour, business personas may be used by threat actors as a front for their operational activity (T0",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.206",
+   "nombre": "Government Institution Persona",
+   "resumen": "Institutions which present themselves as governments, or government ministries, are presenting a government institution persona. While presenting as a government institution is not an indication of inauthentic behaviour, threat actors may impersonate existing government institutions as part of their",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.207",
+   "nombre": "NGO Persona",
+   "resumen": "Institutions which present themselves as an NGO (Non-Governmental Organisation), an organisation which provides services or advocates for public policy (while not being directly affiliated with any government), are presenting an NGO persona. While presenting as an NGO is not an indication of inauthe",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0097.208",
+   "nombre": "Social Cause Persona",
+   "resumen": "Online accounts which present themselves as focusing on a social cause are presenting the Social Cause Persona. Examples include accounts which post about current affairs, such as discrimination faced by minorities. While presenting as an account invested in a social cause is not an indication of in",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0098",
+   "nombre": "Establish Inauthentic News Sites",
+   "resumen": "Modern computational propaganda makes use of a cadre of imposter news sites spreading globally. These sites, sometimes motivated by concerns other than propaganda--for instance, click-based revenue--often have some superficial markers of authenticity, such as naming and site-design. But many can be ",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0098.001",
+   "nombre": "Create Inauthentic News Sites",
+   "resumen": "Create Inauthentic News Sites",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0098.002",
+   "nombre": "Leverage Existing Inauthentic News Sites",
+   "resumen": "Leverage Existing Inauthentic News Sites",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0100",
+   "nombre": "Co-Opt Trusted Sources",
+   "resumen": "An influence operation may co-opt trusted sources by infiltrating or repurposing a source to reach a target audience through existing, previously reliable networks. Co-opted trusted sources may include: - National or local new outlets - Research or academic publications - Online blogs or websites",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0100.001",
+   "nombre": "Co-Opt Trusted Individuals",
+   "resumen": "Co-Opt Trusted Individuals",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0100.002",
+   "nombre": "Co-Opt Grassroots Groups",
+   "resumen": "Co-Opt Grassroots Groups",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0100.003",
+   "nombre": "Co-Opt Influencers",
+   "resumen": "Co-opt Influencers",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0101",
+   "nombre": "Create Localised Content",
+   "resumen": "Localised content refers to content that appeals to a specific community of individuals, often in defined geographic areas. An operation may create localised content using local language and dialects to resonate with its target audience and blend in with other local news and social media. Localised ",
+   "tactica": "TA05"
+  },
+  {
+   "id": "T0102",
+   "nombre": "Leverage Echo Chambers/Filter Bubbles",
+   "resumen": "An echo chamber refers to an internet subgroup, often along ideological lines, where individuals only engage with “others with which they are already in agreement.” A filter bubble refers to an algorithm's placement of an individual in content that they agree with or regularly engage with, possibly ",
+   "tactica": "TA05"
+  },
+  {
+   "id": "T0102.001",
+   "nombre": "Use Existing Echo Chambers/Filter Bubbles",
+   "resumen": "Use existing Echo Chambers/Filter Bubbles",
+   "tactica": "TA05"
+  },
+  {
+   "id": "T0102.002",
+   "nombre": "Create Echo Chambers/Filter Bubbles",
+   "resumen": "Create Echo Chambers/Filter Bubbles",
+   "tactica": "TA05"
+  },
+  {
+   "id": "T0102.003",
+   "nombre": "Exploit Data Voids",
+   "resumen": "A data void refers to a word or phrase that results in little, manipulative, or low-quality search engine data. Data voids are hard to detect and relatively harmless until exploited by an entity aiming to quickly proliferate false or misleading information during a phenomenon that causes a high numb",
+   "tactica": "TA05"
+  },
+  {
+   "id": "T0107",
+   "nombre": "Bookmarking and Content Curation",
+   "resumen": "Platforms for searching, sharing, and curating content and media. Examples include Pinterest, Flipboard, etc.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0109",
+   "nombre": "Consumer Review Networks",
+   "resumen": "Platforms for finding, reviewing, and sharing information about brands, products, services, restaurants, travel destinations, etc. Examples include Yelp, TripAdvisor, etc.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0110",
+   "nombre": "Formal Diplomatic Channels",
+   "resumen": "Leveraging formal, traditional, diplomatic channels to communicate with foreign governments (written documents, meetings, summits, diplomatic visits, etc). This type of diplomacy is conducted by diplomats of one nation with diplomats and other officials of another nation or international organisatio",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0111",
+   "nombre": "Traditional Media",
+   "resumen": "Examples include TV, Newspaper, Radio, etc.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0111.001",
+   "nombre": "TV",
+   "resumen": "TV",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0111.002",
+   "nombre": "Newspaper",
+   "resumen": "Newspaper",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0111.003",
+   "nombre": "Radio",
+   "resumen": "Radio",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0113",
+   "nombre": "Employ Commercial Analytic Firms",
+   "resumen": "Commercial analytic firms collect data on target audience activities and evaluate the data to detect trends, such as content receiving high click-rates. An influence operation may employ commercial analytic firms to facilitate external collection on its target audience, complicating attribution effo",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0114",
+   "nombre": "Deliver Ads",
+   "resumen": "Delivering content via any form of paid media or advertising.",
+   "tactica": "TA09"
+  },
+  {
+   "id": "T0114.001",
+   "nombre": "Social Media",
+   "resumen": "Social Media",
+   "tactica": "TA09"
+  },
+  {
+   "id": "T0114.002",
+   "nombre": "Traditional Media",
+   "resumen": "Examples include TV, Radio, Newspaper, billboards",
+   "tactica": "TA09"
+  },
+  {
+   "id": "T0115",
+   "nombre": "Post Content",
+   "resumen": "Delivering content by posting via owned media (assets that the operator controls).",
+   "tactica": "TA09"
+  },
+  {
+   "id": "T0115.001",
+   "nombre": "Share Memes",
+   "resumen": "Memes are one of the most important single artefact types in all of computational propaganda. Memes in this framework denotes the narrow image-based definition. But that naming is no accident, as these items have most of the important properties of Dawkins' original conception as a self-replicating ",
+   "tactica": "TA09"
+  },
+  {
+   "id": "T0115.002",
+   "nombre": "Post Violative Content to Provoke Takedown and Backlash",
+   "resumen": "Post Violative Content to Provoke Takedown and Backlash.",
+   "tactica": "TA09"
+  },
+  {
+   "id": "T0115.003",
+   "nombre": "One-Way Direct Posting",
+   "resumen": "Direct posting refers to a method of posting content via a one-way messaging service, where the recipient cannot directly respond to the poster’s messaging. An influence operation may post directly to promote operation narratives to the target audience without allowing opportunities for fact-checkin",
+   "tactica": "TA09"
+  },
+  {
+   "id": "T0116",
+   "nombre": "Comment or Reply on Content",
+   "resumen": "Delivering content by replying or commenting via owned media (assets that the operator controls).",
+   "tactica": "TA09"
+  },
+  {
+   "id": "T0116.001",
+   "nombre": "Post Inauthentic Social Media Comment",
+   "resumen": "Use government-paid social media commenters, astroturfers, chat bots (programmed to reply to specific key words/hashtags) influence online conversations, product reviews, web-site comment forums.",
+   "tactica": "TA09"
+  },
+  {
+   "id": "T0117",
+   "nombre": "Attract Traditional Media",
+   "resumen": "Deliver content by attracting the attention of traditional media (earned media).",
+   "tactica": "TA09"
+  },
+  {
+   "id": "T0118",
+   "nombre": "Amplify Existing Narrative",
+   "resumen": "An influence operation may amplify existing narratives that align with its narratives to support operation objectives.",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0119",
+   "nombre": "Cross-Posting",
+   "resumen": "Cross-posting refers to posting the same message to multiple internet discussions, social media platforms or accounts, or news groups at one time. An influence operation may post content online in multiple communities and platforms to increase the chances of content exposure to the target audience.",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0119.001",
+   "nombre": "Post across Groups",
+   "resumen": "An influence operation may post content across groups to spread narratives and content to new communities within the target audiences or to new target audiences.",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0119.002",
+   "nombre": "Post across Platform",
+   "resumen": "An influence operation may post content across platforms to spread narratives and content to new communities within the target audiences or to new target audiences. Posting across platforms can also remove opposition and context, helping the narrative spread with less opposition on the cross-posted ",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0119.003",
+   "nombre": "Post across Disciplines",
+   "resumen": "Post Across Disciplines",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0120",
+   "nombre": "Incentivize Sharing",
+   "resumen": "Incentivizing content sharing refers to actions that encourage users to share content themselves, reducing the need for the operation itself to post and promote its own content.",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0120.001",
+   "nombre": "Use Affiliate Marketing Programmes",
+   "resumen": "Use Affiliate Marketing Programmes",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0120.002",
+   "nombre": "Use Contests and Prizes",
+   "resumen": "Use Contests and Prizes",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0121",
+   "nombre": "Manipulate Platform Algorithm",
+   "resumen": "Manipulating a platform algorithm refers to conducting activity on a platform in a way that intentionally targets its underlying algorithm. After analysing a platform’s algorithm (see: Select Platforms), an influence operation may use a platform in a way that increases its content exposure, avoids c",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0121.001",
+   "nombre": "Bypass Content Blocking",
+   "resumen": "Bypassing content blocking refers to actions taken to circumvent network security measures that prevent users from accessing certain servers, resources, or other online spheres. An influence operation may bypass content blocking to proliferate its content on restricted areas of the internet. Common ",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0122",
+   "nombre": "Direct Users to Alternative Platforms",
+   "resumen": "Direct users to alternative platforms refers to encouraging users to move from the platform on which they initially viewed operation content and engage with content on alternate information channels, including separate social media channels and inauthentic websites. An operation may drive users to a",
+   "tactica": "TA17"
+  },
+  {
+   "id": "T0123",
+   "nombre": "Control Information Environment through Offensive Cyberspace Operations",
+   "resumen": "Controlling the information environment through offensive cyberspace operations uses cyber tools and techniques to alter the trajectory of content in the information space to either prioritise operation messaging or block opposition messaging.",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0123.001",
+   "nombre": "Delete Opposing Content",
+   "resumen": "Deleting opposing content refers to the removal of content that conflicts with operational narratives from selected platforms. An influence operation may delete opposing content to censor contradictory information from the target audience, allowing operation narratives to take priority in the inform",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0123.002",
+   "nombre": "Block Content",
+   "resumen": "Content blocking refers to actions taken to restrict internet access or render certain areas of the internet inaccessible. An influence operation may restrict content based on both network and content attributes.",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0123.003",
+   "nombre": "Destroy Information Generation Capabilities",
+   "resumen": "Destroying information generation capabilities refers to actions taken to limit, degrade, or otherwise incapacitate an actor’s ability to generate conflicting information. An influence operation may destroy an actor’s information generation capabilities by physically dismantling the information infr",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0123.004",
+   "nombre": "Conduct Server Redirect",
+   "resumen": "A server redirect, also known as a URL redirect, occurs when a server automatically forwards a user from one URL to another using server-side or client-side scripting languages. An influence operation may conduct a server redirect to divert target audience members from one website to another without",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0124",
+   "nombre": "Suppress Opposition",
+   "resumen": "Operators can suppress the opposition by exploiting platform content moderation tools and processes like reporting non-violative content to platforms for takedown and goading opposition actors into taking actions that result in platform action or target audience disapproval.",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0124.001",
+   "nombre": "Report Non-Violative Opposing Content",
+   "resumen": "Reporting opposing content refers to notifying and providing an instance of a violation of a platform’s guidelines and policies for conduct on the platform. In addition to simply reporting the content, an operation may leverage copyright regulations to trick social media and web platforms into remov",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0124.002",
+   "nombre": "Goad People into Harmful Action (Stop Hitting Yourself)",
+   "resumen": "Goad people into actions that violate terms of service or will lead to having their content or accounts taken down.",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0124.003",
+   "nombre": "Exploit Platform TOS/Content Moderation",
+   "resumen": "Exploit Platform TOS/Content Moderation",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0125",
+   "nombre": "Platform Filtering",
+   "resumen": "Platform filtering refers to the decontextualization of information as claims cross platforms (from Joan Donovan https://www.hks.harvard.edu/publications/disinformation-design-use-evidence-collages-and-platform-filtering-media-manipulation)",
+   "tactica": "TA18"
+  },
+  {
+   "id": "T0126",
+   "nombre": "Encourage Attendance at Events",
+   "resumen": "Operation encourages attendance at existing real world event.",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0126.001",
+   "nombre": "Call to Action to Attend",
+   "resumen": "Call to action to attend an event",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0126.002",
+   "nombre": "Facilitate Logistics or Support for Attendance",
+   "resumen": "Facilitate logistics or support for travel, food, housing, etc.",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0127",
+   "nombre": "Physical Violence",
+   "resumen": "Physical violence refers to the use of force to injure, abuse, damage, or destroy. An influence operation may conduct or encourage physical violence to discourage opponents from promoting conflicting content or draw attention to operation narratives using shock value.",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0127.001",
+   "nombre": "Conduct Physical Violence",
+   "resumen": "An influence operation may directly Conduct Physical Violence to achieve campaign goals.",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0127.002",
+   "nombre": "Encourage Physical Violence",
+   "resumen": "An influence operation may Encourage others to engage in Physical Violence to achieve campaign goals.",
+   "tactica": "TA10"
+  },
+  {
+   "id": "T0128",
+   "nombre": "Conceal Information Assets",
+   "resumen": "Conceal the identity or provenance of campaign information assets such as accounts, channels, pages etc. to avoid takedown and attribution.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0128.001",
+   "nombre": "Use Pseudonyms",
+   "resumen": "An operation may use pseudonyms, or fake names, to mask the identity of operational accounts, channels, pages etc., publish anonymous content, or otherwise use falsified personas to conceal the identity of the operation. An operation may coordinate pseudonyms across multiple platforms, for example, ",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0128.002",
+   "nombre": "Conceal Network Identity",
+   "resumen": "Concealing network identity aims to hide the existence an influence operation’s network completely. Unlike concealing sponsorship, concealing network identity denies the existence of any sort of organisation.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0128.003",
+   "nombre": "Distance Reputable Individuals from Operation",
+   "resumen": "Distancing reputable individuals from the operation occurs when enlisted individuals, such as celebrities or subject matter experts, actively disengage themselves from operation activities and messaging. Individuals may distance themselves from the operation by deleting old posts or statements, unfo",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0128.004",
+   "nombre": "Launder Information Assets",
+   "resumen": "Laundering occurs when an influence operation acquires control of previously legitimate information assets such as accounts, channels, pages etc. from third parties through sale or exchange and often in contravention of terms of use. Influence operations use laundered assets to reach target audience",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0128.005",
+   "nombre": "Change Names of Information Assets",
+   "resumen": "Changing names or brand names of information assets such as accounts, channels, pages etc. An operation may change the names or brand names of its assets throughout an operation to avoid detection or alter the names of newly acquired or repurposed assets to fit operational narratives.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0129",
+   "nombre": "Conceal Operational Activity",
+   "resumen": "Conceal the campaign's operational activity to avoid takedown and attribution.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0129.001",
+   "nombre": "Conceal Network Identity",
+   "resumen": "Concealing network identity aims to hide the existence an influence operation’s network completely. Unlike concealing sponsorship, concealing network identity denies the existence of any sort of organisation.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0129.002",
+   "nombre": "Generate Content Unrelated to Narrative",
+   "resumen": "An influence operation may mix its own operation content with legitimate news or external unrelated content to disguise operational objectives, narratives, or existence. For example, an operation may generate \"lifestyle\" or \"cuisine\" content alongside regular operation content.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0129.003",
+   "nombre": "Break Association with Content",
+   "resumen": "Breaking association with content occurs when an influence operation actively separates itself from its own content. An influence operation may break association with content by unfollowing, unliking, or unsharing its content, removing attribution from its content, or otherwise taking actions that d",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0129.004",
+   "nombre": "Delete URLs",
+   "resumen": "URL deletion occurs when an influence operation completely removes its website registration, rendering the URL inaccessible. An influence operation may delete its URLs to complicate attribution or remove online documentation that the operation ever occurred.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0129.005",
+   "nombre": "Coordinate on Encrypted/Closed Networks",
+   "resumen": "Coordinate on encrypted/ closed networks",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0129.006",
+   "nombre": "Deny Involvement",
+   "resumen": "Without \"smoking gun\" proof (and even with proof), incident creator can or will deny involvement. This technique also leverages the attacker advantages outlined in \"Demand insurmountable proof\", specifically the asymmetric disadvantage for truth-tellers in a \"firehose of misinformation\" environment.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0129.007",
+   "nombre": "Delete Accounts/Account Activity",
+   "resumen": "Deleting accounts and account activity occurs when an influence operation removes its online social media assets, including social media accounts, posts, likes, comments, and other online artefacts. An influence operation may delete its accounts and account activity to complicate attribution or remo",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0129.009",
+   "nombre": "Remove Post Origins",
+   "resumen": "Removing post origins refers to the elimination of evidence that indicates the initial source of operation content, often to complicate attribution. An influence operation may remove post origins by deleting watermarks, renaming files, or removing embedded links in its content.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0129.010",
+   "nombre": "Misattribute Activity",
+   "resumen": "Misattributed activity refers to incorrectly attributed operation activity. For example, a state sponsored influence operation may conduct operation activity in a way that mimics another state so that external entities misattribute activity to the incorrect state. An operation may misattribute their",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0130",
+   "nombre": "Conceal Infrastructure",
+   "resumen": "Conceal the campaign's infrastructure to avoid takedown and attribution.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0130.001",
+   "nombre": "Conceal Sponsorship",
+   "resumen": "Concealing sponsorship aims to mislead or obscure the identity of the hidden sponsor behind an operation rather than entity publicly running the operation. Operations that conceal sponsorship may maintain visible falsified groups, news outlets, non-profits, or other organisations, but seek to mislea",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0130.002",
+   "nombre": "Utilise Bulletproof Hosting",
+   "resumen": "Hosting refers to services through which storage and computing resources are provided to an individual or organisation for the accommodation and maintenance of one or more websites and related services. Services may include web hosting, file sharing, and email distribution. Bulletproof hosting refer",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0130.003",
+   "nombre": "Use Shell Organisations",
+   "resumen": "Use Shell Organisations to conceal sponsorship.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0130.004",
+   "nombre": "Use Cryptocurrency",
+   "resumen": "Use Cryptocurrency to conceal sponsorship. Examples include Bitcoin, Monero, and Etherium.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0130.005",
+   "nombre": "Obfuscate Payment",
+   "resumen": "Obfuscate Payment",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0131",
+   "nombre": "Exploit TOS/Content Moderation",
+   "resumen": "Exploiting weaknesses in platforms' terms of service and content moderation policies to avoid takedowns and platform actions.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0131.001",
+   "nombre": "Legacy Web Content",
+   "resumen": "Make incident content visible for a long time, e.g. by exploiting platform terms of service, or placing it where it's hard to remove or unlikely to be removed.",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0131.002",
+   "nombre": "Post Borderline Content",
+   "resumen": "Post Borderline Content",
+   "tactica": "TA11"
+  },
+  {
+   "id": "T0132",
+   "nombre": "Measure Performance",
+   "resumen": "A metric used to determine the accomplishment of actions. “Are the actions being executed as planned?”",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0132.001",
+   "nombre": "People Focused",
+   "resumen": "Measure the performance individuals in achieving campaign goals",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0132.002",
+   "nombre": "Content Focused",
+   "resumen": "Measure the performance of campaign content",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0132.003",
+   "nombre": "View Focused",
+   "resumen": "View Focused",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0133",
+   "nombre": "Measure Effectiveness",
+   "resumen": "A metric used to measure a current system state. “Are we on track to achieve the intended new system state within the planned timescale?”",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0133.001",
+   "nombre": "Behaviour Changes",
+   "resumen": "Monitor and evaluate behaviour changes from misinformation incidents.",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0133.002",
+   "nombre": "Content",
+   "resumen": "Measure current system state with respect to the effectiveness of campaign content.",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0133.003",
+   "nombre": "Awareness",
+   "resumen": "Measure current system state with respect to the effectiveness of influencing awareness.",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0133.004",
+   "nombre": "Knowledge",
+   "resumen": "Measure current system state with respect to the effectiveness of influencing knowledge.",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0133.005",
+   "nombre": "Action/Attitude",
+   "resumen": "Measure current system state with respect to the effectiveness of influencing action/attitude.",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0134",
+   "nombre": "Measure Effectiveness Indicators (or KPIs)",
+   "resumen": "Ensuring that Key Performance Indicators are identified and tracked, so that the performance and effectiveness of campaigns, and elements of campaigns, can be measured, during and after their execution.",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0134.001",
+   "nombre": "Message Reach",
+   "resumen": "Monitor and evaluate message reach in misinformation incidents.",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0134.002",
+   "nombre": "Social Media Engagement",
+   "resumen": "Monitor and evaluate social media engagement in misinformation incidents.",
+   "tactica": "TA12"
+  },
+  {
+   "id": "T0135",
+   "nombre": "Undermine",
+   "resumen": "Weaken, debilitate, or subvert a target or their actions. An influence operation may be designed to disparage an opponent; sabotage an opponent’s systems or processes; compromise an opponent’s relationships or support system; impair an opponent’s capability; or thwart an opponent’s initiative.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0135.001",
+   "nombre": "Smear",
+   "resumen": "Denigrate, disparage, or discredit an opponent. This is a common tactical objective in political campaigns with a larger strategic goal. It differs from efforts to harm a target through defamation. If there is no ulterior motive and the sole aim is to cause harm to the target, then choose sub-techni",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0135.002",
+   "nombre": "Thwart",
+   "resumen": "Prevent the successful outcome of a policy, operation, or initiative. Actors conduct influence operations to stymie or foil proposals, plans, or courses of action which are not in their interest.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0135.003",
+   "nombre": "Subvert",
+   "resumen": "Sabotage, destroy, or damage a system, process, or relationship. The classic example is the Soviet strategy of “active measures” involving deniable covert activities such as political influence, the use of front organisations, the orchestration of domestic unrest, and the spread of disinformation.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0135.004",
+   "nombre": "Polarise",
+   "resumen": "To cause a target audience to divide into two completely opposing groups. This is a special case of subversion. To divide and conquer is an age-old approach to subverting and overcoming an enemy.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0136",
+   "nombre": "Cultivate Support",
+   "resumen": "Grow or maintain the base of support for the actor, ally, or action. This includes hard core recruitment, managing alliances, and generating or maintaining sympathy among a wider audience, including reputation management and public relations. Sub-techniques assume support for actor (self) unless oth",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0136.001",
+   "nombre": "Defend Reputaton",
+   "resumen": "Preserve a positive perception in the public’s mind following an accusation or adverse event. When accused of a wrongful act, an actor may engage in denial, counter accusations, whataboutism, or conspiracy theories to distract public attention and attempt to maintain a positive image.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0136.002",
+   "nombre": "Justify Action",
+   "resumen": "To convince others to exonerate you of a perceived wrongdoing. When an actor finds it untenable to deny doing something, they may attempt to exonerate themselves with disinformation which claims the action was reasonable. This is a special case of “Defend Reputation”.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0136.003",
+   "nombre": "Energise Supporters",
+   "resumen": "Raise the morale of those who support the organisation or group. Invigorate constituents with zeal for the mission or activity. Terrorist groups, political movements, and cults may indoctrinate their supporters with ideologies that are based on warped versions of religion or cause harm to others.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0136.004",
+   "nombre": "Boost Reputation",
+   "resumen": "Elevate the estimation of the actor in the public’s mind. Improve their image or standing. Public relations professionals use persuasive overt communications to achieve this goal; manipulators use covert disinformation.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0136.005",
+   "nombre": "Cultvate Support for Initiative",
+   "resumen": "Elevate or fortify the public backing for a policy, operation, or idea. Domestic and foreign actors can use artificial means to fabricate or amplify public support for a proposal or action.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0136.006",
+   "nombre": "Cultivate Support for Ally",
+   "resumen": "Elevate or fortify the public backing for a partner. Governments may interfere in other countries’ elections by covertly favouring a party or candidate aligned with their interests. They may also mount an influence operation to bolster the reputation of an ally under attack.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0136.007",
+   "nombre": "Recruit Members",
+   "resumen": "Motivate followers to join or subscribe as members of the team. Organisations may mount recruitment drives that use propaganda to entice sympathisers to sign up.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0136.008",
+   "nombre": "Increase Prestige",
+   "resumen": "Improve personal standing within a community. Gain fame, approbation, or notoriety. Conspiracy theorists, those with special access, and ideologues can gain prominence in a community by propagating disinformation, leaking confidential documents, or spreading hate.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0137",
+   "nombre": "Make Money",
+   "resumen": "Profit from disinformation, conspiracy theories, or online harm. In some cases, the sole objective is financial gain, in other cases the objective is both financial and political. Making money may also be a way to sustain a political campaign.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0137.001",
+   "nombre": "Generate Ad Revenue",
+   "resumen": "Earn income from digital advertisements published alongside inauthentic content. Conspiratorial, false, or provocative content drives internet traffic. Content owners earn money from impressions of, or clicks on, or conversions of ads published on their websites, social media profiles, or streaming ",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0137.002",
+   "nombre": "Scam",
+   "resumen": "Defraud a target or trick a target into doing something that benefits the attacker. A typical scam is where a fraudster convinces a target to pay for something without the intention of ever delivering anything in return. Alternatively, the fraudster may promise benefits which never materialise, such",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0137.003",
+   "nombre": "Raise Funds",
+   "resumen": "Solicit donations for a cause. Popular conspiracy theorists can attract financial contributions from their followers. Fighting back against the establishment is a popular crowdfunding narrative.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0137.004",
+   "nombre": "Sell Items under False Pretences",
+   "resumen": "Offer products for sale under false pretences. Campaigns may hijack or create causes built on disinformation to sell promotional merchandise. Or charlatans may amplify victims’ unfounded fears to sell them items of questionable utility such as supplements or survival gear.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0137.005",
+   "nombre": "Extort",
+   "resumen": "Coerce money or favours from a target by threatening to expose or corrupt information. Ransomware criminals typically demand money. Intelligence agencies demand national secrets. Sexual predators demand favours. The leverage may be critical, sensitive, or embarrassing information.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0137.006",
+   "nombre": "Manipulate Stocks",
+   "resumen": "Artificially inflate or deflate the price of stocks or other financial instruments and then trade on these to make profit. The most common securities fraud schemes are called “pump and dump” and “poop and scoop”.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0138",
+   "nombre": "Motivate to Act",
+   "resumen": "Persuade, impel, or provoke the target to behave in a specific manner favourable to the attacker. Some common behaviours are joining, subscribing, voting, buying, demonstrating, fighting, retreating, resigning, boycotting.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0138.001",
+   "nombre": "Encourage",
+   "resumen": "Inspire, animate, or exhort a target to act. An actor can use propaganda, disinformation, or conspiracy theories to stimulate a target to act in its interest.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0138.002",
+   "nombre": "Provoke",
+   "resumen": "Instigate, incite, or arouse a target to act. Social media manipulators exploit moral outrage to propel targets to spread hate, take to the streets to protest, or engage in acts of violence.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0138.003",
+   "nombre": "Compel",
+   "resumen": "Force target to take an action or to stop taking an action it has already started. Actors can use the threat of reputational damage alongside military or economic threats to compel a target.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0139",
+   "nombre": "Dissuade from Acting",
+   "resumen": "Discourage, deter, or inhibit the target from actions which would be unfavourable to the attacker. The actor may want the target to refrain from voting, buying, fighting, or supplying.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0139.001",
+   "nombre": "Discourage",
+   "resumen": "To make a target disinclined or reluctant to act. Manipulators use disinformation to cause targets to question the utility, legality, or morality of taking an action.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0139.002",
+   "nombre": "Silence",
+   "resumen": "Intimidate or incentivise target into remaining silent or prevent target from speaking out. A threat actor may cow a target into silence as a special case of deterrence. Or they may buy the target’s silence. Or they may repress or restrict the target’s speech.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0139.003",
+   "nombre": "Deter",
+   "resumen": "Prevent target from taking an action for fear of the consequences. Deterrence occurs in the mind of the target, who fears they will be worse off if they take an action than if they don’t. When making threats, aggressors may bluff, feign irrationality, or engage in brinksmanship.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0140",
+   "nombre": "Cause Harm",
+   "resumen": "Persecute, malign, or inflict pain upon a target. The objective of a campaign may be to cause fear or emotional distress in a target. In some cases, harm is instrumental to achieving a primary objective, as in coercion, repression, or intimidation. In other cases, harm may be inflicted for the satis",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0140.001",
+   "nombre": "Defame",
+   "resumen": "Attempt to damage the target’s personal reputation by impugning their character. This can range from subtle attempts to misrepresent or insinuate, to obvious attempts to denigrate or disparage, to blatant attempts to malign or vilify. Slander applies to oral expression. Libel applies to written or p",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0140.002",
+   "nombre": "Intimidate",
+   "resumen": "Coerce, bully, or frighten the target. An influence operation may use intimidation to compel the target to act against their will. Or the goal may be to frighten or even terrify the target into silence or submission. In some cases, the goal is simply to make the victim suffer.",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0140.003",
+   "nombre": "Spread Hate",
+   "resumen": "Publish and/or propagate demeaning, derisive, or humiliating content targeting an individual or group of individuals with the intent to cause emotional, psychological, or physical distress. Hate speech can cause harm directly or incite others to harm the target. It often aims to stigmatise the targe",
+   "tactica": "TA02"
+  },
+  {
+   "id": "T0143",
+   "nombre": "Persona Legitimacy",
+   "resumen": "This Technique contains sub-techniques which analysts can use to assert whether an account is presenting an authentic, fabricated, or parody persona: T0143.001: Authentic Persona T0143.002: Fabricated Persona T0143.003: Impersonated Persona T0143.004: Parody Persona",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0143.001",
+   "nombre": "Authentic Persona",
+   "resumen": "An individual or institution presenting a persona that legitimately matches who or what they are is presenting an authentic persona. For example, an account which presents as being managed by a member of a country’s military, and is legitimately managed by that person, would be presenting an authent",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0143.002",
+   "nombre": "Fabricated Persona",
+   "resumen": "An individual or institution pretending to have a persona without any legitimate claim to that persona is presenting a fabricated persona, such as a person who presents themselves as a member of a country’s military without having worked in any capacity with the military (T0143.002: Fabricated Perso",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0143.003",
+   "nombre": "Impersonated Persona",
+   "resumen": "Threat actors may impersonate existing individuals or institutions to conceal their network identity, add legitimacy to content, or harm the impersonated target’s reputation. This Technique covers situations where an actor presents themselves as another existing individual or institution. This Techn",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0143.004",
+   "nombre": "Parody Persona",
+   "resumen": "Parody is a form of artistic expression that imitates the style or characteristics of a particular work, genre, or individual in a humorous or satirical way, often to comment on or critique the original work or subject matter. People may present as parodies to create humour or make a point by exagge",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0144",
+   "nombre": "Persona Legitimacy Evidence",
+   "resumen": "This Technique contains behaviours which might indicate whether a persona is legitimate, a fabrication, or a parody. For example, the same persona being consistently presented across platforms is consistent with how authentic users behave on social media. However, threat actors have also displayed t",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0144.001",
+   "nombre": "Present Persona across Platforms",
+   "resumen": "This sub-technique covers situations where analysts have identified the same persona being presented across multiple platforms. Having multiple accounts presenting the same persona is not an indicator of inauthentic behaviour; many people create accounts and present as themselves on multiple platfor",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0144.002",
+   "nombre": "Persona Template",
+   "resumen": "Threat actors have been observed following a template when filling their accounts’ online profiles. This may be done to enable account holders to quickly present themselves as a real person with a targeted persona. For example, an actor may be instructed to create many fabricated local accounts for ",
+   "tactica": "TA16"
+  },
+  {
+   "id": "T0145",
+   "nombre": "Establish Account Imagery",
+   "resumen": "Introduce visual elements to an account where a platform allows this functionality (e.g. a profile picture, a cover photo, etc). Threat Actors who don’t want to use pictures of themselves in their social media accounts may use alternate imagery to make their account appear more legitimate.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0145.001",
+   "nombre": "Copy Account Imagery",
+   "resumen": "Account imagery copied from an existing account. Analysts may use reverse image search tools to try to identify previous uses of account imagery (e.g. a profile picture) by other accounts. Threat Actors have been known to copy existing accounts’ imagery to impersonate said accounts, or to provide im",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0145.002",
+   "nombre": "AI-Generated Account Imagery",
+   "resumen": "AI Generated images used in account imagery. An influence operation might flesh out its account by uploading account imagery (e.g. a profile picture), increasing its perceived legitimacy. By using an AI-generated picture for this purpose, they are able to present themselves as a real person without ",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0145.003",
+   "nombre": "Animal Account Imagery",
+   "resumen": "Animal used in account imagery. An influence operation might flesh out its account by uploading a profile picture, increasing its perceived authenticity. People sometimes legitimately use images of animals as their profile pictures (e.g. of their pets), and threat actors can mimic this behaviour to ",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0145.004",
+   "nombre": "Scenery Account Imagery",
+   "resumen": "Scenery or nature used in account imagery. An influence operation might flesh out its account by uploading account imagery (e.g. a profile picture), increasing its perceived authenticity. People sometimes legitimately use images of scenery as their profile picture, and threat actors can mimic this b",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0145.005",
+   "nombre": "Illustrated Character Account Imagery",
+   "resumen": "A cartoon/illustrated/anime character used in account imagery. An influence operation might flesh out its account by uploading account imagery (e.g. a profile picture), increasing its perceived authenticity. People sometimes legitimately use images of illustrated characters as their profile picture,",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0145.006",
+   "nombre": "Attractive Person Account Imagery",
+   "resumen": "Attractive person used in account imagery. An influence operation might flesh out its account by uploading account imagery (e.g. a profile picture), increasing its perceived authenticity. Pictures of physically attractive people can benefit threat actors by increasing attention given to their posts.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0145.007",
+   "nombre": "Stock Image Account Imagery",
+   "resumen": "Stock images used in account imagery. Stock image websites produce photos of people in various situations. Threat Actors can purchase or appropriate these images for use in their account imagery, increasing perceived legitimacy while avoiding the risk of detection associated with stealing or AI-gene",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0146",
+   "nombre": "Account Asset",
+   "resumen": "An Account is a user-specific profile that allows access to the features and services of an online platform, typically requiring a username and password for authentication.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0146.001",
+   "nombre": "Free Account Asset",
+   "resumen": "Many online platforms allow users to create free accounts on their platform. A Free Account is an Account which does not require payment at account creation and is not subscribed to paid platform features.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0146.002",
+   "nombre": "Paid Account Asset",
+   "resumen": "Some online platforms afford accounts extra features, or other benefits, if the user pays a fee. For example, as of September 2024, content posted by a Paid Account on X (previously Twitter) is prioritised in the platform’s algorithm.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0146.003",
+   "nombre": "Verified Account Asset",
+   "resumen": "Some online platforms apply badges of verification to accounts which meet certain criteria. On some platforms (such as dating apps) a verification badge signifies that the account has passed the platform’s identity verification checks. On some platforms (such as X (previously Twitter)) a verificatio",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0146.004",
+   "nombre": "Administrator Account Asset",
+   "resumen": "Some accounts will have special privileges / will be in control of the Digital Community Hosting Asset; for example, the Admin of a Facebook Page, a Moderator of a Subreddit, etc. etc.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0146.005",
+   "nombre": "Lookalike Account ID",
+   "resumen": "Many platforms which host online communities require creation of a username (or another unique identifier) when an Account is created. Sometimes people create usernames which are visually similar to other existing accounts’ usernames. While this is not necessarily an indicator of malicious behaviour",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0146.006",
+   "nombre": "Open Access Platform",
+   "resumen": "Some online platforms allow users to take advantage of the platform’s features without creating an account. Examples include the Paste Platform Pastebin, and the Image Board Platforms 4chan and 8chan.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0146.007",
+   "nombre": "Automated Account Asset",
+   "resumen": "An Automated Account is an account which is displaying automated behaviour, such as republishing or liking other accounts’ content, or publishing their own content.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0147",
+   "nombre": "Software Asset",
+   "resumen": "A Software is a program developed to run on computers or devices that helps users achieve specific goals, such as improving productivity, automating tasks, or having fun.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0147.001",
+   "nombre": "Game Asset",
+   "resumen": "A Game is Software which has been designed for interactive entertainment, where users take on challenges set by the game’s designers. While Online Game Platforms allow people to play with each other, Games are designed for single player experiences.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0147.002",
+   "nombre": "Game Mod Asset",
+   "resumen": "A Game Mod is a modification which can be applied to a Game or Multiplayer Online Game to add new content or functionality to the game. Users can Modify Games to introduce new content to the game. Modified Games can be distributed on Software Delivery Platforms such as Steam or can be distributed wi",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0147.003",
+   "nombre": "Malware Asset",
+   "resumen": "Malware is Software which has been designed to cause harm or facilitate malicious behaviour on electronic devices. DISARM recommends using the [MITRE ATT&CK Framework](https://attack.mitre.org/) to document malware types and their usage.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0147.004",
+   "nombre": "Mobile App Asset",
+   "resumen": "A Mobile App is an application which has been designed to run on mobile operating systems, such as Android or iOS. Mobile Apps can enable access to online platforms (e.g. Facebook’s mobile app) or can provide software which users can run offline on their device.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0148",
+   "nombre": "Financial Instrument",
+   "resumen": "A Financial Instrument is a platform or software that facilitates the sending, receiving, and management of money, enabling financial transactions between users or organisations. Threat actors can deploy financial instruments legitimately to manage their own finances or illegitimately to support fra",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0148.001",
+   "nombre": "Online Banking Platform",
+   "resumen": "Online Banking Platforms are spaces provided by banks for their customers to manage their Bank Account online. The Online Banking Platforms available differ by country. In the United Kingdom, examples of banking institutions which provide Online Banking Platforms include Lloyds, Barclays, and Monzo.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0148.002",
+   "nombre": "Bank Account Asset",
+   "resumen": "A Bank Account is a financial account that allows individuals or organisations to store, manage, and access their money, typically for saving, spending, or investment purposes.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0148.003",
+   "nombre": "Payment Processing Platform",
+   "resumen": "Stripe, Paypal, and Apple Pay, Chargebee, Recurly and Zuora are examples of Payment Processing Platforms. Payment Processing Platforms produce programs providing Payment Processing or Subscription Processing capabilities which actors can use to set up online storefronts, or to take donations.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0148.004",
+   "nombre": "Payment Processing Capability",
+   "resumen": "A Payment Processing Capability is a feature of online platforms or software which enables the processing of one-off payments (e.g. an online checkout, or donation processing page). Payment Processing Capabilities can enable platform users to purchase products or services or can facilitate donations",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0148.005",
+   "nombre": "Subscription Processing Capability",
+   "resumen": "A Subscription Processing Capability is a feature of online platforms or software which enables the processing of recurring payments. Subscription Processing Capabilities are typically used to enable recurring payments in exchange for continued access to products or services.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0148.006",
+   "nombre": "Crowdfunding Platform",
+   "resumen": "Kickstarter and GoFundMe are examples of Crowdfunding Platforms. Crowdfunding Platforms enable users with Accounts to create projects for other platform users to finance, usually in exchange for access to fruits of the project.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0148.007",
+   "nombre": "eCommerce Platform",
+   "resumen": "Amazon, eBay and Etsy are examples of eCommerce Platforms. eCommerce Platforms enable users with Accounts to create online storefronts from which other platform users can purchase goods or services.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0148.008",
+   "nombre": "Cryptocurrency Exchange Platform",
+   "resumen": "Coinbase and Kraken are examples of Cryptocurrency Exchange Platforms. Cryptocurrency Exchange Platforms provide users a digital marketplace where they can buy, sell, and trade cryptocurrencies, such as Bitcoin or Ethereum. Some Cryptocurrency Exchange Platforms allow users to create a Cryptocurrenc",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0148.009",
+   "nombre": "Cryptocurrency Wallet",
+   "resumen": "A Cryptocurrency Wallet is a digital tool that allows users to store, send, and receive cryptocurrencies. It manages private and public keys, enabling secure access to a user's crypto assets. An influence operation might use cryptocurrency to conceal that they are conducting operational activities, ",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0149",
+   "nombre": "Online Infrastructure",
+   "resumen": "Online Infrastructure consists of technical assets which enable online activity, such as domains, servers, and IP addresses.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0149.001",
+   "nombre": "Domain Asset",
+   "resumen": "A Domain is a web address (such as “google[.]com”), used to navigate to Websites on the internet. Domains differ from Websites in that Websites are considered to be developed web pages which host content, whereas Domains do not necessarily host public-facing web content. A threat actor may register ",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0149.002",
+   "nombre": "Email Domain Asset",
+   "resumen": "An Email Domain is a Domain (such as “meta[.]com”) which has the ability to send emails (e.g. from an @meta[.]com address). Any Domain which has an MX (Mail Exchange) record and configured SMTP (Simple Mail Transfer Protocol) settings can send and receive emails, and is therefore an Email Domain.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0149.003",
+   "nombre": "Lookalike Domain",
+   "resumen": "A Lookalike Domain is a Domain which is visually similar to another Domain, with the potential for web users to mistake one domain for the other. Threat actors who want to impersonate organisations’ websites have been observed using a variety of domain impersonation methods. For example, actors want",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0149.004",
+   "nombre": "Redirecting Domain Asset",
+   "resumen": "A Redirecting Domain is a Domain which has been configured to redirect users to another Domain when visited.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0149.005",
+   "nombre": "Server Asset",
+   "resumen": "A Server is a computer which provides resources, services, or data to other computers over a network. There are different types of servers, such as web servers (which serve web pages and applications to users), database servers (which manage and provide access to databases), and file servers (which ",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0149.006",
+   "nombre": "IP Address Asset",
+   "resumen": "An IP Address is a unique numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication. IP addresses are commonly a part of any online infrastructure. IP addresses can be in IPV4 dotted decimal (x.x.x.x) or IPV6 colon-separated hexadecimal",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0149.007",
+   "nombre": "VPN Asset",
+   "resumen": "A VPN (Virtual Private Network) is a service which creates secure, encrypted connections over the internet, allowing users to transmit data safely and access network resources remotely. It masks IP Addresses, enhancing privacy and security by preventing unauthorised access and tracking. VPNs are com",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0149.008",
+   "nombre": "Proxy IP Address Asset",
+   "resumen": "A Proxy IP Address allows a threat actor to mask their real IP Address by putting a layer between them and the online content they’re connecting with. Proxy IP Addresses can hide the connection between the threat actor and their online infrastructure.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0149.009",
+   "nombre": "Internet Connected Physical Asset",
+   "resumen": "An Internet Connected Physical Asset (sometimes referred to as IoT (Internet of Things)) is a physical asset which has internet connectivity to support online features, such as digital signage, wireless printers, and smart TVs.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0150",
+   "nombre": "Asset Origin",
+   "resumen": "Asset Origin contains a list of ways that an actor can obtain an asset. For example, they can create new accounts on online platforms, or they can compromise existing accounts or websites.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0150.001",
+   "nombre": "Newly Created Asset",
+   "resumen": "A Newly Created Asset is an asset which has been created and used for the first time in a documented potential incident. For example, analysts which can identify a recent creation date of Accounts participating in the spread of a new narrative can assert these are Newly Created Assets. Analysts shou",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0150.002",
+   "nombre": "Dormant Asset",
+   "resumen": "A Dormant Asset is an asset which was inactive for an extended period before being used in a documented potential incident.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0150.003",
+   "nombre": "Pre-Existing Asset",
+   "resumen": "Pre-Existing Assets are assets which existed before the observed incident which have not been Repurposed; i.e. they are still being used for their original purpose. An example could be an Account which presented itself with a Journalist Persona prior to and during the observed potential incident.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0150.004",
+   "nombre": "Repurposed Asset",
+   "resumen": "Repurposed Assets are assets which have been identified as being used previously, but are now being used for different purposes, or have new Presented Personas. Actors have been documented compromising assets, and then repurposing them to present Inauthentic Personas as part of their operations.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0150.005",
+   "nombre": "Compromised Asset",
+   "resumen": "A Compromised Asset is an asset which was originally created or belonged to another person or organisation, but which an actor has gained access to without their consent. See also MITRE ATT&CK T1708: Valid Accounts.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0150.006",
+   "nombre": "Purchased Asset",
+   "resumen": "A Purchased Asset is an asset which actors paid for the ownership of. For example, threat actors have been observed selling compromised social media accounts on dark web marketplaces, which can be used to disguise operation activity.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0150.007",
+   "nombre": "Rented Asset",
+   "resumen": "A Rented Asset is an asset which actors are temporarily renting or subscribing to. For example, threat actors have been observed renting temporary access to legitimate accounts on online platforms in order to disguise operation activity.",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0150.008",
+   "nombre": "Bulk Created Asset",
+   "resumen": "A Bulk Created Asset is an asset which was created alongside many other instances of the same asset. Actors have been observed bulk creating Accounts on Social Media Platforms such as Facebook. Indicators of bulk asset creation include its creation date, assets’ naming conventions, their configurati",
+   "tactica": "TA15"
+  },
+  {
+   "id": "T0151",
+   "nombre": "Digital Community Hosting Asset",
+   "resumen": "A Digital Community Hosting Asset is an online asset which can be used by actors to provide spaces for users to interact with each other. Sub-techniques categorised under Digital Community Hosting Assets can include Content Hosting and Content Delivery capabilities; however, their nominal primary pu",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.001",
+   "nombre": "Social Media Platform",
+   "resumen": "Examples of popular Social Media Platforms include Facebook, Instagram, and VK. Social Media Platforms allow users to create Accounts, which they can configure to present themselves to other platform users. This typically involves Establishing Account Imagery and Presenting a Persona. Social Media P",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.002",
+   "nombre": "Online Community Group",
+   "resumen": "Some online platforms allow people with Accounts to create Online Community Groups. Groups are usually created around a specific topic or locality, and allow users to post content to the group, and interact with other users’ posted content. For example, Meta’s Social Media Platform Facebook allows u",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.003",
+   "nombre": "Online Community Page",
+   "resumen": "A Facebook Page is an example of an Online Community Page. Online Community Pages allow Administrator Accounts to post content to the page, which other users can interact with. Pages can be followed or liked by other users - but these users can’t initiate new posts to the page.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.004",
+   "nombre": "Chat Platform",
+   "resumen": "Examples of popular Chat Platforms include WhatsApp, WeChat, Telegram, and Signal; Slack, Mattermost, and Discord; Zoom, GoTo Meeting, and WebEx. Chat Platforms allow users to engage in text, audio, or video chats with other platform users. Different Chat Platforms afford users different capabilitie",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.005",
+   "nombre": "Chat Community Server",
+   "resumen": "Chat Platforms such as Discord, Slack, and Microsoft Teams allow users to create their own Chat Community Servers, which they can invite other platform users to join. Chat Community Servers are online communities made up of Chat Rooms (or “Channels”) in which users can discuss the given group’s topi",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.006",
+   "nombre": "Chat Room",
+   "resumen": "Many platforms which enable community interaction allow users to create Chat Rooms; a room in which members of the group can talk to each other via text, audio, or video. Most Chat Rooms are Gated; users must be added to the chat group before they can post to the chat group, or view its content. For",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.007",
+   "nombre": "Chat Broadcast Group",
+   "resumen": "A Chat Broadcast Group is a type of Chat Group in which only specific members can send content to the channel (typically administrators, or approved group members). Members of the channel may be able to react to content, or comment on it, but can’t directly push new content to the channel. Examples ",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.008",
+   "nombre": "Microblogging Platform",
+   "resumen": "Examples of Microblogging Platforms include TikTok, Threads, Bluesky, Mastodon, QQ, Tumblr, and X (formerly Twitter). Microblogging Platforms allow users to create Accounts, which they can configure to present themselves to other platform users. This typically involves Establishing Account Imagery a",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.009",
+   "nombre": "Legacy Online Forum Platform",
+   "resumen": "Examples of Legacy Online Forum Platforms include Something Awful (SA Forums), Ars Technica forums, and NeoGAF, and the forums available on the Mumsnet and War Thunder websites. Legacy Online Forum Platforms are a type of message board (using software such as vBulletin or phpBB) popular in the early",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.010",
+   "nombre": "Community Forum Platform",
+   "resumen": "Reddit, Lemmy and Tildes are examples of Community Forum Platforms. Community Forum Platforms are exemplified by users’ ability to create their own sub-communities (Community Sub-Forums) which other platform users can join. Platform users can view aggregated content from all Community Sub-Forums the",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.011",
+   "nombre": "Community Sub-Forum",
+   "resumen": "Community Forum Platforms are made up of many Community Sub-Forums. Sub-Forums provide spaces for platform users to create a community based around any topic. For example, Reddit (a popular Community Forum Platform) has over 138,000 “subreddits” (Community Sub-Forums), including 1082 unique cat-base",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.012",
+   "nombre": "Image Board Platform",
+   "resumen": "4chan and 8chan are examples of Image Board Platforms. Image Board Platforms provide individual boards on which users can start threads related to the board’s topic. For example, 4chan’s /pol/ board provides a space for users to talk about politics. Most Image Board Platforms allow users to post wit",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.013",
+   "nombre": "Question and Answer Platform",
+   "resumen": "Quora, Stack Overflow, and Yahoo Answers are examples of Question and Answer Platforms. Question and Answer Platforms allow users to create Accounts letting them post questions to the platform community, and respond to other platform users’ questions.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.014",
+   "nombre": "Comments Section",
+   "resumen": "Many platforms enable community interaction via Comments Sections on posted content. Comments Sections allow platform users to comment on content posted by other users. On some platforms Comments Sections are the only place available for community interaction, such as news websites which provide a C",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.015",
+   "nombre": "Online Game Platform",
+   "resumen": "Roblox, Minecraft, Fortnite, League of Legends, and World of Warcraft are examples of Online Game Platforms. Online Game Platforms allow users to create Accounts which they can use to access Online Game Sessions; i.e. an individual instance of a multiplayer online game. Many Online Game Platforms su",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.016",
+   "nombre": "Online Game Session",
+   "resumen": "Online Game Sessions are instances of a game played on an Online Game Platform. Examples of Online Game Sessions include a match in Fortnite or League of Legends, or a server in Minecraft, Fortnite, or World of Warcraft. Some Online Game Platforms (such as Fortnite, League of Legends, and World of W",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0151.017",
+   "nombre": "Dating Platform",
+   "resumen": "Tinder, Bumble, Grindr, Tantan, Badoo, Plenty of Fish, hinge, LOVOO, OkCupid, happn, and Mamba are examples of Dating Platforms. Dating Platforms allow users to create Accounts, letting them connect with other platform users with the purpose of developing a physical/romantic relationship.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152",
+   "nombre": "Digital Content Hosting Asset",
+   "resumen": "Digital Content Hosting Assets are online assets which are primarily designed to allow actors to upload content to the internet. Sub-techniques categorised under Digital Content Hosting Assets can include Community Hosting and Content Delivery capabilities; however their nominal primary purpose is t",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.001",
+   "nombre": "Blogging Platform",
+   "resumen": "Medium and Substack are examples of Blogging Platforms. By creating an Account on a Blogging Platform, people are able to create their own Blog.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.002",
+   "nombre": "Blog Asset",
+   "resumen": "Blogs are a collation of posts centred on a particular topic, author, or collection of authors. Some platforms are designed to support users in hosting content online, such as Blogging Platforms like Substack which allow users to create Blogs, but other online platforms can also be used to produce a",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.003",
+   "nombre": "Website Hosting Platform",
+   "resumen": "Examples of Website Hosting Platforms include Wix, Webflow, Weebly, and Wordpress. Website Hosting Platforms help users with managing online infrastructure required to host a website online; such as securing IP Addresses and Domains.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.004",
+   "nombre": "Website Asset",
+   "resumen": "A Website is a collection of related web pages hosted on a server and accessible via a web browser. Websites have an associated Domain and can host various types of content, such as text, images, videos, and interactive features. When a Website is fleshed out, it Presents a Persona to site visitors.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.005",
+   "nombre": "Paste Platform",
+   "resumen": "Pastebin is an example of a Paste Platform. Paste Platforms allow people to upload unformatted text to the platform, which they can share via a link. Some Paste Platforms are Open Access Platforms which allow users to upload content without creating an Account first.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.006",
+   "nombre": "Video Platform",
+   "resumen": "YouTube, Vimeo, and LiveLeak are examples of Video Platforms. Video Platforms allow people to create Accounts which they can use to upload video content for people to watch on the platform. The ability to host videos is not exclusive to Video Platforms; many online platforms allow users with Account",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.007",
+   "nombre": "Audio Platform",
+   "resumen": "Soundcloud, Spotify, and YouTube Music; Apple Podcasts, Podbean, and Captivate are examples of Audio Platforms. Audio Platforms allow people to create Accounts which they can use to upload audio content to the platform. The ability to host audio is not exclusive to Audio Platforms; many online platf",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.008",
+   "nombre": "Live Streaming Platform",
+   "resumen": "Twitch.tv and Whatnot are examples of Live Streaming Platforms. Live Streaming Platforms allow people to create Accounts and stream live content (video or audio). A temporary open Group Chat is created alongside live streamed content for viewers to discuss the stream. Some Live Streaming Platforms a",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.009",
+   "nombre": "Software Delivery Platform",
+   "resumen": "Apple’s App Store, Google’s Google Play Store, and Valve’s Steam are examples of Software Delivery Platforms. Software Delivery Platforms are designed to enable users to download programmes uploaded to the platform. Software can be purchased, or downloaded for free. Some Software Delivery Platforms ",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.010",
+   "nombre": "File Hosting Platform",
+   "resumen": "Dropbox and Google Drive are examples of File Hosting Platforms. File Hosting Platforms allow people to create Accounts which they can use to host files on another server, enabling access to content on any machine, and the ability to easily share files with anyone online. Actors may also create thei",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.011",
+   "nombre": "Wiki Platform",
+   "resumen": "Wikipedia, Fandom, Ruwiki, TV Tropes, and the SCP Foundation are examples of Wiki Platforms. Wikis use wiki software to allow platform users to collaboratively create and maintain an encyclopedia of information related to a given topic.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0152.012",
+   "nombre": "Subscription Service Platform",
+   "resumen": "Patreon, Fansly, and OnlyFans are examples of Subscription Service Platforms. Subscription Service Platforms enable users with Accounts to host online content to which other platform users can subscribe to access. Content typically requires Paid Subscription to access, however open content is often ",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0153",
+   "nombre": "Digital Content Delivery Asset",
+   "resumen": "Digital Content Delivery Assets are assets which support the delivery of content to users online. Sub-techniques categorised under Digital Content Delivery Assets can include Community Hosting and Content Hosting capabilities; however their nominal primary purpose is to support the delivery of conte",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0153.001",
+   "nombre": "Email Platform",
+   "resumen": "Gmail, iCloud mail, and Microsoft Outlook are examples of Email Platforms. Email Platforms are online platforms which allow people to create Accounts that they can use to send and receive emails to and from other email accounts. Instead of using an Email Platform, actors may set up their own Email D",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0153.002",
+   "nombre": "Link Shortening Platform",
+   "resumen": "Bitly and TinyURL are examples of Link Shortening Platforms. Link Shortening Platforms are online platforms which allow people to create Accounts that they can use to convert existing URLs into Shortened Links, or into QR Codes.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0153.003",
+   "nombre": "Shortened Link Asset",
+   "resumen": "A Shortened Link is a custom URL which is typically a shortened version of another URL.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0153.004",
+   "nombre": "QR Code Asset",
+   "resumen": "A QR Code allows people to use cameras on their smartphones to open a URL.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0153.005",
+   "nombre": "Online Advertising Platform",
+   "resumen": "Google Ads, Facebook Ads, and LinkedIn Marketing Solutions are examples of Online Advertising Platforms. Online Advertising Platforms are online platforms which allow people to create Accounts that they can use to upload and deliver adverts to people online.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0153.006",
+   "nombre": "Content Recommendation Algorithm",
+   "resumen": "Many online platforms have Content Recommendation Algorithms, which promote content posted to the platform to users based on metrics the platform operators are trying to meet. Algorithms typically surface platform content which the user is likely to engage with, based on how they and other users hav",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0153.007",
+   "nombre": "Direct Messaging",
+   "resumen": "Many online platforms allow users to contact other platform users via Direct Messaging; private messaging which can be initiated by a user with other platform users. Examples include messaging on WhatsApp, Telegram, and Signal; direct messages (DMs) on Facebook or Instagram. Some platforms’ Direct M",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0154",
+   "nombre": "Digital Content Creation Asset",
+   "resumen": "Digital Content Creation Assets are Platforms or Software which help actors produce content for publication online.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0154.001",
+   "nombre": "AI LLM Platform",
+   "resumen": "OpenAI’s ChatGPT, Google’s Bard, Microsoft’s Turing-NLG, Google’s T5 (Text-to-Text Transfer Transformer), and Facebook’s BART are examples of AI LLM (Large Language Model) Platforms. AI LLM Platforms are online platforms which allow people to create Accounts that they can use to interact with the pl",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0154.002",
+   "nombre": "AI Media Platform",
+   "resumen": "AI Media Platforms are online platforms that allow people to create Accounts which they can use to produce image, video, or audio content (also known as “deepfakes”) using the platform’s AI Software. Midjourney, DALL-E, Stable Diffusion, and Adobe Firefly are examples of AI Media Platforms which all",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0155",
+   "nombre": "Gated Asset",
+   "resumen": "Some assets are Gated; closed communities or platforms which can’t be accessed openly. They may be password protected or require admin approval for entry. Many different digital assets can be gated. This technique contains sub-techniques with methods used to gate assets. Analysts can use T0155: Gate",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0155.001",
+   "nombre": "Password Gated Asset",
+   "resumen": "A Password Gated Asset is an online asset which requires a password to gain access. Examples include password protected Servers set up to be a File Hosting Platform, or password protected Community Sub-Forums.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0155.002",
+   "nombre": "Invite Gated Asset",
+   "resumen": "An Invite Gated Asset is an online asset which requires an existing user to invite other users for access to the asset. Examples include Chat Groups in which Administrator Accounts are able to add or remove users, or File Hosting Platforms which allow users to invite other users to access their file",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0155.003",
+   "nombre": "Approval Gated Asset",
+   "resumen": "An Approval Gated Asset is an online asset which requires approval from Administrator Accounts for access to the asset. Examples include Online Community Groups on Facebook, which can be configured to require questions and approval before access, and Accounts on Social Media Platforms such as Instag",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0155.004",
+   "nombre": "Geoblocked Asset",
+   "resumen": "A Geoblocked Asset is an online asset which cannot be accessed in specific geographical locations. Assets can be Geoblocked by choice of the platform, or can have Geoblocking mandated by regulators, and enforced through Internet Service Providers.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0155.005",
+   "nombre": "Paid Access Asset",
+   "resumen": "A Paid Access Asset is an online asset which requires a single payment for permanent access to the asset.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0155.006",
+   "nombre": "Subscription Access Asset",
+   "resumen": "A Subscription Access Asset is an online asset which requires a continued subscription for access to the asset. Examples include the Blogging Platform Substack, which affords Blogs hosted on their platform the ability to produce subscriber-only posts, and the Subscription Service Platform Patreon.",
+   "tactica": "TA07"
+  },
+  {
+   "id": "T0155.007",
+   "nombre": "Encrypted Communication Channel",
+   "resumen": "Some online platforms support encrypted communication between platform users, for example the Chat Platforms Telegram and Signal.",
+   "tactica": "TA07"
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48"
+     role="img" aria-label="FEMÓNOE">
+  <title>FEMÓNOE</title>
+  <!-- El umbral: la línea que cada país tiene por costumbre. -->
+  <line x1="4" y1="29" x2="44" y2="29" stroke="#667B89" stroke-width="1.6"
+        stroke-dasharray="3 3" stroke-linecap="round"/>
+  <!-- La serie, que se mueve dentro de lo habitual y en un punto lo cruza. -->
+  <polyline points="6,35 14,34 22,36 29,31 38,15" fill="none" stroke="#8C00E0"
+            stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- La señal. -->
+  <circle cx="38" cy="15" r="5" fill="#8C00E0"/>
+  <circle cx="38" cy="15" r="8.5" fill="none" stroke="#BA66EC" stroke-width="1.4"/>
+</svg>
