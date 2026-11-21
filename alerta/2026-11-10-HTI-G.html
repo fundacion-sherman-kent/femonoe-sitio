@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Medicion. Es la MISMA etiqueta de la Fundacion que ya usa SIWA: una sola
+     propiedad y un solo flujo para las tres plataformas, que se separan despues
+     por nombre de host. Si la propiedad cambia, se cambia SOLO esta linea.
+     * anonymize_ip: la IP del visitante se recorta antes de guardarse.
+     * linker.domains nombra los CUATRO dominios de la casa. Sin eso, un salto
+       entre plataformas crea un usuario nuevo y una sesion nueva, y el dato de
+       que las plataformas se alimentan entre si no se podria demostrar.
+     * El evento de entrada NO se dispara aca. La casa lo crea del lado de
+       Analytics, como `siwa_entrada`, a partir de page_view y la direccion.
+     * PENDIENTE DE LA DIRECCION: esto instala cookies de medicion; corresponde
+       el aviso de privacidad y el consentimiento (Ley 25.326). -->
+<script>
+  window.FEMONOE_GA = "G-L9ZDDH81GB";
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L9ZDDH81GB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', window.FEMONOE_GA, {
+    anonymize_ip: true,
+    linker: { domains: ['fundacionkent.org', 'siwa.fundacionkent.org',
+                        'femonoe.fundacionkent.org', 'ysyry.fundacionkent.org'] }
+  });
+  // LIMPIA LA DIRECCION DESPUES DE QUE ANALYTICS LA LEYO.
+  //
+  // El enlace de la casa es `https://femonoe.fundacionkent.org/` y nada mas.
+  // Lo largo lo agrega Google: cuando alguien llega desde otro dominio de la
+  // Fundacion, el *linker* de Analytics pega un parametro `_gl` de unos cien
+  // caracteres. Quien copia la direccion de la barra comparte ESO, y un enlace
+  // asi parece roto o rastreador y se comparte menos.
+  //
+  // `gtag('config')` ya consumio el parametro arriba, de forma sincronica, asi
+  // que sacarlo de la barra no rompe la medicion entre dominios: la sesion ya
+  // quedo unida. Se saca SOLO `_gl`; los `utm_` se dejan, porque son la unica
+  // manera de saber que campana trajo a alguien.
+  try {
+    var u = new URL(window.location.href);
+    if (u.searchParams.has('_gl')) {
+      u.searchParams.delete('_gl');
+      history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+    }
+  } catch (e) { /* una barra rara no justifica romper la pagina */ }
+</script>
+<title>Haití · gobernabilidad · FEMÓNOE</title>
+<meta name="description" content="Una alerta de FEMÓNOE, con su probabilidad declarada, su plazo, el dictamen del décimo hombre y el criterio fijado al nacer.">
+<!-- Cómo se ve el enlace al compartirse. La tarjeta la genera
+     `herramientas/tarjeta_redes.py` con la paleta del manual: no es un PNG
+     suelto que alguien dibujó una vez. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FEMÓNOE · Fundación Sherman Kent">
+<meta property="og:locale" content="es_AR">
+<meta property="og:title" content="Haití · gobernabilidad · FEMÓNOE">
+<meta property="og:description" content="Una alerta de FEMÓNOE, con su probabilidad declarada, su plazo, el dictamen del décimo hombre y el criterio fijado al nacer.">
+<link rel="canonical" href="https://femonoe.fundacionkent.org/alerta/2026-11-10-HTI-G.html">
+<meta property="og:url" content="https://femonoe.fundacionkent.org/alerta/2026-11-10-HTI-G.html">
+<meta property="og:image" content="https://femonoe.fundacionkent.org/marca/femonoe-compartir.png?v=b9ab0bce">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FEMÓNOE · alerta temprana para América Latina y el Caribe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Haití · gobernabilidad · FEMÓNOE">
+<meta name="twitter:description" content="Una alerta de FEMÓNOE, con su probabilidad declarada, su plazo, el dictamen del décimo hombre y el criterio fijado al nacer.">
+<meta name="twitter:image" content="https://femonoe.fundacionkent.org/marca/femonoe-compartir.png?v=b9ab0bce">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../estilos.css?v=2e6076b7">
+</head>
+<body>
+
+<div class="franja">
+  <div class="marca">
+    <a href="https://fundacionkent.org/?utm_source=femonoe&amp;utm_medium=referral&amp;utm_campaign=tablero" target="_blank" rel="noopener"
+       title="Ir a la web de la Fundación Sherman Kent">
+      <img class="logo claro" src="../marca/fusk-lockup-color.svg" alt="Fundación Sherman Kent">
+      <img class="logo oscuro" src="../marca/fusk-lockup-blanco.svg" alt="Fundación Sherman Kent"></a>
+    <div class="sep"></div>
+    <a class="nombre" href="../index.html" title="Volver a la portada de FEMÓNOE">
+      <img class="icono" src="../marca/femonoe-marca.svg" alt="">
+      <div><h1>FEMÓNOE</h1><small>Alerta temprana · América Latina y el Caribe</small></div>
+    </a>
+  </div>
+  <nav class="franja-nav"><a href="../index.html">Los 33 Estados</a>
+    <a href="../horizonte.html">El horizonte</a>
+    <a href="../metodo.html">Método</a>
+    <a href="https://fundacionkent.org/articulos/?utm_source=femonoe&amp;utm_medium=referral&amp;utm_campaign=franja" target="_blank" rel="noopener">Análisis de la región ↗</a></nav>
+  <div class="franja-derecha">
+    <button type="button" id="tema" class="tema" aria-pressed="false">Fondo oscuro</button>
+  </div>
+</div>
+
+<main class="dictamen">
+  <a class="volver" href="../index.html">&larr; Los 33 Estados</a>
+  <div class="sello"><span>Haití</span> · <span>gobernabilidad</span> ·
+    <b>descartada</b> · <span>2026-11-17</span></div>
+  <div class="descarte" role="note"><b>Esta alerta no se publicó: fue descartada antes de salir.</b> La descartó <b>dirección</b> el 2026-11-17. Queda en el registro porque el disenso que la frenó es parte del método, no un borrador que convenga borrar.<p>Dictamen del décimo hombre: el criterio puede resolverse con un documento anterior a la ventana, y la Oficina lo concede entero. El criterio pregunta si al 8/12 alguna fuente muestra un acto oficial DE CUALQUIERA DE LOS DOS ESTADOS que enuncie dos de cuatro términos, y no exige que el acto sea bilateral ni nuevo. El Decreto Legislativo 679 de El Salvador, publicado en el Diario Oficial el 30/9/2026 y vigente desde el 2/10, ya enuncia dos de esos cuatro: la vigencia de doce meses prorrogables y el estatuto del personal. Leído literalmente, un resolutor competente falla el juicio en diciembre con un documento de septiembre: la alerta nace falsa. NO SE CORRIGE EL CRITERIO, se descarta la alerta. Corregirlo ahora, sabiendo ya qué documento lo satisface, es exactamente la maniobra que la regla de la casa prohíbe: el criterio se fija al nacer y no se reescribe cuando se descubre qué lo cumple. Es el mismo descarte que la dirección resolvió el 2/10/2026 sobre 2026-10-02-HTI-S. Y hay dos objeciones más del dictamen que la Oficina también concede: el hecho publicado no derivaba de la señal -el pico eran cinco registros de prensa de protesta que, según el propio fundamento, ni apuntaban contra el Gobierno- y la banda publicada no pasó por el panel ciego, porque al anunciar hechos distintos y no transferirse la banda, probable con confianza media quedó siendo una sola lectura. Se asienta además la corrección de hecho del dictamen: el viaje del Primer Ministro del 16/11 no se frustró, se delegó en el ministro de Justicia y Seguridad Pública, presente en San Salvador el 16 y 17/11. La lectura del analista de contexto queda en el expediente como medición y como antecedente: la negativa expresa del vicepresidente salvadoreño del 16/11 a divulgar el convenio es el mejor argumento del juicio y merece una alerta propia, nacida de un disparador que le corresponda y con un criterio que enumere los canales de publicación DE LOS DOS Estados, gaceta oficial y órgano legislativo incluidos.</p></div>
+  <h2>Ni el Poder Ejecutivo haitiano ni el Gobierno de El Salvador harían público, entre el 18 de noviembre y el 8 de diciembre de 2026 inclusive, el instrumento bilateral que rige el despliegue militar salvadoreño en Haití, ni un acto oficial que enuncie sus términos esenciales.</h2>
+  <div class="kent" role="img" aria-label="Probabilidad: probable"><small>menos probable</small><span class="paso" title="casi con certeza no"></span><span class="paso" title="muy improbable"></span><span class="paso" title="improbable"></span><span class="paso" title="posibilidades parejas"></span><span class="paso aqui" title="probable">probable</span><span class="paso" title="muy probable"></span><span class="paso" title="casi con certeza"></span><small>más probable</small></div>
+  <p class="resumen">Confianza media · plazo 21 días · vence el 2026-12-08 · <b>fuente única</b></p>
+
+  
+
+  <div class="cuerpo">
+    <div><p>HECHO: desde el 23 de octubre de 2026 hay tropa salvadoreña desplegada en Puerto Príncipe —450 efectivos en esa fecha según Rezo Nòdwès del 24/10/2026, más de 2.000 según la cifra del Ministerio de Relaciones Exteriores salvadoreño recogida por las Naciones Unidas el 3/11/2026 y reproducida por France 24 el 11/11/2026—, desplegada tras la emboscada del 18 de octubre de 2026 en que desaparecieron cuatro militares salvadoreños (CNN, 29/10/2026). HECHO: las Naciones Unidas señalaron que la gran mayoría de esos efectivos opera fuera del mando de la Gang Suppression Force creada por la resolución 2793 del Consejo de Seguridad (CNN, 29/10/2026; France 24, 11/11/2026). HECHO: el 9 de noviembre de 2026 Amnistía Internacional reclamó a ambos Gobiernos que publiquen el acuerdo que encuadra el despliegue y que precisen las reglas de supervisión, de uso de la fuerza y de responsabilidad (RCI y RHI News, 9–10/11/2026); a la fecha de corte ninguno de los dos lo publicó. HECHO: el viaje del Primer Ministro haitiano a El Salvador previsto para el lunes 16 de noviembre de 2026, cuyo objeto declarado era discutir el futuro del despliegue, fue anulado, y la duración y los términos quedaron sin resolver (qz.fr y RHI News, 16/11/2026); ese mismo día el ministro de Seguridad haitiano elogió públicamente el despliegue (Reuters vía US News, 16/11/2026). JUICIO: la vía institucional que obligaría a publicar está cerrada, y por eso el silencio no sería coyuntural sino estructural — Haití no tiene Parlamento en funciones desde enero de 2023, de modo que no hay Asamblea Nacional que ratifique un tratado ni que interpele al Ejecutivo, y el Ejecutivo es un Conseil des ministres encabezado por el Primer Ministro, que asumió las funciones presidenciales al terminar el mandato del Conseil présidentiel de transition el 7 de febrero de 2026 (Ministerio de Europa y de Asuntos Exteriores de Francia, febrero de 2026; informe del Secretario General de la ONU S/2026/325, 14/4/2026). JUICIO: los despliegues extranjeros anteriores en Haití tuvieron marco público porque eran de mandato onusiano y el Consejo de Seguridad publica por procedimiento propio; éste es bilateral y fuera de ese mandato, con lo cual la publicación depende de la voluntad de dos Ejecutivos que hasta hoy no la tuvieron. CONTEXTO DE LA SEÑAL: el pico de eventos de protesta del 10/11/2026 no marcaría presión callejera contra el Gobierno sino lo contrario — las jornadas de movilización del 17 y 18 de noviembre, a las que la Asociación de Propietarios y Choferes de Haití llamó a sumarse, son en apoyo de la ofensiva contra las bandas y contra sus financiadores y protectores (Rezo Nòdwès, 16/11/2026)—, y el 18 de noviembre es el aniversario de la batalla de Vertières, fecha de movilización en el calendario histórico haitiano. JUICIO: ese respaldo de calle es precisamente lo que reduciría el incentivo de ambos Ejecutivos a someter el despliegue a un marco escrito y exigible. CORRECCIÓN AL EXPEDIENTE: el apartado 3 afirma que no hay fechas institucionales en ±60 días, y no es así — el 15 de noviembre de 2026 cerró la inscripción de candidaturas, el 15 de diciembre de 2026 el Conseil Électoral Provisoire debe exhibir la lista provisional con 48 horas de impugnación y el 11 de enero de 2027 la lista definitiva, según el calendario revisado el 28 de octubre de 2026 sobre el decreto electoral del 6 de octubre de 2026, que llevó la primera vuelta al 18 de julio de 2027 (La 1ère/franceinfo, Juno7 y Haitian Times, 29/10 y 16/11/2026)—. El nodo del 15 de diciembre cae 28 días después del nacimiento de esta alerta y queda fuera del plazo máximo de 21 días: se recomienda alerta sucesora que lo abrace.</p><p>---</p><p>## La elección de la Oficina</p><p><b>Los dos analistas anunciaron hechos distintos, así que no rige la banda más baja: la Oficina elige, y la banda viaja con el hecho elegido.</b> El consolidador dejó «improbable» porque es la menor de las dos, pero esa banda pertenecía al hecho del analista de indicadores, no al que se publica.</p><p><b>Se elige la formulación del analista de contexto, y el motivo no es de preferencia sino de doctrina ya resuelta.</b> El analista de indicadores anunció un hecho <b>sobre el propio indicador de FEMÓNOE</b> —que la serie volvería o no a cierto valor—. La dirección ya rechazó ese molde el 13/10/2026 al descartar la alerta <code>2026-10-10-MEX-S</code>: <i>FEMÓNOE prediciendo su propia serie</i>. Una plataforma de alerta temprana anuncia hechos del mundo, no el comportamiento futuro de su propio contador; y un lector al que se le anuncia que un contador va a subir no recibió ninguna advertencia sobre la región. <b>El propio analista de indicadores de Belice señaló esta objeción contra su propio molde al entregar</b>, y la sostuvo sólo porque es lo único que su instrumento alcanza a sostener. Tiene razón en lo segundo, y eso es exactamente por qué su lectura entra al expediente como medición y no como hecho anunciado.</p><p><b>Lo que la lectura de indicadores aporta, y queda en el expediente:</b> la señal ya decayó —en los dos casos— y la tasa base condicionada al estado real de hoy es más baja que la incondicional. Eso no cambia el hecho elegido, pero sostiene la confianza en media y no más arriba.</p></div>
+    <figure style="margin:0"><div class="serie"><div class="eje-y"><span>5</span><span class="unidad">hechos</span><span>0</span></div><div class="trama"><svg class="chispa" viewBox="0 0 250 48" role="img" preserveAspectRatio="none" aria-label="Los últimos 31 días de la serie"><line x1="5" y1="43.0" x2="245" y2="43.0" stroke="var(--acero)" stroke-width="1" stroke-dasharray="3 3"/><polyline class="trazo" points="5.0,35.4 13.0,43.0 21.0,43.0 29.0,43.0 37.0,43.0 45.0,43.0 53.0,43.0 61.0,43.0 69.0,27.8 77.0,27.8 85.0,35.4 93.0,27.8 101.0,43.0 109.0,43.0 117.0,43.0 125.0,43.0 133.0,43.0 141.0,35.4 149.0,43.0 157.0,43.0 165.0,43.0 173.0,43.0 181.0,43.0 189.0,43.0 197.0,35.4 205.0,20.2 213.0,43.0 221.0,35.4 229.0,35.4 237.0,5.0 245.0,5.0" fill="none" stroke="var(--violeta)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="328" style="--largo:328"/><circle class="punta" cx="245.0" cy="5.0" r="3.2" fill="var(--violeta)"/></svg><span class="rot-mediana" style="--y:100.0%">mediana 0</span></div><div class="eje-x"><span>12 oct</span><span>10 nov</span></div></div><figcaption title="serie: eventos_protesta">hechos de protesta registrados, 30 días. La línea punteada es la mediana de Haití en ese tramo.</figcaption></figure>
+  </div>
+
+  
+
+  <p class="criterio"><b>Criterio de resolución, fijado al nacer la alerta.</b>
+    Al vencer se consultan, en este orden: 1) los comunicados de la Primature de la République d'Haïti y del Ministère des Affaires Étrangères et des Cultes; 2) Le Moniteur, journal officiel de la République, en sus ediciones del período; 3) los canales oficiales de la Presidencia de El Salvador, del Ministerio de Relaciones Exteriores y del Ministerio de la Defensa Nacional de El Salvador; 4) subsidiariamente, Le Nouvelliste, AlterPresse, HaitiLibre y Rezo Nòdwès, y agencias internacionales, pero sólo cuando reproduzcan o citen el acto oficial. EL HECHO ANUNCIADO SE CUMPLE si al 8 de diciembre de 2026, 23.59 hora de Puerto Príncipe, ninguna de esas fuentes muestra el texto del instrumento bilateral ni un acto oficial de cualquiera de los dos Estados que enuncie al menos DOS de estos cuatro términos: a) vigencia o duración del despliegue; b) cadena de mando y autoridad que dirige a la tropa extranjera; c) estatuto jurídico de los efectivos en territorio haitiano —inmunidades, porte de armas, facultad de detener—; d) régimen de responsabilidad por daños o por violaciones de derechos. EL JUICIO QUEDA POR FALLADO si se publica el texto, o si un acto oficial enuncia dos o más de esos cuatro términos. NO CUENTAN, y por lo tanto no fallan el juicio: las declaraciones de respaldo, agradecimiento o bienvenida sin términos; las cifras de efectivos desplegados o de operaciones realizadas; los partes de operaciones y los comunicados conjuntos sin contenido normativo; las resoluciones del Consejo de Seguridad relativas a la Gang Suppression Force, que es una fuerza distinta y de mandato propio; y las descripciones del acuerdo hechas por terceros —prensa, organismos, organizaciones— sin acto oficial que las respalde. Fecha de corte de la recolección: 17 de noviembre de 2026.</p>
+
+  
+
+  <p class="disenso falta">Sin dictamen del décimo hombre: esta alerta no puede publicarse.</p>
+
+  <section class="vacios"><h2>Lo que no se pudo cerrar</h2><p class="referencia">Un juicio sin sus brechas declaradas no se publica. Éstas son las de esta alerta, con el puesto que las declaró — no es lo mismo que el vacío lo diga quien sostiene el juicio o quien lo impugna.</p><ul><li>No se pudo establecer si los cinco registros del 9 y los cinco del 10 de noviembre corresponden a cinco episodios o a un episodio cubierto por cinco cabeceras. La serie cuenta notas de prensa codificadas con la raíz 14 de CAMEO y no hechos verificados en el terreno, y en los datos de la casa no existe hoy una segunda familia viva que permita separarlos. Es el vacío que más pesa sobre la confianza. No se pudo corroborar con una segunda familia, y se verificó por qué: acled_protesta termina para Haití el 20 de octubre de 2025 y sus ceros posteriores no acreditan ausencia sino corte de entrega, y redes_gobernabilidad está inutilizable como corroboración porque el 9 de noviembre dio un escalón simultáneo en 27 de los 33 Estados; umbrales 1.3 ya la declaraba inmadura hasta el 16 de diciembre de 2026 y el escalón nuevo obliga a correr esa fecha, lo que se reporta a la Oficina como hallazgo y no como juicio. No se pudo medir el efecto del calendario electoral, que es el riesgo al alza al que este puesto no puede ponerle precio: calendario.json trae para Haití únicamente la elección del 18 de julio de 2027, de modo que el módulo informa «sin fechas institucionales en ±60 días» mientras la prensa del propio expediente muestra un proceso en curso —cierre del registro de adherentes fijado por el CEP para el 8 de noviembre, registro preliminar de candidaturas presidenciales, ajustes presupuestarios del CEP con el Ministerio de Economía—. Mejora concreta para el robot: mientras esos hitos no estén en el calendario, el detector va a leer noviembre con los umbrales estrictos y no con los del calendario. Y aviso al panel: si el analista de contexto establece una convocatoria con fecha pública dentro de la ventana anunciada, la banda correcta es la inmediatamente superior. No se pudo medir la geografía del episodio: la serie es nacional y no tiene capa subnacional, de modo que un episodio en Puerto Príncipe y uno extendido dan el mismo número. No se pudo verificar la serie contra el archivo original de GDELT: la verificación se hizo contra los datos de la casa, el registro de cambios del colector y su documentación interna, sin navegar, y el expediente existe para eso; lo que se afirma sobre la fuente tiene esa procedencia y no otra. No se pudo usar la capa de prensa del expediente para cotejar el episodio: de las cuarenta entradas de los días 9 y 10, la mayoría es agenda deportiva, ambiental y diaspórica, y ninguna describe una movilización, lo que no refuta la señal pero tampoco la sostiene. No hay antecedente propio de este Estado en este eje: las dos alertas anteriores de Haití, del 2 y del 3 de octubre, son de seguridad y de entorno informativo y están descartadas. La calibración del puesto no alcanza para corregir la banda: de diez lecturas anteriores sólo dos están resueltas. Lo que elevaría esta confianza de baja a media es concreto y medible: una segunda familia viva sobre Haití en el eje gobernabilidad que cubra del 18 de noviembre al 1.º de diciembre —la reapertura de ACLED, la familia de redes con línea de base limpia, o un recuento de la propia autoridad recogido por el vigía—, y cualquier instrumento que permita distinguir un hecho replicado de varios hechos distintos.<span class="quien">lo declaró el analista de indicadores</span></li><li>No abrí en primario Le Moniteur ni los sitios de la Primature y del Ministère des Affaires Étrangères et des Cultes de Haití, de modo que no puedo excluir que exista ya un arrêté o un acuerdo publicado y no indexado por buscadores: es el vacío que más afecta al juicio. No leí en documento original las resoluciones del Consejo de Seguridad citadas (2699 y 2793) ni el acuerdo recíproco Haití-Kenia; sus términos entran referidos por fuentes secundarias y por el informe del Secretario General S/2026/325, que tampoco abrí en primario. Dos fuentes que habrían cerrado el cuadro devolvieron error 403 en esta sesión: la ficha del calendario electoral de HaitiLibre y el análisis de The New Humanitarian del 11/11/2026. No consulté prensa en criollo haitiano ni radio local, exigencia de la casa para Haití, de modo que falta la lectura del terreno en la lengua de uso. No establecí si el viaje del Primer Ministro anulado el 16 de noviembre fue reprogramado, ni si hay encuentro bilateral agendado dentro de la ventana: es el dato que más movería la banda y no lo tengo. No establecí la posición oficial de la Cancillería salvadoreña frente al reclamo de publicación, ni si la nota diplomática estadounidense sobre falta de coordinación entre la tropa salvadoreña y la Gang Suppression Force —reportada por terceros— existe como acto formal. No pude contar los acuerdos bilaterales de seguridad publicados por el Ejecutivo haitiano desde abril de 2024, con lo cual la tasa base de la clase pertinente queda sin construir. No verifiqué en fuente oficial el carácter feriado del 18 de noviembre ni la norma que lo fija, aunque la fecha consta como jornada de movilización convocada. Tampoco verifiqué en el sitio del Conseil Électoral Provisoire las fechas del calendario revisado el 28 de octubre de 2026, que tomo de tres fuentes de prensa concordantes; queda sin resolver la discrepancia entre esas fuentes y una que sostiene que la inscripción de candidaturas corre hasta el 9 de febrero de 2027. Lo que elevaría esta confianza a alta: lectura en primario de Le Moniteur y de los comunicados de las dos cancillerías en el período, y confirmación oficial de si el encuentro bilateral se reprogramó dentro de la ventana.<span class="quien">lo declaró el analista de contexto</span></li><li>No se halló acto oficial, texto ni comunicado de ninguno de los dos Estados que publique el instrumento bilateral que rige el despliegue, ni anuncio de que vaya a publicarse en una fecha determinada. La tesis de este dictamen no se apoya en una publicación anunciada: se apoya en un acto ya publicado que el criterio, tal como está escrito, admite.<span class="quien">lo declaró el décimo hombre</span></li><li>No se halló convocatoria con fecha pública de encuentro bilateral entre el Primer Ministro haitiano y el Presidente salvadoreño dentro de la ventana.<span class="quien">lo declaró el décimo hombre</span></li><li>No se halló pieza en trámite en la Asamblea Legislativa salvadoreña sobre ampliación de efectivos, sobre el contingente que opera fuera de la GSF ni sobre prórroga anticipada, y se buscó expresamente. La segunda razón describe una vía acreditada y una discusión en curso, no un trámite abierto.<span class="quien">lo declaró el décimo hombre</span></li><li>No se verificó en primario la afirmación, recogida en resúmenes de cobertura francófona, de que el Primer Ministro haitiano habría declarado el 3/11/2026 que el Estado haitiano dirige las fuerzas extranjeras en el país; al abrir la nota que la soportaba, lo que consta es un mensaje del 10/11/2026 en su cuenta personal, de agradecimiento y sin términos. El dato queda marcado, con credibilidad descendida, y ningún eslabón de este dictamen depende de él.<span class="quien">lo declaró el décimo hombre</span></li></ul><p class="corte">La información se cerró el <b>2026-11-17</b>. Es el corte más temprano de los tres puestos: el juicio descansa en los tres a la vez.</p></section>
+
+  <div class="tira" title="Los 33 Estados; en violeta, el de esta alerta"><img src="../banderas/ARG.png" alt="Argentina"><img src="../banderas/BRA.png" alt="Brasil"><img src="../banderas/CHL.png" alt="Chile"><img src="../banderas/PRY.png" alt="Paraguay"><img src="../banderas/URY.png" alt="Uruguay"><img src="../banderas/BOL.png" alt="Bolivia"><img src="../banderas/COL.png" alt="Colombia"><img src="../banderas/ECU.png" alt="Ecuador"><img src="../banderas/PER.png" alt="Perú"><img src="../banderas/VEN.png" alt="Venezuela"><img src="../banderas/GUY.png" alt="Guyana"><img src="../banderas/SUR.png" alt="Surinam"><img src="../banderas/MEX.png" alt="México"><img src="../banderas/BLZ.png" alt="Belice"><img src="../banderas/CRI.png" alt="Costa Rica"><img src="../banderas/SLV.png" alt="El Salvador"><img src="../banderas/GTM.png" alt="Guatemala"><img src="../banderas/HND.png" alt="Honduras"><img src="../banderas/NIC.png" alt="Nicaragua"><img src="../banderas/PAN.png" alt="Panamá"><img src="../banderas/CUB.png" alt="Cuba"><img src="../banderas/DOM.png" alt="República Dominicana"><img src="../banderas/HTI.png" alt="Haití" class="viva"><img src="../banderas/JAM.png" alt="Jamaica"><img src="../banderas/TTO.png" alt="Trinidad y Tobago"><img src="../banderas/BHS.png" alt="Bahamas"><img src="../banderas/BRB.png" alt="Barbados"><img src="../banderas/ATG.png" alt="Antigua y Barbuda"><img src="../banderas/DMA.png" alt="Dominica"><img src="../banderas/GRD.png" alt="Granada"><img src="../banderas/KNA.png" alt="San Cristóbal y Nieves"><img src="../banderas/LCA.png" alt="Santa Lucía"><img src="../banderas/VCT.png" alt="San Vicente y las Granadinas"></div>
+</main>
+
+<script>
+  (function () {
+    var raiz = document.documentElement, boton = document.getElementById("tema");
+    function poner(modo) {
+      raiz.setAttribute("data-tema", modo);
+      boton.textContent = modo === "oscuro" ? "Fondo claro" : "Fondo oscuro";
+      boton.setAttribute("aria-pressed", modo === "oscuro" ? "true" : "false");
+    }
+    var guardado = null;
+    try { guardado = localStorage.getItem("femonoe-tema"); } catch (e) { guardado = null; }
+    poner(guardado === "oscuro" ? "oscuro" : "claro");
+    boton.onclick = function () {
+      var nuevo = raiz.getAttribute("data-tema") === "oscuro" ? "claro" : "oscuro";
+      poner(nuevo);
+      try { localStorage.setItem("femonoe-tema", nuevo); } catch (e) { /* sin memoria */ }
+    };
+  })();</script>
+
+<footer>
+  <b>Equipo de Análisis · Fundación Sherman Kent.</b> Alerta 2026-11-10-HTI-G, página generada el 2026-11-21.
+
+  <p><b>El resto del trabajo de la Fundación.</b> FEMÓNOE anuncia
+  hechos con probabilidad y plazo; el análisis que los explica se publica aparte:
+  <a href="https://fundacionkent.org/articulos/?utm_source=femonoe&amp;utm_medium=referral&amp;utm_campaign=pie" target="_blank" rel="noopener">los informes sobre América
+  Latina y el Caribe</a>. Quien quiera sostener este trabajo puede hacerse
+  <a href="https://fundacionkent.org/membresias/?utm_source=femonoe&amp;utm_medium=referral&amp;utm_campaign=pie" target="_blank" rel="noopener">socio de la Fundación</a>
+  — <b>las alertas y los datos de esta plataforma son libres y gratuitos, hoy y
+  siempre</b>, y eso no depende de ninguna membresía.</p>
+
+  <p>Programa libre bajo <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank"
+  rel="noopener">AGPL-3.0</a> · código en
+  <a href="https://github.com/fundacion-sherman-kent/femonoe" target="_blank"
+  rel="noopener">github.com/fundacion-sherman-kent/femonoe</a>.</p>
+</footer>
+<script>
+  // Lo que llega a la vista, entra.
+  //
+  // **Por qué no usa `IntersectionObserver`.** Es la herramienta correcta para
+  // esto, pero el 2/10/2026 no entregó una sola llamada en el entorno donde la
+  // Oficina verifica, ni siquiera creada a mano sobre un elemento a la vista.
+  // Puede ser una limitación de ese entorno y no del navegador del lector —
+  // pero **una función que no se puede comprobar no se publica**. Un recorrido
+  // sobre la posición de cada pieza es más tosco, se puede medir, y con unas
+  // decenas de piezas no cuesta nada.
+  //
+  // El estado por defecto del sitio es «todo a la vista»: si este programa no
+  // corre, no se pierde nada. La animación se agrega; nunca se resta.
+  (function () {
+    var piezas = [].slice.call(document.querySelectorAll(".revela"));
+    if (!piezas.length) { return; }
+    var pedido = false;
+    function mirar() {
+      pedido = false;
+      var alto = window.innerHeight || document.documentElement.clientHeight;
+      for (var i = piezas.length - 1; i >= 0; i--) {
+        var r = piezas[i].getBoundingClientRect();
+        // Entra cuando su borde superior cruza el 92 % de la pantalla: un poco
+        // antes de llegar abajo del todo, para que no aparezca de golpe.
+        //
+        // **Sin exigir que siga a la vista.** La primera versión pedía además
+        // `r.bottom > 0`, y entonces una pieza que se pasaba de largo sin haber
+        // sido mirada —por un salto de ancla, por una vuelta atrás, por rodar
+        // rápido— quedaba invisible para siempre. Una animación de entrada que
+        // puede dejar una sección en blanco no es una animación: es un defecto.
+        if (r.top < alto * 0.92) {
+          piezas[i].classList.add("visible");
+          piezas.splice(i, 1);          // entra una vez y se deja de mirar
+        }
+      }
+      if (!piezas.length) {
+        window.removeEventListener("scroll", pedir);
+        window.removeEventListener("resize", pedir);
+      }
+    }
+    // Sin `requestAnimationFrame`: el 2/10/2026 no se entregó de forma fiable
+    // en el entorno donde la Oficina verifica, y una entrada que a veces no
+    // ocurre deja secciones en blanco. El freno por tiempo es más tosco y se
+    // puede medir. Con unas decenas de piezas, el costo es imperceptible.
+    var ultimo = 0;
+    function pedir() {
+      var ahora = Date.now();
+      if (pedido || ahora - ultimo < 80) { return; }
+      ultimo = ahora;
+      pedido = true;
+      setTimeout(mirar, 0);
+    }
+    window.addEventListener("scroll", pedir, { passive: true });
+    window.addEventListener("resize", pedir);
+    mirar();
+  })();
+</script>
+</body>
+</html>

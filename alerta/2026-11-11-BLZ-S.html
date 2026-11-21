@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Medicion. Es la MISMA etiqueta de la Fundacion que ya usa SIWA: una sola
+     propiedad y un solo flujo para las tres plataformas, que se separan despues
+     por nombre de host. Si la propiedad cambia, se cambia SOLO esta linea.
+     * anonymize_ip: la IP del visitante se recorta antes de guardarse.
+     * linker.domains nombra los CUATRO dominios de la casa. Sin eso, un salto
+       entre plataformas crea un usuario nuevo y una sesion nueva, y el dato de
+       que las plataformas se alimentan entre si no se podria demostrar.
+     * El evento de entrada NO se dispara aca. La casa lo crea del lado de
+       Analytics, como `siwa_entrada`, a partir de page_view y la direccion.
+     * PENDIENTE DE LA DIRECCION: esto instala cookies de medicion; corresponde
+       el aviso de privacidad y el consentimiento (Ley 25.326). -->
+<script>
+  window.FEMONOE_GA = "G-L9ZDDH81GB";
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L9ZDDH81GB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', window.FEMONOE_GA, {
+    anonymize_ip: true,
+    linker: { domains: ['fundacionkent.org', 'siwa.fundacionkent.org',
+                        'femonoe.fundacionkent.org', 'ysyry.fundacionkent.org'] }
+  });
+  // LIMPIA LA DIRECCION DESPUES DE QUE ANALYTICS LA LEYO.
+  //
+  // El enlace de la casa es `https://femonoe.fundacionkent.org/` y nada mas.
+  // Lo largo lo agrega Google: cuando alguien llega desde otro dominio de la
+  // Fundacion, el *linker* de Analytics pega un parametro `_gl` de unos cien
+  // caracteres. Quien copia la direccion de la barra comparte ESO, y un enlace
+  // asi parece roto o rastreador y se comparte menos.
+  //
+  // `gtag('config')` ya consumio el parametro arriba, de forma sincronica, asi
+  // que sacarlo de la barra no rompe la medicion entre dominios: la sesion ya
+  // quedo unida. Se saca SOLO `_gl`; los `utm_` se dejan, porque son la unica
+  // manera de saber que campana trajo a alguien.
+  try {
+    var u = new URL(window.location.href);
+    if (u.searchParams.has('_gl')) {
+      u.searchParams.delete('_gl');
+      history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+    }
+  } catch (e) { /* una barra rara no justifica romper la pagina */ }
+</script>
+<title>Belice · seguridad · FEMÓNOE</title>
+<meta name="description" content="Una alerta de FEMÓNOE, con su probabilidad declarada, su plazo, el dictamen del décimo hombre y el criterio fijado al nacer.">
+<!-- Cómo se ve el enlace al compartirse. La tarjeta la genera
+     `herramientas/tarjeta_redes.py` con la paleta del manual: no es un PNG
+     suelto que alguien dibujó una vez. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FEMÓNOE · Fundación Sherman Kent">
+<meta property="og:locale" content="es_AR">
+<meta property="og:title" content="Belice · seguridad · FEMÓNOE">
+<meta property="og:description" content="Una alerta de FEMÓNOE, con su probabilidad declarada, su plazo, el dictamen del décimo hombre y el criterio fijado al nacer.">
+<link rel="canonical" href="https://femonoe.fundacionkent.org/alerta/2026-11-11-BLZ-S.html">
+<meta property="og:url" content="https://femonoe.fundacionkent.org/alerta/2026-11-11-BLZ-S.html">
+<meta property="og:image" content="https://femonoe.fundacionkent.org/marca/femonoe-compartir.png?v=b9ab0bce">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FEMÓNOE · alerta temprana para América Latina y el Caribe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Belice · seguridad · FEMÓNOE">
+<meta name="twitter:description" content="Una alerta de FEMÓNOE, con su probabilidad declarada, su plazo, el dictamen del décimo hombre y el criterio fijado al nacer.">
+<meta name="twitter:image" content="https://femonoe.fundacionkent.org/marca/femonoe-compartir.png?v=b9ab0bce">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../estilos.css?v=2e6076b7">
+</head>
+<body>
+
+<div class="franja">
+  <div class="marca">
+    <a href="https://fundacionkent.org/?utm_source=femonoe&amp;utm_medium=referral&amp;utm_campaign=tablero" target="_blank" rel="noopener"
+       title="Ir a la web de la Fundación Sherman Kent">
+      <img class="logo claro" src="../marca/fusk-lockup-color.svg" alt="Fundación Sherman Kent">
+      <img class="logo oscuro" src="../marca/fusk-lockup-blanco.svg" alt="Fundación Sherman Kent"></a>
+    <div class="sep"></div>
+    <a class="nombre" href="../index.html" title="Volver a la portada de FEMÓNOE">
+      <img class="icono" src="../marca/femonoe-marca.svg" alt="">
+      <div><h1>FEMÓNOE</h1><small>Alerta temprana · América Latina y el Caribe</small></div>
+    </a>
+  </div>
+  <nav class="franja-nav"><a href="../index.html">Los 33 Estados</a>
+    <a href="../horizonte.html">El horizonte</a>
+    <a href="../metodo.html">Método</a>
+    <a href="https://fundacionkent.org/articulos/?utm_source=femonoe&amp;utm_medium=referral&amp;utm_campaign=franja" target="_blank" rel="noopener">Análisis de la región ↗</a></nav>
+  <div class="franja-derecha">
+    <button type="button" id="tema" class="tema" aria-pressed="false">Fondo oscuro</button>
+  </div>
+</div>
+
+<main class="dictamen">
+  <a class="volver" href="../index.html">&larr; Los 33 Estados</a>
+  <div class="sello"><span>Belice</span> · <span>seguridad</span> ·
+    <b>descartada</b> · <span>2026-11-17</span></div>
+  <div class="descarte" role="note"><b>Esta alerta no se publicó: fue descartada antes de salir.</b> La descartó <b>dirección</b> el 2026-11-17. Queda en el registro porque el disenso que la frenó es parte del método, no un borrador que convenga borrar.<p>Dictamen del décimo hombre: veredicto «no debería nacer», y la Oficina lo concede. Tres defectos del criterio, los tres fijados al nacer y por lo tanto no corregibles ahora. PRIMERO, la fuente designada para el acto 3 está ciega: el listado del expediente del caso ante la Corte Internacional no registra acto alguno posterior a junio de 2022 y no refleja ni la carta del Secretario del 17/9/2026 que fijó las audiencias, que la prensa beliceña sí publicó. Un escrito presentado dentro de la ventana no se vería al 2/12, así que la alerta resolvería «ocurrió» por rezago de la fuente y no por acierto. SEGUNDO, el criterio excluye el repertorio real del actor: Belice cita al embajador guatemalteco en Belmopán -lo hizo en septiembre de 2026- y no retira al propio, y el 11/11 rechazó el boicot; así los actos 2 y 4 quedan sin vía practicable. TERCERO, y es la razón de fondo: contados los cuatro episodios de la tasa base más las tres aplicaciones retroactivas del propio criterio, son siete aplicaciones con cero falsificaciones. La banda correcta es un escalón más arriba, «casi con certeza», y una alerta en esa banda no advierte nada. Es la lección que la casa asentó hoy mismo: un criterio que no tiene con qué fallar no acredita nada. El dictamen además corrigió el expediente a favor de la Oficina en dos puntos que quedan asentados: la tasa base 0 de 4 se verificó y no se refutó, y la posición guatemalteca de noviembre es de protocolo y retorno sin novedades. Y agregó una fecha institucional que el expediente declaraba ausente: la visita del Secretario General de la OEA a Belice alrededor del 22 o 23/11/2026, informada en la Cámara el 12/11. La lectura queda en el expediente: si el episodio se reabre, la alerta nueva tiene que nacer con una fuente capaz de ver el acto dentro del plazo y con al menos un acto del repertorio que el actor usa de verdad, para que el criterio pueda fallar.</p></div>
+  <h2>La controversia del Sarstoon entre Belice y Guatemala no pasaría del umbral de la protesta diplomática: entre el 18 de noviembre y el 2 de diciembre de 2026 inclusive no se registraría ninguno de los cuatro actos de escalada tasados en el criterio de resolución.</h2>
+  <div class="kent" role="img" aria-label="Probabilidad: muy probable"><small>menos probable</small><span class="paso" title="casi con certeza no"></span><span class="paso" title="muy improbable"></span><span class="paso" title="improbable"></span><span class="paso" title="posibilidades parejas"></span><span class="paso" title="probable"></span><span class="paso aqui" title="muy probable">muy probable</span><span class="paso" title="casi con certeza"></span><small>más probable</small></div>
+  <p class="resumen">Confianza media · plazo 15 días · vence el 2026-12-02 · <b>fuente única</b></p>
+
+  
+
+  <div class="cuerpo">
+    <div><p>El pico de la señal no es violencia de bandas: es un incidente interestatal. De las piezas del 10 y el 11 de noviembre que trae el expediente, el bloque dominante corresponde al Sarstoon —despliegue de embarcaciones adicionales de la Fuerza de Defensa y la Guardia Costera, condena del Ministerio de Relaciones Exteriores, reclamo opositor de un plan, comentario del embajador estadounidense sobre la mesura de la Fuerza de Defensa—, mientras los hechos ordinarios del eje en esos días son un robo en la oficina postal y la segunda muerte del tiroteo de Halloween. En un Estado de poco más de cuatrocientos mil habitantes, un episodio interestatal con video basta para multiplicar por ocho el recuento de una familia construida sobre cobertura internacional, sin que se mueva el fenómeno estructural —homicidios concentrados en pocos barrios de Belize City—. La propia serie de la casa lo muestra ya desinflado: 4, 3, 1, 0 y 0 entre el 12 y el 16 de noviembre (datos/series/eventos_violencia.csv, leído el 17/11/2026).</p><p>Los hechos, con fuente. El 7 de noviembre de 2026 el Gobierno de Belice declaró que dos embarcaciones de las fuerzas armadas guatemaltecas se aproximaron de manera agresiva a una patrulla de rutina de la Fuerza de Defensa cerca de la isla Sarstún, anunció que presentaría una protesta formal ante el Gobierno de Guatemala e informaría el incidente a la Organización de los Estados Americanos, y pidió que ambas partes se abstengan de agravar la disputa mientras la reclamación guatemalteca está pendiente ante la Corte Internacional de Justicia (Ministerio de Relaciones Exteriores de Belice, mfa.gov.bz, declaración del 7/11/2026 emitida en Belmopán a las 11.53). El 11 de noviembre nuevas imágenes mostraron embarcaciones de la Guardia Costera beliceña frente a personal guatemalteco, y el comandante de la Guardia Costera confirmó que las fronteras marítimas siguen bajo patrullaje activo (Breaking Belize News, 11/11/2026). Guatemala sostiene la versión inversa —que la embarcación beliceña cruzó a sus aguas— y rechaza la pretensión beliceña de soberanía sobre la isla Sarstún (comunicado del Ministerio de Relaciones Exteriores de Guatemala del 16/9/2025 sobre los incidentes del 10, 12 y 13 de septiembre de 2025, minex.gob.gt; EFE vía swissinfo.ch).</p><p>El actor y su salida. Belice no perdió ninguna vía ordinaria: las tiene todas abiertas y ya las está usando. El 10 de septiembre de 2026, ante un episodio mayor en número —alrededor de dieciocho embarcaciones militares y civiles guatemaltecas bloqueando el circuito anual de los Voluntarios Territoriales Beliceños—, el Ministerio despachó una nota verbal el 14 de septiembre y notificó formalmente a la Organización de los Estados Americanos y a sus socios internacionales (Oficina de Prensa del Gobierno de Belice, comunicado PR#234-26 del 14/9/2026; Breaking Belize News, 14/9/2026). En esa misma ocasión la cartera de Relaciones Exteriores declaró que Belice continuará registrando y protestando estos incidentes mientras mantiene el diálogo directo con Guatemala, y que la tensión del Sarstoon persistirá hasta el fallo final de la Corte. Ésa es la doctrina declarada del actor, y el 11 de noviembre de 2026 la reafirmó al rechazar públicamente los llamados a boicotear productos guatemaltecos (Love FM, 11/11/2026). La presión para subir un escalón existe y tiene nombre institucional: el 14 de noviembre de 2026 la jefatura de la oposición preguntó si el Gobierno había considerado llamar a consultas al embajador beliceño en Guatemala (Breaking Belize News, 14/11/2026). El Ejecutivo no le dio respuesta pública.</p><p>El vencimiento que ordena la conducta no está en la ventana, pero la gobierna. El expediente dice que no hay fechas institucionales en ±60 días, y es exacto; lo que el expediente no registra es que el 22 de febrero de 2027 empiezan las audiencias orales del caso ante la Corte Internacional de Justicia —Guatemala expone el 22, Belice responde el 24, el ciclo cierra el 26—, fechas fijadas y difundidas a mediados de septiembre de 2026 (San Pedro Sun, 24/9/2026; Love FM, 18/9/2026). A tres meses de esas audiencias los dos Estados están construyendo expediente de conducta: Belice compra mesura —y el embajador estadounidense se la acreditó en público el 10/11/2026— y Guatemala sostiene la fórmula de la defensa pacífica de la soberanía (Agencia Guatemalteca de Noticias). Pedir medidas provisionales a tres meses de la vista de fondo rinde poco, y Belice ya dejó ese escalón por el camino una vez: en mayo de 2019 anunció que las solicitaría por el Sarstoon y no consta que las haya presentado (Breaking Belize News, 21/5/2019). Por eso el juicio es de contención y no de escalada: ningún actor perdió su salida, y la capacidad de escalar —que ninguno de los dos perdió— no autoriza a inferir la intención.</p><p>Una advertencia sobre la base, que es medición de la casa y no impresión. Belice produce 2,4 señales por año según datos/cobertura.json (medido el 17/11/2026) y la casa no tiene alertas anteriores de este Estado, de modo que no hay calibración propia con la cual calzar este juicio. La prensa, en cambio, no es escasa en este caso: el expediente trae alrededor de cuarenta piezas en cinco días de al menos cinco medios beliceños, así que la advertencia del 17/11/2026 sobre Estados chicos del Caribe alcanza a la base de la serie y no a la cobertura. La confianza se declara media y no alta por otra razón, detallada en los vacíos: la señal es de familia única y la triangulación quedó coja del lado guatemalteco.</p><p>---</p><p>## La elección de la Oficina</p><p><b>Los dos analistas anunciaron hechos distintos, así que no rige la banda más baja: la Oficina elige, y la banda viaja con el hecho elegido.</b> El consolidador dejó «improbable» porque es la menor de las dos, pero esa banda pertenecía al hecho del analista de indicadores, no al que se publica.</p><p><b>Se elige la formulación del analista de contexto, y el motivo no es de preferencia sino de doctrina ya resuelta.</b> El analista de indicadores anunció un hecho <b>sobre el propio indicador de FEMÓNOE</b> —que la serie volvería o no a cierto valor—. La dirección ya rechazó ese molde el 13/10/2026 al descartar la alerta <code>2026-10-10-MEX-S</code>: <i>FEMÓNOE prediciendo su propia serie</i>. Una plataforma de alerta temprana anuncia hechos del mundo, no el comportamiento futuro de su propio contador; y un lector al que se le anuncia que un contador va a subir no recibió ninguna advertencia sobre la región. <b>El propio analista de indicadores de Belice señaló esta objeción contra su propio molde al entregar</b>, y la sostuvo sólo porque es lo único que su instrumento alcanza a sostener. Tiene razón en lo segundo, y eso es exactamente por qué su lectura entra al expediente como medición y no como hecho anunciado.</p><p><b>Lo que la lectura de indicadores aporta, y queda en el expediente:</b> la señal ya decayó —en los dos casos— y la tasa base condicionada al estado real de hoy es más baja que la incondicional. Eso no cambia el hecho elegido, pero sostiene la confianza en media y no más arriba.</p></div>
+    <figure style="margin:0"><div class="serie"><div class="eje-y"><span>23</span><span class="unidad">hechos</span><span>0</span></div><div class="trama"><svg class="chispa" viewBox="0 0 250 48" role="img" preserveAspectRatio="none" aria-label="Los últimos 31 días de la serie"><line x1="5" y1="38.9" x2="245" y2="38.9" stroke="var(--acero)" stroke-width="1" stroke-dasharray="3 3"/><polyline class="trazo" points="5.0,38.0 13.0,43.0 21.0,26.5 29.0,41.3 37.0,39.7 45.0,31.4 53.0,43.0 61.0,43.0 69.0,41.3 77.0,18.2 85.0,34.7 93.0,16.6 101.0,39.7 109.0,43.0 117.0,43.0 125.0,39.7 133.0,36.4 141.0,34.7 149.0,36.4 157.0,34.7 165.0,43.0 173.0,38.0 181.0,5.0 189.0,38.0 197.0,39.7 205.0,34.7 213.0,39.7 221.0,43.0 229.0,43.0 237.0,16.6 245.0,8.3" fill="none" stroke="var(--violeta)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="412" style="--largo:412"/><circle class="punta" cx="245.0" cy="8.3" r="3.2" fill="var(--violeta)"/></svg><span class="rot-mediana" style="--y:89.1%">mediana 2</span></div><div class="eje-x"><span>13 oct</span><span>11 nov</span></div></div><figcaption title="serie: eventos_violencia">hechos de violencia registrados, 30 días. La línea punteada es la mediana de Belice en ese tramo.</figcaption></figure>
+  </div>
+
+  
+
+  <p class="criterio"><b>Criterio de resolución, fijado al nacer la alerta.</b>
+    Ventana: del 18 de noviembre al 2 de diciembre de 2026 inclusive, hora de Belice. El hecho anunciado SE TIENE POR OCURRIDO si al 2 de diciembre de 2026 a las 23.59 no consta ninguno de estos cuatro actos, enumerados de manera cerrada y que no se amplían al vencer: (1) empleo de arma de fuego por fuerzas de Belice o de Guatemala en el río Sarstoon, en la isla Sarstún o en su desembocadura, con resultado de al menos un herido o un muerto; (2) retiro del embajador de Belice en Guatemala, su llamado a consultas, la reducción formal del rango de la representación o la suspensión o ruptura de relaciones diplomáticas, dispuesta por Belice; (3) presentación por Belice ante la Corte Internacional de Justicia de un pedido de medidas provisionales o de cualquier escrito incidental referido al Sarstoon en el caso «Reclamación territorial, insular y marítima de Guatemala (Guatemala c. Belice)»; (4) suspensión o cierre del paso fronterizo con Guatemala, o suspensión del comercio bilateral, dispuesta por autoridad beliceña por razón del diferendo. Se tiene por NO OCURRIDO si consta al menos uno de los cuatro. Fuentes que se consultan, en este orden: el Ministerio de Relaciones Exteriores de Belice (mfa.gov.bz, sección de declaraciones y notas de prensa) y la Oficina de Prensa del Gobierno de Belice (pressoffice.gov.bz, comunicados numerados PR) para los actos 2 y 4; el expediente del caso en icj-cij.org, listado de documentos y providencias, para el acto 3; para el acto 1, el mismo Ministerio o la Fuerza de Defensa de Belice, corroborado por al menos dos de estos medios beliceños de registro: Amandala, Channel 5 Belize, Love FM, Breaking Belize News, The Reporter. REGLAS DE IMPUTACIÓN, fijadas ahora: el anuncio de la intención de adoptar cualquiera de los cuatro actos no cuenta; cuenta el acto consumado y publicado. Una nueva nota verbal de protesta, una nueva notificación a la Organización de los Estados Americanos, un nuevo despliegue de embarcaciones de la Fuerza de Defensa o de la Guardia Costera, una nueva declaración de condena del Ministerio o un debate parlamentario NO cuentan como escalada: son el umbral de protesta cuyo mantenimiento es precisamente lo que se afirma. Un nuevo incidente de aproximación, bloqueo o embestida sin disparo con víctima tampoco cuenta. Los actos adoptados por Guatemala quedan fuera del criterio, salvo el acto 1, que es diádico. Fecha de corte de la recolección: 17 de noviembre de 2026.</p>
+
+  
+
+  <p class="disenso falta">Sin dictamen del décimo hombre: esta alerta no puede publicarse.</p>
+
+  <section class="vacios"><h2>Lo que no se pudo cerrar</h2><p class="referencia">Un juicio sin sus brechas declaradas no se publica. Éstas son las de esta alerta, con el puesto que las declaró — no es lo mismo que el vacío lo diga quien sostiene el juicio o quien lo impugna.</p><ul><li>1. FUENTE ÚNICA, confirmada y medida. hechos_gdelt es la única familia con historia utilizable para Belice. ACLED está muerta para el país: 58 filas semanales que terminan el 20 de octubre de 2025, trece meses sin dato. redes_seguridad no tiene historia: once valores distintos de cero en 712 jornadas desde 2017, diez de ellos en los últimos dieciséis días, y su arranque es un artefacto que levanta a los 33 Estados a la vez. Por la regla 10 de la casa esto no sostiene confianza alta, y por eso la confianza es baja. Lo que la subiría a media: una segunda familia con 180 días o más de serie beliceña. 2. NO PUDE DETERMINAR si la caída de siete veces del nivel de Belice desde octubre de 2025 es del país o de la cobertura del país. Descarté la deriva global del colector —el promedio regional quedó plano—, pero un cambio de indexación de uno o dos medios beliceños produciría exactamente la misma caída y la serie no lo distingue. Lo que lo cerraría: una serie de denominador, notas indexadas por país y por día, que la casa no tiene. 3. NO PUDE DESCARTAR el hecho único replicado, que es la explicación aburrida más viva de este caso. El expediente no trae el desglose por medio ni por URL de los 21 registros del 11 de noviembre, así que no puedo contar cuántos episodios distintos los producen. Con mediana 2,5, la diferencia entre un episodio cubierto por ocho cabeceras y ocho episodios distintos es toda la señal. 4. NO PUDE MEDIR cuánta de la varianza diaria es de recolección. El colector cuenta porciones de GDELT —63 al cierre de medición del 17 de noviembre, jornada incompleta— y no existe registro histórico de porciones por día, de modo que no hay manera de saber si una jornada baja de la serie es un día tranquilo o un día mal recolectado. 5. CALIBRACIÓN PROPIA INSUFICIENTE. De los diez juicios de indicadores emitidos desde el 20 de septiembre de 2026, sólo dos alertas llegaron a vencer con resultado asentado, y las dos resolvieron en el sentido anunciado. Con dos casos no hay con qué corregir una banda hacia arriba ni hacia abajo: no se corrigió ninguna, y se declara que la banda de este juicio descansa en la tasa base medida y no en una calibración propia que todavía no existe. Nueve de esos diez juicios llevan confianza baja, lo que es consistente con una cartera de Estados de volumen bajo. 6. LÍMITE DEL JUICIO, declarado. Este juicio no dice nada sobre la violencia real en Belice ni sobre el diferendo del Sarstoon: mide el comportamiento de un indicador que cuenta notas codificadas. La lectura de actores no es de este analista. 7. FECHA DE CORTE: 17 de noviembre de 2026, 15:31 UTC, el sello del último cierre de medición del colector. No se navegó en vivo: todo sale del expediente y de las series locales del repositorio —eventos_violencia.csv, redes_seguridad.csv, eventos_protesta.csv, acled_violencia.csv, acled_muertes.csv, datos/cobertura.json y datos/gdelt_porciones.json—.<span class="quien">lo declaró el analista de indicadores</span></li><li>No se leyó la posición guatemalteca de noviembre de 2026: el sitio del Ministerio de Relaciones Exteriores de Guatemala devolvió HTTP 403 el 17/11/2026 y no se halló cobertura de un comunicado guatemalteco sobre los incidentes del 7 y el 11 de noviembre. La triangulación queda sin la fuente del actor contrario para la ventana, y eso es lo que impide declarar confianza alta. El precedente del 16/9/2025 muestra que Guatemala sí emite comunicado ante episodios así, de modo que su silencio en noviembre no está establecido: no está verificado, que es distinto, y no debe tomarse por calma. No se confirmó que la nota de protesta por el incidente del 7 de noviembre haya sido entregada ni que la Organización de los Estados Americanos haya sido notificada: al 14/11/2026 la prensa beliceña seguía dando ambas cosas como anunciadas y no como hechas. Tampoco se halló respuesta pública del Ejecutivo beliceño al planteo opositor de llamar a consultas al embajador. No se reconstruyó la serie de incidentes del Sarstoon 2016-2024, de modo que la tasa base descansa en cuatro episodios y no en el universo. No se pudo confirmar si Belice llegó a presentar el pedido de medidas provisionales anunciado en mayo de 2019: no se abrió el expediente del caso en icj-cij.org en esta pasada. No se halló calendario ni orden del día de sesiones de la Cámara de Representantes de Belice dentro de la ventana, de modo que el plazo no pudo abrazar una fecha parlamentaria; los quince días se fijaron sobre el ciclo observado en septiembre de 2026, en el que toda la secuencia diplomática se consumó en cuatro días. El segundo hilo vivo del eje quedó fuera del juicio y sin verificar en fuente estadounidense: el interés declarado de los Estados Unidos en operaciones militares conjuntas con Belice contra el narcotráfico (11/11/2026, prensa beliceña) y las revocaciones de visa a figuras beliceñas. Es materia de un juicio aparte, con su propio horizonte e indicadores. Sobre la base de medición: la señal es de familia única —hechos_gdelt y redes, con rótulo de fuente única en el propio borrador— y no se contrastó contra una familia independiente de hechos; la serie ACLED de Belice disponible en la casa termina en octubre de 2025 y no cubre la ventana. Belice produce 2,4 señales por año (datos/cobertura.json, medido el 17/11/2026) y no registra alertas anteriores, de modo que no existe calibración propia de este Estado por banda de Kent. Qué elevaría esta confianza a alta: un comunicado del Ministerio de Relaciones Exteriores de Guatemala sobre noviembre de 2026 leído en origen, la confirmación oficial de la entrega de la nota verbal y de la notificación a la Organización de los Estados Americanos, y la lectura del expediente del caso en icj-cij.org.<span class="quien">lo declaró el analista de contexto</span></li><li>No se halló ningún escrito de Belice ante la Corte referido al Sarstoon, ni anuncio de que vaya a presentarse dentro de la ventana. La vía está declarada y la documentación está en manos del equipo jurídico; el acto, no. Se dice con todas las letras: el disenso no se apoya en un escrito acreditado.<span class="quien">lo declaró el décimo hombre</span></li><li>No se halló comunicado del Ministerio de Relaciones Exteriores de Guatemala sobre los incidentes del 7 y el 11 de noviembre de 2026. Lo guatemalteco que se halló es militar, no diplomático.<span class="quien">lo declaró el décimo hombre</span></li><li>No se halló ninguna pieza de prensa beliceña ni guatemalteca fechada entre el 15 y el 17 de noviembre de 2026 sobre el Sarstoon: la última hallada es del 14/11/2026. No se halló respuesta pública del Ejecutivo beliceño al planteo de retirar o llamar a consultas a su embajador.<span class="quien">lo declaró el décimo hombre</span></li><li>No se halló disparo, herido ni muerto en el episodio. Tampoco se verificó si Belice presentó las medidas provisionales que anunció en mayo de 2019: el listado del expediente del caso no registra actos de esos años.<span class="quien">lo declaró el décimo hombre</span></li><li>No se abrieron en primario tres piezas que se citan y entran marcadas, con credibilidad descendida: el comunicado PR#234-26 en PDF —el archivo no trae capa de texto legible—, la nota de Prensa Libre del 9/11/2026 y la de Canal Antigua del 10/11/2026. Ningún eslabón del dictamen depende sólo de ellas: el pasaje decisivo del 14/9/2026 se leyó en mfa.gov.bz.<span class="quien">lo declaró el décimo hombre</span></li></ul><p class="corte">La información se cerró el <b>2026-11-17</b>. Es el corte más temprano de los tres puestos: el juicio descansa en los tres a la vez.</p></section>
+
+  <div class="tira" title="Los 33 Estados; en violeta, el de esta alerta"><img src="../banderas/ARG.png" alt="Argentina"><img src="../banderas/BRA.png" alt="Brasil"><img src="../banderas/CHL.png" alt="Chile"><img src="../banderas/PRY.png" alt="Paraguay"><img src="../banderas/URY.png" alt="Uruguay"><img src="../banderas/BOL.png" alt="Bolivia"><img src="../banderas/COL.png" alt="Colombia"><img src="../banderas/ECU.png" alt="Ecuador"><img src="../banderas/PER.png" alt="Perú"><img src="../banderas/VEN.png" alt="Venezuela"><img src="../banderas/GUY.png" alt="Guyana"><img src="../banderas/SUR.png" alt="Surinam"><img src="../banderas/MEX.png" alt="México"><img src="../banderas/BLZ.png" alt="Belice" class="viva"><img src="../banderas/CRI.png" alt="Costa Rica"><img src="../banderas/SLV.png" alt="El Salvador"><img src="../banderas/GTM.png" alt="Guatemala"><img src="../banderas/HND.png" alt="Honduras"><img src="../banderas/NIC.png" alt="Nicaragua"><img src="../banderas/PAN.png" alt="Panamá"><img src="../banderas/CUB.png" alt="Cuba"><img src="../banderas/DOM.png" alt="República Dominicana"><img src="../banderas/HTI.png" alt="Haití"><img src="../banderas/JAM.png" alt="Jamaica"><img src="../banderas/TTO.png" alt="Trinidad y Tobago"><img src="../banderas/BHS.png" alt="Bahamas"><img src="../banderas/BRB.png" alt="Barbados"><img src="../banderas/ATG.png" alt="Antigua y Barbuda"><img src="../banderas/DMA.png" alt="Dominica"><img src="../banderas/GRD.png" alt="Granada"><img src="../banderas/KNA.png" alt="San Cristóbal y Nieves"><img src="../banderas/LCA.png" alt="Santa Lucía"><img src="../banderas/VCT.png" alt="San Vicente y las Granadinas"></div>
+</main>
+
+<script>
+  (function () {
+    var raiz = document.documentElement, boton = document.getElementById("tema");
+    function poner(modo) {
+      raiz.setAttribute("data-tema", modo);
+      boton.textContent = modo === "oscuro" ? "Fondo claro" : "Fondo oscuro";
+      boton.setAttribute("aria-pressed", modo === "oscuro" ? "true" : "false");
+    }
+    var guardado = null;
+    try { guardado = localStorage.getItem("femonoe-tema"); } catch (e) { guardado = null; }
+    poner(guardado === "oscuro" ? "oscuro" : "claro");
+    boton.onclick = function () {
+      var nuevo = raiz.getAttribute("data-tema") === "oscuro" ? "claro" : "oscuro";
+      poner(nuevo);
+      try { localStorage.setItem("femonoe-tema", nuevo); } catch (e) { /* sin memoria */ }
+    };
+  })();</script>
+
+<footer>
+  <b>Equipo de Análisis · Fundación Sherman Kent.</b> Alerta 2026-11-11-BLZ-S, página generada el 2026-11-21.
+
+  <p><b>El resto del trabajo de la Fundación.</b> FEMÓNOE anuncia
+  hechos con probabilidad y plazo; el análisis que los explica se publica aparte:
+  <a href="https://fundacionkent.org/articulos/?utm_source=femonoe&amp;utm_medium=referral&amp;utm_campaign=pie" target="_blank" rel="noopener">los informes sobre América
+  Latina y el Caribe</a>. Quien quiera sostener este trabajo puede hacerse
+  <a href="https://fundacionkent.org/membresias/?utm_source=femonoe&amp;utm_medium=referral&amp;utm_campaign=pie" target="_blank" rel="noopener">socio de la Fundación</a>
+  — <b>las alertas y los datos de esta plataforma son libres y gratuitos, hoy y
+  siempre</b>, y eso no depende de ninguna membresía.</p>
+
+  <p>Programa libre bajo <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank"
+  rel="noopener">AGPL-3.0</a> · código en
+  <a href="https://github.com/fundacion-sherman-kent/femonoe" target="_blank"
+  rel="noopener">github.com/fundacion-sherman-kent/femonoe</a>.</p>
+</footer>
+<script>
+  // Lo que llega a la vista, entra.
+  //
+  // **Por qué no usa `IntersectionObserver`.** Es la herramienta correcta para
+  // esto, pero el 2/10/2026 no entregó una sola llamada en el entorno donde la
+  // Oficina verifica, ni siquiera creada a mano sobre un elemento a la vista.
+  // Puede ser una limitación de ese entorno y no del navegador del lector —
+  // pero **una función que no se puede comprobar no se publica**. Un recorrido
+  // sobre la posición de cada pieza es más tosco, se puede medir, y con unas
+  // decenas de piezas no cuesta nada.
+  //
+  // El estado por defecto del sitio es «todo a la vista»: si este programa no
+  // corre, no se pierde nada. La animación se agrega; nunca se resta.
+  (function () {
+    var piezas = [].slice.call(document.querySelectorAll(".revela"));
+    if (!piezas.length) { return; }
+    var pedido = false;
+    function mirar() {
+      pedido = false;
+      var alto = window.innerHeight || document.documentElement.clientHeight;
+      for (var i = piezas.length - 1; i >= 0; i--) {
+        var r = piezas[i].getBoundingClientRect();
+        // Entra cuando su borde superior cruza el 92 % de la pantalla: un poco
+        // antes de llegar abajo del todo, para que no aparezca de golpe.
+        //
+        // **Sin exigir que siga a la vista.** La primera versión pedía además
+        // `r.bottom > 0`, y entonces una pieza que se pasaba de largo sin haber
+        // sido mirada —por un salto de ancla, por una vuelta atrás, por rodar
+        // rápido— quedaba invisible para siempre. Una animación de entrada que
+        // puede dejar una sección en blanco no es una animación: es un defecto.
+        if (r.top < alto * 0.92) {
+          piezas[i].classList.add("visible");
+          piezas.splice(i, 1);          // entra una vez y se deja de mirar
+        }
+      }
+      if (!piezas.length) {
+        window.removeEventListener("scroll", pedir);
+        window.removeEventListener("resize", pedir);
+      }
+    }
+    // Sin `requestAnimationFrame`: el 2/10/2026 no se entregó de forma fiable
+    // en el entorno donde la Oficina verifica, y una entrada que a veces no
+    // ocurre deja secciones en blanco. El freno por tiempo es más tosco y se
+    // puede medir. Con unas decenas de piezas, el costo es imperceptible.
+    var ultimo = 0;
+    function pedir() {
+      var ahora = Date.now();
+      if (pedido || ahora - ultimo < 80) { return; }
+      ultimo = ahora;
+      pedido = true;
+      setTimeout(mirar, 0);
+    }
+    window.addEventListener("scroll", pedir, { passive: true });
+    window.addEventListener("resize", pedir);
+    mirar();
+  })();
+</script>
+</body>
+</html>
