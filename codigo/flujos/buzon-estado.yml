@@ -1,0 +1,32 @@
+name: FEMÓNOE · estado del buzón de WhatsApp
+
+on:
+  workflow_dispatch:
+
+jobs:
+  estado:
+    # **La máquina queda fijada, y no es «la última» por azar.**
+    #
+    # Autorizado por la dirección el 14/10/2026. GitHub está cambiando lo que
+    # `ubuntu-latest` significa —de Ubuntu 24.04 a 26.04—, y textual de su
+    # anuncio: «se desplegará a lo largo de varias semanas a partir del 19 de
+    # octubre» y «la migración se completará el 19 de noviembre».
+    #
+    # El riesgo no es que el robot se rompa: las versiones del software que usa
+    # son idénticas en las dos imágenes. El riesgo es que **durante un mes cada
+    # corrida caiga en cualquiera de las dos**, de modo que una falla aparecería
+    # un día y desaparecería al siguiente, sin causa visible. Para una casa que
+    # publica juicios y promete que la misma entrada da la misma salida, eso es
+    # peor que una rotura franca. GitHub avisa además que el 21 % de los
+    # depósitos tiene al menos un trabajo que fallaría al arrancar en la nueva.
+    #
+    # Se vuelve a `ubuntu-latest` cuando la Oficina haya probado `ubuntu-26.04`
+    # en un flujo aparte y con tiempo. **Hasta entonces esto no se toca.**
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Qué llegó al receptor
+        run: |
+          curl -s -X POST "$(cat whatsapp-buzon/url.txt)/estado" -H "Authorization: Bearer ${{ secrets.WA_ROBOT_CLAVE }}"
+          echo
